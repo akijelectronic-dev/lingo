@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#58cc02">
+<title>লিঙ্গো — AI দিয়ে ভাষা শেখা</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --brand:#58cc02;--brand-dark:#46a302;--brand-light:#89e219;
+  --accent:#1cb0f6;--accent-dark:#1899d6;
+  --warning:#ffc800;--danger:#ff4b4b;--purple:#ce82ff;
+  --bg:#131f24;--bg-alt:#0f181c;--surface:#1f2c34;--surface-hover:#2a3841;
+  --text:#ffffff;--text-secondary:#afbbbf;--text-muted:#6f7c82;
+  --border:#37464f;--border-light:#2b3a42;
+  --font-bn:'Hind Siliguri',system-ui,sans-serif;
+  --font-en:'Plus Jakarta Sans',system-ui,sans-serif;
+}
+[data-theme="light"]{
+  --bg:#ffffff;--bg-alt:#f7f7f7;--surface:#f7f7f7;--surface-hover:#efefef;
+  --text:#3c3c3c;--text-secondary:#777777;--text-muted:#afafaf;
+  --border:#e5e5e5;--border-light:#f0f0f0;
+}
+html,body{height:100%}
+body{font-family:var(--font-bn);background:var(--bg);color:var(--text);line-height:1.5;overflow-x:hidden;transition:background .3s,color .3s;-webkit-font-smoothing:antialiased}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:10px}
+
+/* ===== SPLASH ===== */
+#splash{position:fixed;inset:0;z-index:99999;background:linear-gradient(160deg,#0f181c 0%,#131f24 50%,#0a1216 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .8s}
+#splash.hide{opacity:0;pointer-events:none}
+.splash-owl{font-size:120px;animation:owlDance 1.4s ease-in-out infinite;filter:drop-shadow(0 8px 30px rgba(88,204,2,.5));margin-bottom:20px;position:relative;z-index:2}
+@keyframes owlDance{0%,100%{transform:translateY(0) rotate(-6deg) scale(1)}25%{transform:translateY(-15px) rotate(6deg) scale(1.08)}50%{transform:translateY(-5px) rotate(-3deg) scale(.98)}75%{transform:translateY(-10px) rotate(4deg) scale(1.05)}}
+.splash-ring{position:absolute;width:220px;height:220px;border:3px dashed rgba(88,204,2,.3);border-radius:50%;animation:ringSpin 8s linear infinite;top:calc(50% - 180px)}
+@keyframes ringSpin{to{transform:rotate(360deg)}}
+.splash-ring::before{content:'';position:absolute;top:-8px;left:50%;width:16px;height:16px;background:var(--brand);border-radius:50%;box-shadow:0 0 25px var(--brand-light);transform:translateX(-50%)}
+.splash-logo{font-family:var(--font-en);font-size:clamp(42px,11vw,68px);font-weight:800;letter-spacing:-1px;display:flex;gap:2px;margin-bottom:12px;position:relative;z-index:2}
+.splash-logo span{display:inline-block;background:linear-gradient(135deg,#58cc02 0%,#89e219 40%,#ffc800 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;opacity:0;transform:translateY(30px) scale(.5);animation:letterPop .5s forwards}
+@keyframes letterPop{0%{opacity:0;transform:translateY(30px) scale(.5)}60%{opacity:1;transform:translateY(-6px) scale(1.15)}100%{opacity:1;transform:translateY(0) scale(1)}}
+.splash-tag{font-size:clamp(13px,3vw,17px);color:#afbbbf;letter-spacing:3px;text-transform:uppercase;opacity:0;animation:fadeInUp .8s 1.2s forwards;margin-bottom:40px;position:relative;z-index:2}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(15px)}to{opacity:.85;transform:translateY(0)}}
+.splash-bar-wrap{width:220px;height:6px;background:rgba(175,187,191,.15);border-radius:99px;overflow:hidden;position:relative;z-index:2}
+.splash-bar{height:100%;width:0%;background:linear-gradient(90deg,#58cc02,#89e219,#ffc800);border-radius:99px;animation:barFill 2.2s .3s forwards}
+@keyframes barFill{to{width:100%}}
+.splash-status{margin-top:16px;font-size:13px;color:#6f7c82;font-weight:600;letter-spacing:.5px;position:relative;z-index:2}
+
+/* ===== TOP BAR ===== */
+.topbar{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:2px solid var(--border-light);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.topbar-left{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+.topbar-right{display:flex;align-items:center;gap:8px}
+.topbar-title{font-family:var(--font-en);font-size:20px;font-weight:800;color:var(--brand);line-height:1}
+.topbar-title small{font-family:var(--font-bn);font-size:11px;color:var(--text-muted);font-weight:500;display:block;letter-spacing:.5px;margin-top:2px}
+.icon-btn{width:36px;height:36px;border-radius:10px;background:transparent;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-secondary);font-size:15px;transition:all .2s}
+.icon-btn:hover{border-color:var(--brand);color:var(--brand)}
+.stat-pill{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:9999px;font-family:var(--font-en);font-weight:800;font-size:13px;background:var(--surface)}
+.stat-pill .ico{font-size:14px}
+.stat-pill.xp{color:var(--warning)}
+.stat-pill.streak{color:var(--danger)}
+
+/* ===== BOTTOM NAV ===== */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:100;background:var(--bg);border-top:2px solid var(--border-light);padding:8px 0 max(8px, env(safe-area-inset-bottom));display:flex;justify-content:space-around}
+.bnav-item{flex:1;padding:6px 4px;display:flex;flex-direction:column;align-items:center;gap:3px;font-family:var(--font-bn);font-size:10px;font-weight:700;color:var(--text-muted);transition:all .2s}
+.bnav-item i{font-size:20px}
+.bnav-item.active{color:var(--brand)}
+
+/* ===== MAIN ===== */
+main{padding:16px 16px 90px;max-width:640px;margin:0 auto;transition:padding-bottom .3s}
+main.chat-open{padding-bottom:170px}
+.page{display:none;animation:fadeUp .3s ease}
+.page.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* ===== HOME ===== */
+.hello-banner{background:linear-gradient(135deg,var(--brand),var(--brand-dark));border-radius:16px;padding:20px;margin-bottom:20px;position:relative;overflow:hidden;box-shadow:0 4px 0 rgba(0,0,0,.15)}
+.hello-banner::before{content:'🦉';position:absolute;font-size:100px;right:-20px;top:-20px;opacity:.15}
+.hello-title{font-size:22px;font-weight:800;color:#fff;margin-bottom:4px;position:relative;z-index:1}
+.hello-sub{font-size:13px;color:rgba(255,255,255,.9);position:relative;z-index:1}
+.sec-title{font-family:var(--font-en);font-size:16px;font-weight:800;color:var(--text);margin:20px 4px 12px;display:flex;align-items:center;gap:8px}
+.sec-title small{font-family:var(--font-bn);font-size:11px;color:var(--text-muted);font-weight:600}
+.lang-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:520px){.lang-grid{grid-template-columns:repeat(3,1fr)}}
+.lang-card{background:var(--surface);border:2px solid var(--border);border-radius:16px;padding:18px 12px;text-align:center;transition:all .2s;position:relative;overflow:hidden}
+.lang-card:hover{border-color:var(--brand);transform:translateY(-3px);box-shadow:0 6px 0 var(--border)}
+.lang-flag{font-size:44px;display:block;margin-bottom:8px}
+.lang-name{font-family:var(--font-en);font-size:14px;font-weight:800;color:var(--text);margin-bottom:2px}
+.lang-name-bn{font-size:12px;color:var(--text-muted);font-weight:600;margin-bottom:10px}
+.lang-prog{height:6px;background:var(--border);border-radius:6px;overflow:hidden;margin-top:8px}
+.lang-prog-fill{height:100%;background:var(--brand);border-radius:6px;transition:width .4s}
+.lang-prog-txt{font-size:10px;color:var(--text-muted);font-weight:700;margin-top:4px;font-family:var(--font-en)}
+.ai-card{background:linear-gradient(135deg,var(--purple),#a855f7);border-radius:16px;padding:18px;margin-bottom:16px;cursor:pointer;position:relative;overflow:hidden;box-shadow:0 4px 0 #7c3aed;transition:all .2s}
+.ai-card:hover{transform:translateY(-3px);box-shadow:0 6px 0 #7c3aed}
+.ai-card::before{content:'🤖';position:absolute;font-size:90px;right:-15px;bottom:-20px;opacity:.2}
+.ai-card-title{font-family:var(--font-en);font-size:17px;font-weight:800;color:#fff;margin-bottom:4px;position:relative;z-index:1}
+.ai-card-sub{font-size:12px;color:rgba(255,255,255,.9);position:relative;z-index:1}
+
+/* ===== LESSON PATH ===== */
+.path-header{background:linear-gradient(135deg,var(--accent),var(--accent-dark));border-radius:16px;padding:20px;margin-bottom:20px;color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.15)}
+.path-header h2{font-size:20px;font-weight:800;margin-bottom:4px;display:flex;align-items:center;gap:10px}
+.path-header p{font-size:13px;opacity:.9}
+.path-back{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:9999px;background:rgba(255,255,255,.2);color:#fff;font-size:12px;font-weight:700;margin-bottom:12px}
+.module-group{margin-bottom:24px}
+.module-title{font-family:var(--font-en);font-size:14px;font-weight:800;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;padding-left:4px}
+.lesson-path{display:flex;flex-direction:column;gap:14px;align-items:center}
+.lesson-node{position:relative;width:70px;height:70px;border-radius:50%;background:var(--surface);border:3px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:26px;transition:all .2s;box-shadow:0 5px 0 var(--border)}
+.lesson-node.unlocked{background:var(--brand);border-color:var(--brand-dark);box-shadow:0 5px 0 var(--brand-dark);cursor:pointer}
+.lesson-node.completed{background:var(--warning);border-color:#cc9e00;box-shadow:0 5px 0 #cc9e00}
+.lesson-node.completed::after{content:'✓';position:absolute;top:-4px;right:-4px;width:22px;height:22px;border-radius:50%;background:var(--brand);border:2px solid var(--bg);color:#fff;font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.lesson-node.locked{opacity:.5;cursor:not-allowed}
+.lesson-label{position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:700;color:var(--text-muted);white-space:nowrap}
+
+/* ===== LESSON SCREEN ===== */
+.lesson-topbar{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.lesson-close{width:36px;height:36px;border-radius:50%;background:var(--surface);display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:16px;font-weight:800}
+.lesson-close:hover{background:var(--danger);color:#fff}
+.lesson-progress-track{flex:1;height:12px;background:var(--surface);border-radius:9999px;overflow:hidden}
+.lesson-progress-fill{height:100%;background:linear-gradient(90deg,var(--brand),var(--brand-light));border-radius:9999px;transition:width .4s}
+.lesson-hearts{display:flex;align-items:center;gap:5px;font-family:var(--font-en);font-weight:800;font-size:14px;color:var(--danger)}
+.lesson-q{font-size:22px;font-weight:800;line-height:1.4;margin-bottom:20px;color:var(--text)}
+.audio-card{background:linear-gradient(135deg,var(--accent),var(--accent-dark));border-radius:16px;padding:20px;margin-bottom:20px;text-align:center;color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.15)}
+.audio-big-btn{width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.25);border:3px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;font-size:32px;color:#fff;margin:0 auto 12px;transition:all .2s}
+.audio-big-btn:hover{transform:scale(1.1);background:rgba(255,255,255,.35)}
+.audio-word{font-family:var(--font-en);font-size:28px;font-weight:800;margin-bottom:4px}
+.audio-pron{font-size:13px;opacity:.9;margin-bottom:16px}
+.audio-btn-row{display:flex;gap:8px;justify-content:center}
+.audio-btn{padding:8px 16px;border-radius:9999px;background:rgba(255,255,255,.2);color:#fff;font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:6px}
+.options{display:flex;flex-direction:column;gap:10px}
+.opt-card{padding:16px;border-radius:14px;background:var(--bg-alt);border:2px solid var(--border);color:var(--text);text-align:left;font-size:15px;font-weight:600;transition:all .15s;box-shadow:0 4px 0 var(--border);display:flex;align-items:center;gap:10px}
+.opt-card.selected{border-color:var(--accent);background:rgba(28,176,246,.1)}
+.opt-card.correct{background:rgba(88,204,2,.15);border-color:var(--brand);color:var(--brand-light)}
+.opt-card.wrong{background:rgba(255,75,75,.15);border-color:var(--danger);color:#ff8b8b}
+.match-wrap{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.match-col{display:flex;flex-direction:column;gap:10px}
+.match-item{padding:14px;border-radius:12px;background:var(--bg-alt);border:2px solid var(--border);font-size:14px;font-weight:600;text-align:center}
+.match-item.selected{border-color:var(--accent);background:rgba(28,176,246,.15)}
+.match-item.correct{background:rgba(88,204,2,.2);border-color:var(--brand)}
+.match-item.wrong{background:rgba(255,75,75,.2);border-color:var(--danger)}
+.match-item.done{opacity:.4;pointer-events:none}
+.write-wrap{margin-top:10px}
+.write-input{width:100%;padding:16px;border-radius:14px;background:var(--bg-alt);border:2px solid var(--border);color:var(--text);font-size:16px;font-family:var(--font-bn);outline:none}
+.write-input:focus{border-color:var(--brand)}
+.speak-wrap{text-align:center;padding:20px 0}
+.speak-target{font-family:var(--font-en);font-size:32px;font-weight:800;color:var(--accent);margin-bottom:8px}
+.speak-hint{font-size:13px;color:var(--text-muted);margin-bottom:20px}
+.mic-btn{width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,var(--danger),#b91c1c);color:#fff;font-size:40px;display:flex;align-items:center;justify-content:center;margin:0 auto;box-shadow:0 6px 0 #7f1d1d;transition:all .2s}
+.mic-btn.listening{background:linear-gradient(135deg,#f43f5e,#dc2626);animation:pulse .8s ease infinite}
+@keyframes pulse{0%,100%{box-shadow:0 6px 0 #7f1d1d,0 0 0 0 rgba(244,63,94,.6)}50%{box-shadow:0 6px 0 #7f1d1d,0 0 0 25px rgba(244,63,94,0)}}
+.transcript{margin-top:20px;padding:14px;border-radius:12px;background:var(--bg-alt);border:2px dashed var(--border);font-size:15px;min-height:50px;color:var(--text-secondary)}
+.transcript.ok{border-color:var(--brand);background:rgba(88,204,2,.1)}
+.transcript.no{border-color:var(--danger);background:rgba(255,75,75,.1)}
+
+/* ===== FEEDBACK BAR ===== */
+.feedback-bar{position:fixed;bottom:0;left:0;right:0;z-index:200;padding:16px;padding-bottom:max(16px, env(safe-area-inset-bottom));transform:translateY(200%);transition:transform .35s cubic-bezier(.5,1.5,.7,1)}
+.feedback-bar.show{transform:translateY(0)}
+.feedback-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;border-radius:14px}
+.feedback-bar.ok .feedback-inner{background:rgba(88,204,2,.15);border:2px solid var(--brand)}
+.feedback-bar.no .feedback-inner{background:rgba(255,75,75,.15);border:2px solid var(--danger)}
+.fb-info{display:flex;align-items:center;gap:12px;flex:1;min-width:0}
+.fb-icon{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.feedback-bar.ok .fb-icon{background:var(--brand);color:#fff}
+.feedback-bar.no .fb-icon{background:var(--danger);color:#fff}
+.fb-title{font-size:15px;font-weight:800;margin-bottom:2px}
+.fb-msg{font-size:12px;color:var(--text-secondary)}
+.fb-continue{padding:14px 24px;border-radius:12px;font-family:var(--font-en);font-weight:800;font-size:15px;color:#fff;flex-shrink:0}
+.feedback-bar.ok .fb-continue{background:var(--brand);box-shadow:0 4px 0 var(--brand-dark)}
+.feedback-bar.no .fb-continue{background:var(--danger);box-shadow:0 4px 0 #b91c1c}
+
+/* ===== AI CHAT ===== */
+.ai-header{display:flex;align-items:center;gap:12px;padding:14px;background:linear-gradient(135deg,var(--purple),#a855f7);border-radius:16px;margin-bottom:16px;color:#fff;position:relative;overflow:hidden}
+.ai-avatar{width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-size:32px;border:2px solid rgba(255,255,255,.5);flex-shrink:0}
+.ai-avatar.talking{animation:avatarTalk .6s ease-in-out infinite}
+@keyframes avatarTalk{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.ai-info h3{font-family:var(--font-en);font-size:17px;font-weight:800;margin-bottom:2px}
+.ai-info p{font-size:12px;opacity:.9}
+.chat-chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:12px}
+.chat-chips::-webkit-scrollbar{display:none}
+.chip{padding:8px 14px;border-radius:9999px;background:var(--surface);border:2px solid var(--border);font-size:12px;font-weight:600;color:var(--text-secondary);white-space:nowrap;flex-shrink:0}
+.chat-wrap{display:flex;flex-direction:column;gap:12px}
+.chat-bubble{max-width:85%;padding:12px 16px;border-radius:16px;font-size:14px;line-height:1.5;word-wrap:break-word;animation:msgIn .3s ease;position:relative}
+@keyframes msgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.chat-bubble.ai{background:var(--surface);border:2px solid var(--border);align-self:flex-start;border-bottom-left-radius:4px}
+.chat-bubble.ai.has-audio{padding-right:40px}
+.chat-bubble.me{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.chat-bubble.typing{display:flex;gap:4px;padding:14px 16px}
+.chat-bubble.typing span{width:8px;height:8px;border-radius:50%;background:var(--text-muted);animation:typing 1.2s infinite}
+.chat-bubble.typing span:nth-child(2){animation-delay:.2s}
+.chat-bubble.typing span:nth-child(3){animation-delay:.4s}
+@keyframes typing{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}
+.chat-bubble .speak-btn{position:absolute;right:8px;bottom:8px;width:26px;height:26px;border-radius:50%;background:var(--brand);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer}
+.chat-bubble .speak-btn:hover{background:var(--brand-light)}
+
+/* চ্যাট ইনপুট বার — নিচে বটম নেভের উপরে */
+.chat-input-wrap{position:fixed;bottom:58px;left:0;right:0;z-index:99;background:var(--bg);border-top:2px solid var(--border-light);padding:10px 12px;display:none;box-shadow:0 -4px 12px rgba(0,0,0,.15)}
+.chat-input-wrap.active{display:block}
+.chat-input-inner{max-width:640px;margin:0 auto;display:flex;gap:8px;align-items:flex-end}
+.chat-input{flex:1;padding:10px 14px;border-radius:20px;background:var(--surface);border:2px solid var(--border);color:var(--text);font-size:15px;font-family:var(--font-bn);outline:none;resize:none;max-height:100px;line-height:1.4}
+.chat-input:focus{border-color:var(--purple)}
+.chat-voice{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#ef4444,#b91c1c);color:#fff;font-size:16px;flex-shrink:0;box-shadow:0 4px 0 #7f1d1d;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;transition:all .15s}
+.chat-voice:active{transform:translateY(3px);box-shadow:0 1px 0 #7f1d1d}
+.chat-voice.listening{background:linear-gradient(135deg,#f43f5e,#dc2626);animation:pulse 1s infinite}
+.chat-send{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--purple),#a855f7);color:#fff;font-size:16px;flex-shrink:0;box-shadow:0 4px 0 #7c3aed;display:flex;align-items:center;justify-content:center;transition:all .15s;border:none;cursor:pointer}
+.chat-send:active{transform:translateY(3px);box-shadow:0 1px 0 #7c3aed}
+.chat-send:disabled{opacity:.5;cursor:not-allowed}
+
+/* ===== LEADERBOARD ===== */
+.lb-row{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:14px;background:var(--surface);border:2px solid var(--border);margin-bottom:10px}
+.lb-row.me{border-color:var(--brand);background:rgba(88,204,2,.08)}
+.lb-rank{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-en);font-weight:800;font-size:13px;background:var(--bg-alt);border:2px solid var(--border)}
+.lb-rank.gold{background:linear-gradient(135deg,#fbbf24,#f59e0b);border-color:#cc9e00;color:#fff}
+.lb-rank.silver{background:linear-gradient(135deg,#cbd5e1,#94a3b8);border-color:#64748b;color:#fff}
+.lb-rank.bronze{background:linear-gradient(135deg,#d97706,#b45309);border-color:#78350f;color:#fff}
+.lb-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--purple),#a855f7);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.lb-name{flex:1;font-size:14px;font-weight:700}
+.lb-name small{display:block;font-size:11px;color:var(--text-muted)}
+.lb-xp{font-family:var(--font-en);font-weight:800;font-size:14px;color:var(--warning)}
+
+/* ===== PROFILE ===== */
+.profile-head{display:flex;align-items:center;gap:16px;padding:20px;border-radius:16px;background:var(--surface);border:2px solid var(--border);margin-bottom:20px}
+.profile-avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand-dark));display:flex;align-items:center;justify-content:center;font-size:38px;flex-shrink:0;box-shadow:0 4px 0 var(--brand-dark)}
+.profile-info h2{font-size:20px;font-weight:800;margin-bottom:4px}
+.profile-info p{font-size:12px;color:var(--text-muted)}
+.profile-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px}
+.profile-stat{padding:18px;border-radius:14px;background:var(--surface);border:2px solid var(--border);text-align:center}
+.profile-stat .ico{font-size:26px;margin-bottom:6px;display:block}
+.profile-stat .val{font-family:var(--font-en);font-weight:800;font-size:22px}
+.profile-stat .lbl{font-size:11px;color:var(--text-muted);font-weight:700;margin-top:2px}
+
+/* ===== BUTTONS ===== */
+.btn-primary{padding:14px 24px;border-radius:12px;background:var(--brand);color:#fff;font-family:var(--font-en);font-weight:800;font-size:15px;box-shadow:0 5px 0 var(--brand-dark);transition:all .15s;display:inline-flex;align-items:center;gap:8px}
+.btn-primary:active{transform:translateY(3px);box-shadow:0 2px 0 var(--brand-dark)}
+.btn-block{display:flex;width:100%;justify-content:center}
+
+/* ===== MODAL ===== */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(6px);z-index:500;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal-box{background:var(--surface);border:2px solid var(--border);border-radius:20px;padding:24px;max-width:400px;width:100%}
+.modal-box h3{font-family:var(--font-en);font-size:20px;font-weight:800;margin-bottom:10px}
+.modal-box p{font-size:14px;color:var(--text-secondary);margin-bottom:20px;line-height:1.6}
+.modal-actions{display:flex;gap:10px}
+.modal-btn{flex:1;padding:14px;border-radius:12px;font-family:var(--font-en);font-weight:800;font-size:14px}
+.modal-btn.cancel{background:var(--bg-alt);color:var(--text);border:2px solid var(--border)}
+.modal-btn.danger{background:var(--danger);color:#fff;box-shadow:0 4px 0 #b91c1c}
+
+/* ===== TOAST ===== */
+.toast{position:fixed;top:80px;left:50%;transform:translateX(-50%) translateY(-100px);background:var(--surface);border:2px solid var(--border);padding:12px 20px;border-radius:12px;font-size:14px;font-weight:700;z-index:1000;transition:transform .3s;box-shadow:0 10px 30px rgba(0,0,0,.4);max-width:90vw;text-align:center}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast.ok{border-color:var(--brand);color:var(--brand-light)}
+.toast.no{border-color:var(--danger);color:#ff8b8b}
+
+/* ===== XP POP ===== */
+.xp-pop{position:fixed;pointer-events:none;z-index:900;font-family:var(--font-en);font-weight:800;font-size:20px;color:var(--warning);animation:xpUp 1s ease-out forwards}
+@keyframes xpUp{0%{opacity:0;transform:translateY(0) scale(.5)}20%{opacity:1;transform:translateY(-10px) scale(1.2)}100%{opacity:0;transform:translateY(-80px) scale(1)}}
+
+/* ===== CONFETTI ===== */
+.confetti{position:fixed;top:-20px;width:12px;height:12px;z-index:999;pointer-events:none;border-radius:2px}
+
+/* ===== COMPLETE ===== */
+.complete-screen{text-align:center;padding:40px 20px}
+.complete-badge{width:140px;height:140px;border-radius:50%;background:linear-gradient(135deg,var(--warning),#f59e0b);display:flex;align-items:center;justify-content:center;font-size:64px;margin:0 auto 24px;box-shadow:0 8px 0 #cc9e00}
+.complete-title{font-size:28px;font-weight:800;color:var(--warning);margin-bottom:8px;font-family:var(--font-en)}
+.complete-sub{font-size:15px;color:var(--text-secondary);margin-bottom:30px}
+.complete-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:30px}
+.complete-stat{padding:16px 8px;border-radius:14px;background:var(--surface);border:2px solid var(--border);text-align:center}
+.complete-stat .ico{font-size:24px;margin-bottom:6px;display:block}
+.complete-stat .val{font-family:var(--font-en);font-weight:800;font-size:20px}
+.complete-stat .lbl{font-size:10px;color:var(--text-muted);font-weight:700;text-transform:uppercase}
+@media(max-width:480px){.lang-flag{font-size:38px}.lesson-node{width:64px;height:64px;font-size:24px}}
+</style>
+</head>
+<body>
+
+<div id="splash">
+  <div class="splash-ring"></div>
+  <div class="splash-owl">🦉</div>
+  <div class="splash-logo" id="splashLogo"></div>
+  <div class="splash-tag">AI দিয়ে ভাষা শেখা</div>
+  <div class="splash-bar-wrap"><div class="splash-bar"></div></div>
+  <div class="splash-status">লোড হচ্ছে...</div>
+</div>
+
+<header class="topbar">
+  <div class="topbar-left"><div class="topbar-title">লিঙ্গো<small>AI দিয়ে ভাষা শেখা</small></div></div>
+  <div class="topbar-right">
+    <span class="stat-pill xp"><span class="ico">⚡</span><span id="xpTop">0</span></span>
+    <span class="stat-pill streak"><span class="ico">🔥</span><span id="streakTop">0</span></span>
+    <button class="icon-btn" onclick="toggleTheme()" title="থিম"><i class="fas fa-sun" id="themeIcon"></i></button>
+  </div>
+</header>
+
+<main id="mainContent">
+  <div class="page active" id="page-home">
+    <div class="hello-banner">
+      <div class="hello-title" id="greetTitle">স্বাগতম! 👋</div>
+      <div class="hello-sub" id="greetSub">আজ কোন ভাষা শিখবেন?</div>
+    </div>
+    <div class="ai-card" onclick="switchPage('ai')">
+      <div class="ai-card-title">🤖 AI শিক্ষক</div>
+      <div class="ai-card-sub">যেকোনো প্রশ্ন করুন — বাংলায় উত্তর পাবেন</div>
+    </div>
+    <div class="sec-title">🌍 ভাষা নির্বাচন করুন <small id="langCount"></small></div>
+    <div class="lang-grid" id="langGrid"></div>
+  </div>
+
+  <div class="page" id="page-learn"><div id="learnContent"></div></div>
+  <div class="page" id="page-lesson"><div id="lessonContent"></div></div>
+  <div class="page" id="page-complete"><div id="completeContent"></div></div>
+
+  <div class="page" id="page-ai">
+    <div class="ai-header">
+      <div class="ai-avatar" id="aiAvatar">🦉</div>
+      <div class="ai-info">
+        <h3>লিঙ্গো বন্ধু</h3>
+        <p id="aiStatus">আপনার AI শিক্ষক — যেকোনো ভাষার প্রশ্ন করুন</p>
+      </div>
+    </div>
+    <div class="chat-chips">
+      <button class="chip" onclick="quickAsk('ইংরেজিতে কিভাবে নিজের পরিচয় দিব?')">💬 পরিচয়</button>
+      <button class="chip" onclick="quickAsk('মালয় ভাষায় দাম জিজ্ঞেস কিভাবে করব?')">💰 দাম</button>
+      <button class="chip" onclick="quickAsk('আরবিতে ধন্যবাদ কিভাবে বলব?')">🙏 ধন্যবাদ</button>
+      <button class="chip" onclick="quickAsk('জাপানিতে হ্যালো কিভাবে বলব?')">👋 হ্যালো</button>
+    </div>
+    <div class="chat-wrap" id="chatWrap"></div>
+  </div>
+
+  <div class="page" id="page-leaderboard">
+    <div class="sec-title">🏆 সাপ্তাহিক লিগ <small>টপ ১০</small></div>
+    <div id="leaderboardList"></div>
+  </div>
+
+  <div class="page" id="page-profile"><div id="profileContent"></div></div>
+</main>
+
+<div class="chat-input-wrap" id="chatInputWrap">
+  <div class="chat-input-inner">
+    <button class="chat-voice" id="chatVoice" onclick="toggleVoiceChat()" title="ভয়েস"><i class="fas fa-microphone"></i></button>
+    <textarea class="chat-input" id="chatInput" rows="1" placeholder="বাংলায় লিখুন বা 🎤 চেপে বলুন..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat()}"></textarea>
+    <button class="chat-send" id="chatSend" onclick="sendChat()"><i class="fas fa-paper-plane"></i></button>
+  </div>
+</div>
+
+<nav class="bottom-nav" id="bottomNav">
+  <button class="bnav-item active" data-page="home" onclick="switchPage('home',this)"><i class="fas fa-home"></i><span>হোম</span></button>
+  <button class="bnav-item" data-page="learn" onclick="switchPage('learn',this)"><i class="fas fa-graduation-cap"></i><span>শিখুন</span></button>
+  <button class="bnav-item" data-page="ai" onclick="switchPage('ai',this)"><i class="fas fa-robot"></i><span>AI</span></button>
+  <button class="bnav-item" data-page="leaderboard" onclick="switchPage('leaderboard',this)"><i class="fas fa-trophy"></i><span>লিগ</span></button>
+  <button class="bnav-item" data-page="profile" onclick="switchPage('profile',this)"><i class="fas fa-user"></i><span>প্রোফাইল</span></button>
+</nav>
+
+<div class="feedback-bar" id="feedbackBar">
+  <div class="feedback-inner">
+    <div class="fb-info">
+      <div class="fb-icon" id="fbIcon">✓</div>
+      <div><div class="fb-title" id="fbTitle">দুর্দান্ত!</div><div class="fb-msg" id="fbMsg">সঠিক উত্তর</div></div>
+    </div>
+    <button class="fb-continue" id="fbContinue">চালিয়ে যান</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <h3 id="modalTitle">শিরোনাম</h3>
+    <p id="modalMsg">বার্তা</p>
+    <div class="modal-actions">
+      <button class="modal-btn cancel" onclick="closeModal()">বাতিল</button>
+      <button class="modal-btn danger" id="modalConfirm">হ্যাঁ</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+'use strict';
+
+/* ============================================================
+   ⚠️ আপনার Cloudflare Worker URL
+   ============================================================ */
+var WORKER_URL = 'https://lingo-ai.akijelectronic.workers.dev';
+
+/* ============================================================
+   ৬টি ভাষার সম্পূর্ণ ডেটা
+   ============================================================ */
+var LANGUAGES = {
+  english: {
+    name: 'English', nameBn: 'ইংরেজি', flag: '🇬🇧', langCode: 'en-US',
+    intro: 'বিশ্বের সবচেয়ে জনপ্রিয় ভাষা। বিদেশে কাজ, পড়াশোনা, ভ্রমণে সবার সাথে যোগাযোগের জন্য অপরিহার্য।',
+    modules: [
+      { title: 'Beginner', titleBn: 'শুরুর স্তর', lessons: [
+        { title: 'শুভেচ্ছা', icon: '👋', questions: [
+          { type: 'listen', word: 'Hello', pron: 'হ্যালো', meaning: 'হ্যালো', audioText: 'Hello' },
+          { type: 'choice', q: '"Hello" এর বাংলা অর্থ কী?', options: ['হ্যালো', 'বিদায়', 'ধন্যবাদ', 'দুঃখিত'], correct: 0 },
+          { type: 'match', pairs: [['Hello', 'হ্যালো'], ['Goodbye', 'বিদায়'], ['Thanks', 'ধন্যবাদ']] },
+          { type: 'write', q: '"ধন্যবাদ" কে ইংরেজিতে কী বলে?', answer: 'thanks', alt: ['thank you', 'Thanks', 'Thank you'] },
+          { type: 'speak', target: 'Hello', hint: 'Hello বলুন' }
+        ]},
+        { title: 'নিজের পরিচয়', icon: '🙋', questions: [
+          { type: 'listen', word: 'My name is', pron: 'মাই নেম ইজ', meaning: 'আমার নাম', audioText: 'My name is' },
+          { type: 'choice', q: '"My name is Karim" মানে কী?', options: ['আমার নাম করিম', 'আমি করিম', 'তোমার নাম করিম', 'তার নাম করিম'], correct: 0 },
+          { type: 'match', pairs: [['I', 'আমি'], ['You', 'তুমি'], ['We', 'আমরা']] },
+          { type: 'write', q: '"আমি" কে ইংরেজিতে কী বলে?', answer: 'i', alt: ['I', 'me'] },
+          { type: 'speak', target: 'My name is Karim', hint: 'নিজের পরিচয় দিন' }
+        ]},
+        { title: 'সংখ্যা', icon: '🔢', questions: [
+          { type: 'listen', word: 'One', pron: 'ওয়ান', meaning: 'এক', audioText: 'One' },
+          { type: 'choice', q: '"Three" সংখ্যাটি কত?', options: ['১', '২', '৩', '৪'], correct: 2 },
+          { type: 'match', pairs: [['One', 'এক'], ['Two', 'দুই'], ['Five', 'পাঁচ']] },
+          { type: 'write', q: '"দশ" কে ইংরেজিতে কী বলে?', answer: 'ten', alt: ['Ten'] },
+          { type: 'speak', target: 'One two three', hint: 'এক দুই তিন বলুন' }
+        ]},
+        { title: 'খাবার', icon: '🍎', questions: [
+          { type: 'listen', word: 'Water', pron: 'ওয়াটার', meaning: 'পানি', audioText: 'Water' },
+          { type: 'choice', q: '"Food" এর বাংলা কী?', options: ['পানি', 'খাবার', 'বাতাস', 'আগুন'], correct: 1 },
+          { type: 'match', pairs: [['Rice', 'ভাত'], ['Chicken', 'মুরগি'], ['Fish', 'মাছ']] },
+          { type: 'write', q: '"পানি" কে ইংরেজিতে কী বলে?', answer: 'water', alt: ['Water'] },
+          { type: 'speak', target: 'I want water', hint: 'আমি পানি চাই' }
+        ]},
+        { title: 'রং', icon: '🎨', questions: [
+          { type: 'listen', word: 'Red', pron: 'রেড', meaning: 'লাল', audioText: 'Red' },
+          { type: 'choice', q: '"Blue" কোন রঙ?', options: ['লাল', 'নীল', 'সবুজ', 'হলুদ'], correct: 1 },
+          { type: 'match', pairs: [['Red', 'লাল'], ['Green', 'সবুজ'], ['Black', 'কালো']] },
+          { type: 'write', q: '"হলুদ" কে ইংরেজিতে কী বলে?', answer: 'yellow', alt: ['Yellow'] },
+          { type: 'speak', target: 'Red and blue', hint: 'লাল এবং নীল' }
+        ]}
+      ]},
+      { title: 'Intermediate', titleBn: 'মধ্যম স্তর', lessons: [
+        { title: 'দিকনির্দেশনা', icon: '🧭', questions: [
+          { type: 'listen', word: 'Where is', pron: 'হোয়্যার ইজ', meaning: 'কোথায়', audioText: 'Where is' },
+          { type: 'choice', q: '"Left" এর বাংলা কী?', options: ['ডান', 'বাম', 'সোজা', 'উপরে'], correct: 1 },
+          { type: 'match', pairs: [['Left', 'বাম'], ['Right', 'ডান'], ['Straight', 'সোজা']] },
+          { type: 'write', q: '"কোথায়" কে ইংরেজিতে কী বলে?', answer: 'where', alt: ['Where'] },
+          { type: 'speak', target: 'Where is the station', hint: 'স্টেশন কোথায়?' }
+        ]},
+        { title: 'কেনাকাটা', icon: '🛒', questions: [
+          { type: 'listen', word: 'How much', pron: 'হাউ মাচ', meaning: 'কত দাম', audioText: 'How much' },
+          { type: 'choice', q: '"How much is this?" মানে কী?', options: ['এটা কত দাম?', 'এটা কী?', 'এটা কোথায়?', 'এটা কীভাবে?'], correct: 0 },
+          { type: 'match', pairs: [['Cheap', 'সস্তা'], ['Expensive', 'দামি'], ['Money', 'টাকা']] },
+          { type: 'write', q: '"টাকা" কে ইংরেজিতে কী বলে?', answer: 'money', alt: ['Money'] },
+          { type: 'speak', target: 'How much is this', hint: 'এটা কত দাম?' }
+        ]},
+        { title: 'সময়', icon: '🕐', questions: [
+          { type: 'listen', word: 'What time', pron: 'হোয়াট টাইম', meaning: 'কত সময়', audioText: 'What time' },
+          { type: 'choice', q: '"Today" এর বাংলা কী?', options: ['আজ', 'কাল', 'গতকাল', 'পরশু'], correct: 0 },
+          { type: 'match', pairs: [['Today', 'আজ'], ['Tomorrow', 'আগামীকাল'], ['Yesterday', 'গতকাল']] },
+          { type: 'write', q: '"সময়" কে ইংরেজিতে কী বলে?', answer: 'time', alt: ['Time'] },
+          { type: 'speak', target: 'What time is it', hint: 'কত সময় হয়েছে?' }
+        ]},
+        { title: 'জরুরি', icon: '🚨', questions: [
+          { type: 'listen', word: 'Help', pron: 'হেল্প', meaning: 'সাহায্য', audioText: 'Help' },
+          { type: 'choice', q: '"I need help" মানে কী?', options: ['আমার সাহায্য দরকার', 'আমি ভালো আছি', 'আমি যাচ্ছি', 'আমি খাবো'], correct: 0 },
+          { type: 'match', pairs: [['Help', 'সাহায্য'], ['Police', 'পুলিশ'], ['Hospital', 'হাসপাতাল']] },
+          { type: 'write', q: '"পুলিশ" কে ইংরেজিতে কী বলে?', answer: 'police', alt: ['Police'] },
+          { type: 'speak', target: 'I need help', hint: 'আমার সাহায্য দরকার' }
+        ]},
+        { title: 'ভ্রমণ', icon: '✈️', questions: [
+          { type: 'listen', word: 'Airport', pron: 'এয়ারপোর্ট', meaning: 'বিমানবন্দর', audioText: 'Airport' },
+          { type: 'choice', q: '"Ticket" এর বাংলা কী?', options: ['টিকিট', 'ব্যাগ', 'গাড়ি', 'বিমান'], correct: 0 },
+          { type: 'match', pairs: [['Airport', 'বিমানবন্দর'], ['Ticket', 'টিকিট'], ['Bag', 'ব্যাগ']] },
+          { type: 'write', q: '"বিমানবন্দর" কে ইংরেজিতে কী বলে?', answer: 'airport', alt: ['Airport'] },
+          { type: 'speak', target: 'Where is the airport', hint: 'বিমানবন্দর কোথায়?' }
+        ]}
+      ]}
+    ]
+  },
+  malay: {
+    name: 'Bahasa Melayu', nameBn: 'মালয়', flag: '🇲🇾', langCode: 'ms-MY',
+    intro: 'মালয়েশিয়ায় কাজ করতে যাওয়া বাংলাদেশীদের জন্য অপরিহার্য ভাষা। প্রতিদিনের কাজ, কেনাকাটা ও যোগাযোগে সবচেয়ে দরকারি।',
+    modules: [
+      { title: 'Beginner', titleBn: 'শুরুর স্তর', lessons: [
+        { title: 'শুভেচ্ছা', icon: '👋', questions: [
+          { type: 'listen', word: 'Selamat datang', pron: 'সেলামাত দাতাং', meaning: 'স্বাগতম', audioText: 'Selamat datang' },
+          { type: 'choice', q: '"Apa khabar" মানে কী?', options: ['কেমন আছেন?', 'কোথায় যাচ্ছেন?', 'কত টাকা?', 'কী করছেন?'], correct: 0 },
+          { type: 'match', pairs: [['Terima kasih', 'ধন্যবাদ'], ['Selamat tinggal', 'বিদায়'], ['Maaf', 'মাফ']] },
+          { type: 'write', q: '"ধন্যবাদ" কে মালয়ে কী বলে?', answer: 'terima kasih', alt: ['Terima kasih'] },
+          { type: 'speak', target: 'Apa khabar', hint: 'কেমন আছেন?' }
+        ]},
+        { title: 'সংখ্যা', icon: '🔢', questions: [
+          { type: 'listen', word: 'Satu', pron: 'সাতু', meaning: 'এক', audioText: 'Satu' },
+          { type: 'choice', q: '"Lima" সংখ্যাটি কত?', options: ['১', '৩', '৫', '৭'], correct: 2 },
+          { type: 'match', pairs: [['Satu', 'এক'], ['Dua', 'দুই'], ['Tiga', 'তিন']] },
+          { type: 'write', q: '"দশ" কে মালয়ে কী বলে?', answer: 'sepuluh', alt: ['Sepuluh'] },
+          { type: 'speak', target: 'Satu dua tiga', hint: 'এক দুই তিন' }
+        ]},
+        { title: 'খাবার', icon: '🍚', questions: [
+          { type: 'listen', word: 'Nasi', pron: 'নাসি', meaning: 'ভাত', audioText: 'Nasi' },
+          { type: 'choice', q: '"Air" এর বাংলা কী?', options: ['বাতাস', 'পানি', 'আগুন', 'মাটি'], correct: 1 },
+          { type: 'match', pairs: [['Ayam', 'মুরগি'], ['Ikan', 'মাছ'], ['Sayur', 'সবজি']] },
+          { type: 'write', q: '"ভাত" কে মালয়ে কী বলে?', answer: 'nasi', alt: ['Nasi'] },
+          { type: 'speak', target: 'Saya mahu nasi', hint: 'আমি ভাত চাই' }
+        ]},
+        { title: 'কেনাকাটা', icon: '🛒', questions: [
+          { type: 'listen', word: 'Berapa harga', pron: 'বেরাপা হারগা', meaning: 'কত দাম', audioText: 'Berapa harga' },
+          { type: 'choice', q: '"Mahal" এর বাংলা কী?', options: ['সস্তা', 'দামি', 'ভালো', 'খারাপ'], correct: 1 },
+          { type: 'match', pairs: [['Murah', 'সস্তা'], ['Mahal', 'দামি'], ['Duit', 'টাকা']] },
+          { type: 'write', q: '"টাকা" কে মালয়ে কী বলে?', answer: 'duit', alt: ['Duit', 'wang'] },
+          { type: 'speak', target: 'Berapa harga ini', hint: 'এটার দাম কত?' }
+        ]},
+        { title: 'দিকনির্দেশনা', icon: '🧭', questions: [
+          { type: 'listen', word: 'Di mana', pron: 'দি মানা', meaning: 'কোথায়', audioText: 'Di mana' },
+          { type: 'choice', q: '"Kiri" এর বাংলা কী?', options: ['ডান', 'বাম', 'সোজা', 'পেছনে'], correct: 1 },
+          { type: 'match', pairs: [['Kiri', 'বাম'], ['Kanan', 'ডান'], ['Terus', 'সোজা']] },
+          { type: 'write', q: '"ডান" কে মালয়ে কী বলে?', answer: 'kanan', alt: ['Kanan'] },
+          { type: 'speak', target: 'Di mana hospital', hint: 'হাসপাতাল কোথায়?' }
+        ]}
+      ]},
+      { title: 'Intermediate', titleBn: 'মধ্যম স্তর', lessons: [
+        { title: 'কাজের জায়গা', icon: '💼', questions: [
+          { type: 'listen', word: 'Kerja', pron: 'কেরজা', meaning: 'কাজ', audioText: 'Kerja' },
+          { type: 'choice', q: '"Bos" এর বাংলা কী?', options: ['বস', 'কর্মচারী', 'গ্রাহক', 'বন্ধু'], correct: 0 },
+          { type: 'match', pairs: [['Kerja', 'কাজ'], ['Gaji', 'বেতন'], ['Cuti', 'ছুটি']] },
+          { type: 'write', q: '"অফিস" কে মালয়ে কী বলে?', answer: 'pejabat', alt: ['Pejabat'] },
+          { type: 'speak', target: 'Saya kerja di sini', hint: 'আমি এখানে কাজ করি' }
+        ]},
+        { title: 'জরুরি', icon: '🚨', questions: [
+          { type: 'listen', word: 'Tolong', pron: 'তোলোং', meaning: 'সাহায্য', audioText: 'Tolong' },
+          { type: 'choice', q: '"Polis" এর বাংলা কী?', options: ['সৈনিক', 'পুলিশ', 'ডাক্তার', 'শিক্ষক'], correct: 1 },
+          { type: 'match', pairs: [['Tolong', 'সাহায্য'], ['Polis', 'পুলিশ'], ['Hospital', 'হাসপাতাল']] },
+          { type: 'write', q: '"সাহায্য" কে মালয়ে কী বলে?', answer: 'tolong', alt: ['Tolong'] },
+          { type: 'speak', target: 'Tolong saya', hint: 'আমাকে সাহায্য করুন' }
+        ]},
+        { title: 'যাতায়াত', icon: '🚕', questions: [
+          { type: 'listen', word: 'Teksi', pron: 'তেকসি', meaning: 'ট্যাক্সি', audioText: 'Teksi' },
+          { type: 'choice', q: '"Bas" এর বাংলা কী?', options: ['গাড়ি', 'বাস', 'ট্রেন', 'বিমান'], correct: 1 },
+          { type: 'match', pairs: [['Bas', 'বাস'], ['Keretapi', 'ট্রেন'], ['Kapal terbang', 'বিমান']] },
+          { type: 'write', q: '"ট্যাক্সি" কে মালয়ে কী বলে?', answer: 'teksi', alt: ['Teksi'] },
+          { type: 'speak', target: 'Berhenti di sini', hint: 'এখানে থামুন' }
+        ]},
+        { title: 'পরিবার', icon: '👨‍👩‍👧', questions: [
+          { type: 'listen', word: 'Keluarga', pron: 'কেলুয়ার্গা', meaning: 'পরিবার', audioText: 'Keluarga' },
+          { type: 'choice', q: '"Ibu" এর বাংলা কী?', options: ['বাবা', 'মা', 'ভাই', 'বোন'], correct: 1 },
+          { type: 'match', pairs: [['Ayah', 'বাবা'], ['Ibu', 'মা'], ['Anak', 'সন্তান']] },
+          { type: 'write', q: '"বাবা" কে মালয়ে কী বলে?', answer: 'ayah', alt: ['Ayah', 'bapa'] },
+          { type: 'speak', target: 'Ini keluarga saya', hint: 'এটা আমার পরিবার' }
+        ]},
+        { title: 'সময়', icon: '🕐', questions: [
+          { type: 'listen', word: 'Sekarang', pron: 'সেকারাং', meaning: 'এখন', audioText: 'Sekarang' },
+          { type: 'choice', q: '"Esok" এর বাংলা কী?', options: ['আজ', 'কাল', 'গতকাল', 'পরশু'], correct: 1 },
+          { type: 'match', pairs: [['Hari ini', 'আজ'], ['Esok', 'কাল'], ['Semalam', 'গতকাল']] },
+          { type: 'write', q: '"এখন" কে মালয়ে কী বলে?', answer: 'sekarang', alt: ['Sekarang'] },
+          { type: 'speak', target: 'Pukul berapa sekarang', hint: 'এখন কত সময়?' }
+        ]}
+      ]}
+    ]
+  },
+  arabic: {
+    name: 'Arabic', nameBn: 'আরবি', flag: '🇸🇦', langCode: 'ar-SA',
+    intro: 'সৌদি, UAE, কাতার, কুয়েত, ওমান — মধ্যপ্রাচ্যের সব দেশে কাজ করার জন্য অপরিহার্য।',
+    modules: [
+      { title: 'Beginner', titleBn: 'শুরুর স্তর', lessons: [
+        { title: 'শুভেচ্ছা', icon: '👋', questions: [
+          { type: 'listen', word: 'السلام عليكم', pron: 'আসসালামু আলাইকুম', meaning: 'আপনার উপর শান্তি বর্ষিত হোক', audioText: 'السلام عليكم' },
+          { type: 'choice', q: '"شكراً" এর বাংলা কী?', options: ['ধন্যবাদ', 'স্বাগতম', 'বিদায়', 'দুঃখিত'], correct: 0 },
+          { type: 'match', pairs: [['مرحبا', 'স্বাগতম'], ['شكراً', 'ধন্যবাদ'], ['مع السلامة', 'বিদায়']] },
+          { type: 'write', q: '"ধন্যবাদ" আরবিতে কী?', answer: 'شكرا', alt: ['شكراً', 'شكرا'] },
+          { type: 'speak', target: 'السلام عليكم', hint: 'আসসালামু আলাইকুম বলুন' }
+        ]},
+        { title: 'সংখ্যা', icon: '🔢', questions: [
+          { type: 'listen', word: 'واحد', pron: 'ওয়াহিদ', meaning: 'এক', audioText: 'واحد' },
+          { type: 'choice', q: '"ثلاثة" সংখ্যাটি কত?', options: ['১', '৩', '৫', '৭'], correct: 1 },
+          { type: 'match', pairs: [['واحد', 'এক'], ['اثنان', 'দুই'], ['ثلاثة', 'তিন']] },
+          { type: 'write', q: '"দশ" আরবিতে কী?', answer: 'عشرة', alt: ['عشره'] },
+          { type: 'speak', target: 'واحد اثنان ثلاثة', hint: 'এক দুই তিন' }
+        ]},
+        { title: 'খাবার', icon: '🍚', questions: [
+          { type: 'listen', word: 'ماء', pron: 'মা', meaning: 'পানি', audioText: 'ماء' },
+          { type: 'choice', q: '"أرز" এর বাংলা কী?', options: ['ভাত', 'পানি', 'রুটি', 'মাছ'], correct: 0 },
+          { type: 'match', pairs: [['ماء', 'পানি'], ['أرز', 'ভাত'], ['خبز', 'রুটি']] },
+          { type: 'write', q: '"ভাত" আরবিতে কী?', answer: 'أرز', alt: ['ارز'] },
+          { type: 'speak', target: 'أريد ماء', hint: 'আমি পানি চাই' }
+        ]},
+        { title: 'কেনাকাটা', icon: '🛒', questions: [
+          { type: 'listen', word: 'كم السعر', pron: 'কাম আস-সিইর', meaning: 'কত দাম', audioText: 'كم السعر' },
+          { type: 'choice', q: '"غالي" এর বাংলা কী?', options: ['সস্তা', 'দামি', 'ভালো', 'খারাপ'], correct: 1 },
+          { type: 'match', pairs: [['رخيص', 'সস্তা'], ['غالي', 'দামি'], ['مال', 'টাকা']] },
+          { type: 'write', q: '"টাকা" আরবিতে কী?', answer: 'مال', alt: ['فلوس'] },
+          { type: 'speak', target: 'كم السعر', hint: 'কত দাম?' }
+        ]},
+        { title: 'দিক', icon: '🧭', questions: [
+          { type: 'listen', word: 'أين', pron: 'আইন', meaning: 'কোথায়', audioText: 'أين' },
+          { type: 'choice', q: '"يمين" এর বাংলা কী?', options: ['ডান', 'বাম', 'সোজা', 'পেছনে'], correct: 0 },
+          { type: 'match', pairs: [['يمين', 'ডান'], ['يسار', 'বাম'], ['مستقيم', 'সোজা']] },
+          { type: 'write', q: '"ডান" আরবিতে কী?', answer: 'يمين', alt: ['يمين'] },
+          { type: 'speak', target: 'أين المستشفى', hint: 'হাসপাতাল কোথায়?' }
+        ]}
+      ]}
+    ]
+  },
+  japanese: {
+    name: 'Japanese', nameBn: 'জাপানি', flag: '🇯🇵', langCode: 'ja-JP',
+    intro: 'জাপানে পড়াশোনা, কাজ বা ভ্রমণের জন্য। জাপানি সংস্কৃতি ও ভাষা শেখার আনন্দ আলাদা।',
+    modules: [
+      { title: 'Beginner', titleBn: 'শুরুর স্তর', lessons: [
+        { title: 'শুভেচ্ছা', icon: '👋', questions: [
+          { type: 'listen', word: 'こんにちは', pron: 'কোননিচিওয়া', meaning: 'হ্যালো', audioText: 'こんにちは' },
+          { type: 'choice', q: '"ありがとう" এর বাংলা কী?', options: ['ধন্যবাদ', 'স্বাগতম', 'বিদায়', 'দুঃখিত'], correct: 0 },
+          { type: 'match', pairs: [['こんにちは', 'হ্যালো'], ['ありがとう', 'ধন্যবাদ'], ['さようなら', 'বিদায়']] },
+          { type: 'write', q: '"ধন্যবাদ" জাপানিতে কী?', answer: 'ありがとう', alt: ['ありがとうございます'] },
+          { type: 'speak', target: 'こんにちは', hint: 'হ্যালো বলুন' }
+        ]},
+        { title: 'সংখ্যা', icon: '🔢', questions: [
+          { type: 'listen', word: 'いち', pron: 'ইচি', meaning: 'এক', audioText: 'いち' },
+          { type: 'choice', q: '"さん" সংখ্যাটি কত?', options: ['১', '২', '৩', '৪'], correct: 2 },
+          { type: 'match', pairs: [['いち', 'এক'], ['に', 'দুই'], ['さん', 'তিন']] },
+          { type: 'write', q: '"দশ" জাপানিতে কী?', answer: 'じゅう', alt: ['じゅう', 'juu'] },
+          { type: 'speak', target: 'いち に さん', hint: 'এক দুই তিন' }
+        ]},
+        { title: 'খাবার', icon: '🍜', questions: [
+          { type: 'listen', word: 'みず', pron: 'মিজু', meaning: 'পানি', audioText: 'みず' },
+          { type: 'choice', q: '"ごはん" এর বাংলা কী?', options: ['ভাত', 'পানি', 'রুটি', 'মাছ'], correct: 0 },
+          { type: 'match', pairs: [['みず', 'পানি'], ['ごはん', 'ভাত'], ['さかな', 'মাছ']] },
+          { type: 'write', q: '"ভাত" জাপানিতে কী?', answer: 'ごはん', alt: ['ごはん', 'gohan'] },
+          { type: 'speak', target: 'みず ください', hint: 'পানি দিন' }
+        ]},
+        { title: 'সংখ্যা ২', icon: '🔢', questions: [
+          { type: 'listen', word: 'よん', pron: 'ইয়োন', meaning: 'চার', audioText: 'よん' },
+          { type: 'choice', q: '"ご" সংখ্যাটি কত?', options: ['৩', '৪', '৫', '৬'], correct: 2 },
+          { type: 'match', pairs: [['よん', 'চার'], ['ご', 'পাঁচ'], ['ろく', 'ছয়']] },
+          { type: 'write', q: '"সাত" জাপানিতে কী?', answer: 'なな', alt: ['しち'] },
+          { type: 'speak', target: 'よん ご ろく', hint: 'চার পাঁচ ছয়' }
+        ]},
+        { title: 'ধন্যবাদ', icon: '🙏', questions: [
+          { type: 'listen', word: 'すみません', pron: 'সুমিমাসেন', meaning: 'মাফ করবেন', audioText: 'すみません' },
+          { type: 'choice', q: '"ごめんなさい" এর বাংলা কী?', options: ['দুঃখিত', 'ধন্যবাদ', 'স্বাগতম', 'হ্যালো'], correct: 0 },
+          { type: 'match', pairs: [['すみません', 'মাফ করবেন'], ['ごめんなさい', 'দুঃখিত'], ['どうも', 'ধন্যবাদ']] },
+          { type: 'write', q: '"দুঃখিত" জাপানিতে কী?', answer: 'ごめんなさい', alt: ['すみません'] },
+          { type: 'speak', target: 'ありがとうございます', hint: 'অনেক ধন্যবাদ' }
+        ]}
+      ]}
+    ]
+  },
+  korean: {
+    name: 'Korean', nameBn: 'কোরিয়ান', flag: '🇰🇷', langCode: 'ko-KR',
+    intro: 'কোরিয়ায় EPS সিস্টেমে কাজ করতে যাওয়া বাংলাদেশীদের জন্য অপরিহার্য।',
+    modules: [
+      { title: 'Beginner', titleBn: 'শুরুর স্তর', lessons: [
+        { title: 'শুভেচ্ছা', icon: '👋', questions: [
+          { type: 'listen', word: '안녕하세요', pron: 'আনইয়োংহাসেয়ো', meaning: 'হ্যালো', audioText: '안녕하세요' },
+          { type: 'choice', q: '"감사합니다" এর বাংলা কী?', options: ['ধন্যবাদ', 'স্বাগতম', 'বিদায়', 'দুঃখিত'], correct: 0 },
+          { type: 'match', pairs: [['안녕하세요', 'হ্যালো'], ['감사합니다', 'ধন্যবাদ'], ['안녕히 가세요', 'বিদায়']] },
+          { type: 'write', q: '"ধন্যবাদ" কোরিয়ান ভাষায় কী?', answer: '감사합니다', alt: ['고마워요', '감사'] },
+          { type: 'speak', target: '안녕하세요', hint: 'হ্যালো বলুন' }
+        ]},
+        { title: 'সংখ্যা', icon: '🔢', questions: [
+          { type: 'listen', word: '일', pron: 'ইল', meaning: 'এক', audioText: '일' },
+          { type: 'choice', q: '"삼" সংখ্যাটি কত?', options: ['১', '২', '৩', '৪'], correct: 2 },
+          { type: 'match', pairs: [['일', 'এক'], ['이', 'দুই'], ['삼', 'তিন']] },
+          { type: 'write', q: '"দশ" কোরিয়ান ভাষায় কী?', answer: '십', alt: ['열'] },
+          { type: 'speak', target: '일 이 삼', hint: 'এক দুই তিন' }
+        ]},
+        { title: 'খাবার', icon: '🍚', questions: [
+          { type: 'listen', word: '물', pron: 'মুল', meaning: 'পানি', audioText: '물' },
+          { type: 'choice', q: '"밥" এর বাংলা কী?', options: ['ভাত', 'পানি', 'রুটি', 'মাছ'], correct: 0 },
+          { type: 'match', pairs: [['물', 'পানি'], ['밥', 'ভাত'], ['고기', 'মাংস']] },
+          { type: 'write', q: '"ভাত" কোরিয়ান ভাষায় কী?', answer: '밥', alt: ['밥'] },
+          { type: 'speak', target: '물 주세요', hint: 'পানি দিন' }
+        ]},
+        { title: 'কাজ', icon: '💼', questions: [
+          { type: 'listen', word: '일', pron: 'ইল', meaning: 'কাজ', audioText: '일' },
+          { type: 'choice', q: '"회사" এর বাংলা কী?', options: ['অফিস', 'বাড়ি', 'দোকান', 'হাসপাতাল'], correct: 0 },
+          { type: 'match', pairs: [['일', 'কাজ'], ['회사', 'অফিস'], ['돈', 'টাকা']] },
+          { type: 'write', q: '"টাকা" কোরিয়ান ভাষায় কী?', answer: '돈', alt: ['돈'] },
+          { type: 'speak', target: '일 하고 싶어요', hint: 'আমি কাজ করতে চাই' }
+        ]},
+        { title: 'দিক', icon: '🧭', questions: [
+          { type: 'listen', word: '어디', pron: 'ওদি', meaning: 'কোথায়', audioText: '어디' },
+          { type: 'choice', q: '"오른쪽" এর বাংলা কী?', options: ['ডান', 'বাম', 'সোজা', 'পেছনে'], correct: 0 },
+          { type: 'match', pairs: [['오른쪽', 'ডান'], ['왼쪽', 'বাম'], ['직진', 'সোজা']] },
+          { type: 'write', q: '"ডান" কোরিয়ান ভাষায় কী?', answer: '오른쪽', alt: ['오른쪽'] },
+          { type: 'speak', target: '어디 있어요', hint: 'কোথায় আছে?' }
+        ]}
+      ]}
+    ]
+  },
+  spanish: {
+    name: 'Spanish', nameBn: 'স্প্যানিশ', flag: '🇪🇸', langCode: 'es-ES',
+    intro: 'বিশ্বের দ্বিতীয় বৃহত্তম মাতৃভাষা। ইউরোপ, আমেরিকা ও আফ্রিকার ২০+ দেশে বলা হয়।',
+    modules: [
+      { title: 'Beginner', titleBn: 'শুরুর স্তর', lessons: [
+        { title: 'শুভেচ্ছা', icon: '👋', questions: [
+          { type: 'listen', word: 'Hola', pron: 'ওলা', meaning: 'হ্যালো', audioText: 'Hola' },
+          { type: 'choice', q: '"Gracias" এর বাংলা কী?', options: ['ধন্যবাদ', 'স্বাগতম', 'বিদায়', 'দুঃখিত'], correct: 0 },
+          { type: 'match', pairs: [['Hola', 'হ্যালো'], ['Gracias', 'ধন্যবাদ'], ['Adiós', 'বিদায়']] },
+          { type: 'write', q: '"ধন্যবাদ" স্প্যানিশে কী?', answer: 'gracias', alt: ['Gracias'] },
+          { type: 'speak', target: 'Hola', hint: 'হ্যালো বলুন' }
+        ]},
+        { title: 'সংখ্যা', icon: '🔢', questions: [
+          { type: 'listen', word: 'Uno', pron: 'উনো', meaning: 'এক', audioText: 'Uno' },
+          { type: 'choice', q: '"Tres" সংখ্যাটি কত?', options: ['১', '২', '৩', '৪'], correct: 2 },
+          { type: 'match', pairs: [['Uno', 'এক'], ['Dos', 'দুই'], ['Tres', 'তিন']] },
+          { type: 'write', q: '"দশ" স্প্যানিশে কী?', answer: 'diez', alt: ['Diez'] },
+          { type: 'speak', target: 'Uno dos tres', hint: 'এক দুই তিন' }
+        ]},
+        { title: 'খাবার', icon: '🍎', questions: [
+          { type: 'listen', word: 'Agua', pron: 'আগুয়া', meaning: 'পানি', audioText: 'Agua' },
+          { type: 'choice', q: '"Arroz" এর বাংলা কী?', options: ['ভাত', 'পানি', 'রুটি', 'মাছ'], correct: 0 },
+          { type: 'match', pairs: [['Agua', 'পানি'], ['Arroz', 'ভাত'], ['Pan', 'রুটি']] },
+          { type: 'write', q: '"ভাত" স্প্যানিশে কী?', answer: 'arroz', alt: ['Arroz'] },
+          { type: 'speak', target: 'Quiero agua', hint: 'আমি পানি চাই' }
+        ]},
+        { title: 'রং', icon: '🎨', questions: [
+          { type: 'listen', word: 'Rojo', pron: 'রোহো', meaning: 'লাল', audioText: 'Rojo' },
+          { type: 'choice', q: '"Azul" কোন রঙ?', options: ['লাল', 'নীল', 'সবুজ', 'হলুদ'], correct: 1 },
+          { type: 'match', pairs: [['Rojo', 'লাল'], ['Verde', 'সবুজ'], ['Negro', 'কালো']] },
+          { type: 'write', q: '"হলুদ" স্প্যানিশে কী?', answer: 'amarillo', alt: ['Amarillo'] },
+          { type: 'speak', target: 'Rojo y azul', hint: 'লাল এবং নীল' }
+        ]},
+        { title: 'দিক', icon: '🧭', questions: [
+          { type: 'listen', word: 'Dónde', pron: 'দোন্দে', meaning: 'কোথায়', audioText: 'Dónde' },
+          { type: 'choice', q: '"Derecha" এর বাংলা কী?', options: ['ডান', 'বাম', 'সোজা', 'পেছনে'], correct: 0 },
+          { type: 'match', pairs: [['Derecha', 'ডান'], ['Izquierda', 'বাম'], ['Recto', 'সোজা']] },
+          { type: 'write', q: '"ডান" স্প্যানিশে কী?', answer: 'derecha', alt: ['Derecha'] },
+          { type: 'speak', target: 'Dónde está el hospital', hint: 'হাসপাতাল কোথায়?' }
+        ]}
+      ]}
+    ]
+  }
+};
+
+/* ============================================================
+   ইউজার ডেটা
+   ============================================================ */
+var USER_KEY = 'lingo_user_v4';
+function loadUser(){
+  try{
+    var d = JSON.parse(localStorage.getItem(USER_KEY));
+    if(d && typeof d === 'object') return d;
+  }catch(e){}
+  return { xp: 0, streak: 0, lastActive: null, hearts: 5, gems: 20, activeLang: 'english', progress: {}, history: [], createdAt: Date.now() };
+}
+function saveUser(){ try{ localStorage.setItem(USER_KEY, JSON.stringify(USER)); }catch(e){} }
+var USER = loadUser();
+
+function updateStreak(){
+  var today = new Date().toDateString();
+  if(USER.lastActive === today) return;
+  var yesterday = new Date(Date.now() - 86400000).toDateString();
+  if(USER.lastActive === yesterday) USER.streak = (USER.streak || 0) + 1;
+  else if(USER.lastActive) USER.streak = 1;
+  else USER.streak = 1;
+  USER.lastActive = today;
+  saveUser();
+}
+function getProgress(langKey){
+  if(!USER.progress[langKey]) USER.progress[langKey] = {};
+  return USER.progress[langKey];
+}
+function isLessonCompleted(langKey, mIdx, lIdx){
+  var p = getProgress(langKey);
+  return !!(p[mIdx] && p[mIdx][lIdx]);
+}
+function markLessonCompleted(langKey, mIdx, lIdx){
+  var p = getProgress(langKey);
+  if(!p[mIdx]) p[mIdx] = {};
+  p[mIdx][lIdx] = true;
+  saveUser();
+}
+function isLessonUnlocked(langKey, mIdx, lIdx){
+  if(mIdx === 0 && lIdx === 0) return true;
+  var lang = LANGUAGES[langKey];
+  if(!lang) return false;
+  if(lIdx > 0) return isLessonCompleted(langKey, mIdx, lIdx - 1);
+  var prevM = lang.modules[mIdx - 1];
+  if(!prevM) return false;
+  return isLessonCompleted(langKey, mIdx - 1, prevM.lessons.length - 1);
+}
+function getLangProgressPct(langKey){
+  var lang = LANGUAGES[langKey];
+  if(!lang) return 0;
+  var total = 0, done = 0;
+  lang.modules.forEach(function(m, mIdx){
+    m.lessons.forEach(function(l, lIdx){
+      total++;
+      if(isLessonCompleted(langKey, mIdx, lIdx)) done++;
+    });
+  });
+  return total ? Math.round(done / total * 100) : 0;
+}
+function addXP(amount){
+  USER.xp = (USER.xp || 0) + amount;
+  var today = new Date().toDateString();
+  var found = false;
+  USER.history.forEach(function(h){ if(h.date === today){ h.xp += amount; found = true; } });
+  if(!found) USER.history.push({date: today, xp: amount});
+  if(USER.history.length > 30) USER.history = USER.history.slice(-30);
+  saveUser();
+  updateTopStats();
+  showXPPop(amount);
+}
+function updateTopStats(){
+  var xpEl = document.getElementById('xpTop');
+  var streakEl = document.getElementById('streakTop');
+  if(xpEl) xpEl.textContent = USER.xp || 0;
+  if(streakEl) streakEl.textContent = USER.streak || 0;
+}
+function showXPPop(amount){
+  var el = document.createElement('div');
+  el.className = 'xp-pop';
+  el.textContent = '+' + amount + ' XP';
+  el.style.left = '50%';
+  el.style.top = '30%';
+  el.style.transform = 'translateX(-50%)';
+  document.body.appendChild(el);
+  setTimeout(function(){ el.remove(); }, 1200);
+}
+
+function renderHome(){
+  var grid = document.getElementById('langGrid');
+  if(!grid) return;
+  var countEl = document.getElementById('langCount');
+  var keys = Object.keys(LANGUAGES);
+  if(countEl) countEl.textContent = keys.length + 'টি ভাষা';
+  var html = '';
+  keys.forEach(function(key){
+    var lang = LANGUAGES[key];
+    var pct = getLangProgressPct(key);
+    html += '<button class="lang-card" onclick="openLanguage(\'' + key + '\')"><span class="lang-flag">' + lang.flag + '</span><div class="lang-name">' + lang.name + '</div><div class="lang-name-bn">' + lang.nameBn + '</div><div class="lang-prog"><div class="lang-prog-fill" style="width:' + pct + '%"></div></div><div class="lang-prog-txt">' + pct + '% সম্পূর্ণ</div></button>';
+  });
+  grid.innerHTML = html;
+  var h = new Date().getHours();
+  var greet = 'শুভ সকাল';
+  if(h >= 12 && h < 17) greet = 'শুভ অপরাহ্ন';
+  else if(h >= 17 && h < 20) greet = 'শুভ সন্ধ্যা';
+  else if(h >= 20 || h < 5) greet = 'শুভ রাত্রি';
+  var gt = document.getElementById('greetTitle');
+  if(gt) gt.textContent = greet + '! 👋';
+}
+function openLanguage(key){
+  USER.activeLang = key;
+  saveUser();
+  switchPage('learn');
+}
+
+function renderLearnPath(){
+  var key = USER.activeLang || 'english';
+  var lang = LANGUAGES[key];
+  var container = document.getElementById('learnContent');
+  if(!container || !lang) return;
+  var pct = getLangProgressPct(key);
+  var html = '<div class="path-header"><button class="path-back" onclick="switchPage(\'home\')"><i class="fas fa-arrow-left"></i> সব ভাষা</button><h2>' + lang.flag + ' ' + lang.nameBn + '</h2><p>' + lang.name + ' • ' + pct + '% সম্পূর্ণ</p></div><div style="background:var(--surface);border:2px solid var(--border);border-radius:14px;padding:14px;margin-bottom:20px;font-size:13px;color:var(--text-secondary);line-height:1.6">💡 ' + lang.intro + '</div>';
+  lang.modules.forEach(function(mod, mIdx){
+    html += '<div class="module-group"><div class="module-title">' + mod.titleBn + ' — ' + mod.title + '</div><div class="lesson-path">';
+    mod.lessons.forEach(function(les, lIdx){
+      var completed = isLessonCompleted(key, mIdx, lIdx);
+      var unlocked = isLessonUnlocked(key, mIdx, lIdx);
+      var cls = 'lesson-node';
+      if(completed) cls += ' completed';
+      else if(unlocked) cls += ' unlocked';
+      else cls += ' locked';
+      var icon = completed ? '⭐' : (unlocked ? les.icon : '🔒');
+      var clickAttr = unlocked ? 'onclick="startLesson(\'' + key + '\',' + mIdx + ',' + lIdx + ')"' : '';
+      html += '<button class="' + cls + '" ' + clickAttr + '><span>' + icon + '</span><span class="lesson-label">' + les.title + '</span></button>';
+    });
+    html += '</div></div>';
+  });
+  container.innerHTML = html;
+}
+
+var CURRENT = { lang: null, moduleIdx: 0, lessonIdx: 0, questions: [], currentQ: 0, correctCount: 0, wrongCount: 0 };
+function startLesson(langKey, mIdx, lIdx){
+  var lang = LANGUAGES[langKey];
+  if(!lang) return;
+  var lesson = lang.modules[mIdx].lessons[lIdx];
+  CURRENT.lang = langKey;
+  CURRENT.moduleIdx = mIdx;
+  CURRENT.lessonIdx = lIdx;
+  CURRENT.questions = lesson.questions.slice();
+  CURRENT.currentQ = 0;
+  CURRENT.correctCount = 0;
+  CURRENT.wrongCount = 0;
+  updateStreak();
+  switchPage('lesson');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  var q = CURRENT.questions[CURRENT.currentQ];
+  if(!q){ finishLesson(); return; }
+  var total = CURRENT.questions.length;
+  var idx = CURRENT.currentQ;
+  var pct = (idx / total) * 100;
+  var container = document.getElementById('lessonContent');
+  if(!container) return;
+  var topbar = '<div class="lesson-topbar"><button class="lesson-close" onclick="confirmQuit()">✕</button><div class="lesson-progress-track"><div class="lesson-progress-fill" style="width:' + pct + '%"></div></div><div class="lesson-hearts">❤️ <span>' + USER.hearts + '</span></div></div>';
+  var body = '';
+  if(q.type === 'listen') body = renderListenQ(q);
+  else if(q.type === 'choice') body = renderChoiceQ(q);
+  else if(q.type === 'match') body = renderMatchQ(q);
+  else if(q.type === 'write') body = renderWriteQ(q);
+  else if(q.type === 'speak') body = renderSpeakQ(q);
+  container.innerHTML = topbar + body;
+  if(q.type === 'listen' || q.type === 'speak'){
+    setTimeout(function(){ playAudio(q.audioText || q.target || q.word); }, 400);
+  }
+}
+
+function renderListenQ(q){
+  return '<div class="lesson-q">🔊 শুনুন এবং সঠিক উত্তর বেছে নিন</div>' +
+    '<div class="audio-card"><button class="audio-big-btn" onclick="playAudio(\'' + escapeAttr(q.audioText) + '\')"><i class="fas fa-volume-up"></i></button>' +
+    '<div class="audio-word">' + escapeHtml(q.word) + '</div><div class="audio-pron">' + escapeHtml(q.pron || '') + '</div>' +
+    '<div class="audio-btn-row"><button class="audio-btn" onclick="playAudio(\'' + escapeAttr(q.audioText) + '\', 0.7)"><i class="fas fa-turtle"></i> ধীরে</button>' +
+    '<button class="audio-btn" onclick="playAudio(\'' + escapeAttr(q.audioText) + '\', 1.1)"><i class="fas fa-bolt"></i> দ্রুত</button></div></div>' +
+    '<div class="options"><button class="opt-card" onclick="chooseListen(0)">' + escapeHtml(q.meaning) + '</button>' +
+    '<button class="opt-card" onclick="chooseListen(1)">অন্য কিছু</button>' +
+    '<button class="opt-card" onclick="chooseListen(2)">জানি না</button></div>' +
+    '<p style="text-align:center;font-size:12px;color:var(--text-muted);margin-top:20px">উপরের 🔊 চেপে শুনুন, তারপর সঠিকটি বেছে নিন</p>';
+}
+function chooseListen(idx){
+  if(idx === 0) correctAnswer('দুর্দান্ত! সঠিক উত্তর');
+  else wrongAnswer('সঠিক উত্তর: ' + escapeHtml(CURRENT.questions[CURRENT.currentQ].meaning));
+}
+function renderChoiceQ(q){
+  var html = '<div class="lesson-q">' + escapeHtml(q.q) + '</div><div class="options">';
+  q.options.forEach(function(o, i){ html += '<button class="opt-card" onclick="chooseOption(' + i + ')">' + escapeHtml(o) + '</button>'; });
+  html += '</div>';
+  return html;
+}
+function chooseOption(i){
+  var q = CURRENT.questions[CURRENT.currentQ];
+  var all = document.querySelectorAll('#lessonContent .opt-card');
+  all.forEach(function(el, idx){
+    el.classList.remove('selected');
+    if(idx === i) el.classList.add('selected');
+  });
+  if(i === q.correct) setTimeout(function(){ correctAnswer('দুর্দান্ত! সঠিক উত্তর'); }, 200);
+  else setTimeout(function(){ wrongAnswer('সঠিক উত্তর: ' + escapeHtml(q.options[q.correct])); }, 200);
+}
+function renderMatchQ(q){
+  var left = q.pairs.map(function(p){ return p[0]; });
+  var right = q.pairs.map(function(p){ return p[1]; });
+  right = right.slice().sort(function(){ return Math.random() - 0.5; });
+  var html = '<div class="lesson-q">🔗 জোড়া মিলান</div><div class="match-wrap"><div class="match-col" id="matchLeft">';
+  left.forEach(function(t, i){ html += '<button class="match-item" data-side="left" data-idx="' + i + '" onclick="selectMatch(this)">' + escapeHtml(t) + '</button>'; });
+  html += '</div><div class="match-col" id="matchRight">';
+  right.forEach(function(t){
+    var origIdx = q.pairs.findIndex(function(p){ return p[1] === t; });
+    html += '<button class="match-item" data-side="right" data-idx="' + origIdx + '" onclick="selectMatch(this)">' + escapeHtml(t) + '</button>';
+  });
+  html += '</div></div><p style="text-align:center;font-size:12px;color:var(--text-muted);margin-top:20px">বাম দিকের শব্দের সাথে ডান দিকের সঠিক অনুবাদ মিলান</p>';
+  setTimeout(function(){ resetMatchState(q.pairs.length); }, 100);
+  return html;
+}
+var MATCH_STATE = { selectedLeft: null, matched: 0, total: 0 };
+function resetMatchState(total){ MATCH_STATE = { selectedLeft: null, matched: 0, total: total }; }
+function selectMatch(el){
+  if(el.classList.contains('done') || el.classList.contains('correct')) return;
+  var side = el.dataset.side;
+  if(side === 'left'){
+    document.querySelectorAll('#matchLeft .match-item').forEach(function(x){ x.classList.remove('selected'); });
+    el.classList.add('selected');
+    MATCH_STATE.selectedLeft = el;
+  } else {
+    if(!MATCH_STATE.selectedLeft) return;
+    var lIdx = parseInt(MATCH_STATE.selectedLeft.dataset.idx);
+    var rIdx = parseInt(el.dataset.idx);
+    if(lIdx === rIdx){
+      MATCH_STATE.selectedLeft.classList.remove('selected');
+      MATCH_STATE.selectedLeft.classList.add('correct', 'done');
+      el.classList.add('correct', 'done');
+      MATCH_STATE.selectedLeft = null;
+      MATCH_STATE.matched++;
+      if(MATCH_STATE.matched >= MATCH_STATE.total){
+        setTimeout(function(){ correctAnswer('সব মিলিয়ে দিলেন!'); }, 300);
+      }
+    } else {
+      el.classList.add('wrong');
+      MATCH_STATE.selectedLeft.classList.add('wrong');
+      var wrongEl = el, wrongSel = MATCH_STATE.selectedLeft;
+      setTimeout(function(){ wrongEl.classList.remove('wrong'); wrongSel.classList.remove('wrong', 'selected'); }, 600);
+      MATCH_STATE.selectedLeft = null;
+    }
+  }
+}
+function renderWriteQ(q){
+  return '<div class="lesson-q">✍️ ' + escapeHtml(q.q) + '</div><div class="write-wrap">' +
+    '<input type="text" class="write-input" id="writeInput" placeholder="এখানে লিখুন..." autocomplete="off" onkeydown="if(event.key===\'Enter\')submitWrite()">' +
+    '<button class="btn-primary btn-block" style="margin-top:16px" onclick="submitWrite()"><i class="fas fa-check"></i> যাচাই করুন</button></div>';
+}
+function submitWrite(){
+  var q = CURRENT.questions[CURRENT.currentQ];
+  var val = (document.getElementById('writeInput').value || '').trim().toLowerCase();
+  if(!val){ showToast('কিছু লিখুন', 'no'); return; }
+  var answers = [q.answer].concat(q.alt || []).map(function(x){ return String(x).toLowerCase(); });
+  if(answers.indexOf(val) !== -1) correctAnswer('সঠিক!');
+  else wrongAnswer('সঠিক উত্তর: ' + q.answer);
+}
+function renderSpeakQ(q){
+  return '<div class="lesson-q">🎤 উচ্চারণ করুন</div><div class="speak-wrap">' +
+    '<div class="speak-target">' + escapeHtml(q.target) + '</div><div class="speak-hint">' + escapeHtml(q.hint) + '</div>' +
+    '<button class="audio-btn" onclick="playAudio(\'' + escapeAttr(q.target) + '\')" style="margin-bottom:20px"><i class="fas fa-volume-up"></i> শুনুন</button>' +
+    '<button class="mic-btn" id="micBtn" onclick="startSpeak(\'' + escapeAttr(q.target) + '\')"><i class="fas fa-microphone"></i></button>' +
+    '<div class="transcript" id="transcript">🎤 চেপে বলুন...</div>' +
+    '<button class="btn-primary btn-block" style="margin-top:20px" onclick="skipSpeak()">এড়িয়ে যান</button></div>';
+}
+var RECOGNITION = null;
+function startSpeak(target){
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SR){ showToast('এই ব্রাউজারে ভয়েস সাপোর্ট নেই', 'no'); return; }
+  var micBtn = document.getElementById('micBtn');
+  var trans = document.getElementById('transcript');
+  micBtn.classList.add('listening');
+  trans.textContent = '🎤 শুনছি...';
+  trans.className = 'transcript';
+  RECOGNITION = new SR();
+  RECOGNITION.lang = LANGUAGES[CURRENT.lang].langCode;
+  RECOGNITION.continuous = false;
+  RECOGNITION.interimResults = false;
+  RECOGNITION.onresult = function(ev){
+    var said = ev.results[0][0].transcript;
+    trans.textContent = 'আপনি বলেছেন: "' + said + '"';
+    var clean = said.toLowerCase().replace(/[.,!?।]/g, '').trim();
+    var cleanTarget = target.toLowerCase().replace(/[.,!?।]/g, '').trim();
+    if(clean === cleanTarget || clean.indexOf(cleanTarget) !== -1 || cleanTarget.indexOf(clean) !== -1){
+      trans.classList.add('ok');
+      setTimeout(function(){ correctAnswer('চমৎকার উচ্চারণ!'); }, 500);
+    } else {
+      trans.classList.add('no');
+      setTimeout(function(){ wrongAnswer('আবার চেষ্টা করুন — "' + target + '"'); }, 500);
+    }
+    micBtn.classList.remove('listening');
+  };
+  RECOGNITION.onerror = function(){
+    micBtn.classList.remove('listening');
+    trans.textContent = '❌ শোনা যায়নি, আবার চেষ্টা করুন';
+    trans.classList.add('no');
+  };
+  RECOGNITION.onend = function(){ micBtn.classList.remove('listening'); };
+  try{ RECOGNITION.start(); }catch(e){ micBtn.classList.remove('listening'); }
+}
+function skipSpeak(){ correctAnswer('ঠিক আছে, পরের ধাপে যাই'); }
+
+function correctAnswer(msg){ CURRENT.correctCount++; addXP(10); showFeedback(true, '🎉 ' + msg, 'দুর্দান্ত! +10 XP'); }
+function wrongAnswer(msg){
+  CURRENT.wrongCount++;
+  USER.hearts = Math.max(0, USER.hearts - 1);
+  saveUser();
+  if(USER.hearts === 0){ showFeedback(false, '❤️ হৃদয় শেষ!', msg); return; }
+  showFeedback(false, 'ভুল উত্তর', msg);
+}
+var FEEDBACK_NEXT_CALLBACK = null;
+function showFeedback(ok, title, msg){
+  var bar = document.getElementById('feedbackBar');
+  var icon = document.getElementById('fbIcon');
+  var ttl = document.getElementById('fbTitle');
+  var msgEl = document.getElementById('fbMsg');
+  var btn = document.getElementById('fbContinue');
+  bar.classList.remove('ok', 'no');
+  bar.classList.add(ok ? 'ok' : 'no');
+  icon.innerHTML = ok ? '<i class="fas fa-check"></i>' : '<i class="fas fa-times"></i>';
+  ttl.textContent = title;
+  msgEl.textContent = msg;
+  btn.textContent = ok ? 'চালিয়ে যান' : 'বুঝেছি';
+  bar.classList.add('show');
+  FEEDBACK_NEXT_CALLBACK = function(){
+    bar.classList.remove('show');
+    setTimeout(function(){
+      if(ok) nextQuestion();
+      else { if(USER.hearts > 0) renderQuestion(); else finishLesson(); }
+    }, 200);
+  };
+}
+document.getElementById('fbContinue').addEventListener('click', function(){ if(FEEDBACK_NEXT_CALLBACK) FEEDBACK_NEXT_CALLBACK(); });
+function nextQuestion(){
+  CURRENT.currentQ++;
+  if(CURRENT.currentQ >= CURRENT.questions.length) finishLesson();
+  else renderQuestion();
+}
+
+function finishLesson(){
+  var total = CURRENT.questions.length;
+  var correct = CURRENT.correctCount;
+  var bonus = 20;
+  var totalXP = correct * 10 + bonus;
+  addXP(bonus);
+  markLessonCompleted(CURRENT.lang, CURRENT.moduleIdx, CURRENT.lessonIdx);
+  var container = document.getElementById('completeContent');
+  if(!container) return;
+  container.innerHTML = '<div class="complete-screen"><div class="complete-badge">🏆</div><div class="complete-title">লেসন সম্পূর্ণ!</div><div class="complete-sub">আপনি দুর্দান্ত করছেন!</div><div class="complete-stats"><div class="complete-stat"><span class="ico">⚡</span><div class="val">+' + totalXP + '</div><div class="lbl">XP</div></div><div class="complete-stat"><span class="ico">✅</span><div class="val">' + correct + '/' + total + '</div><div class="lbl">সঠিক</div></div><div class="complete-stat"><span class="ico">🔥</span><div class="val">' + USER.streak + '</div><div class="lbl">স্ট্রিক</div></div></div><button class="btn-primary btn-block" onclick="switchPage(\'learn\')"><i class="fas fa-arrow-right"></i> পরবর্তী লেসন</button><button class="btn-primary btn-block" style="background:var(--accent);box-shadow:0 5px 0 var(--accent-dark);margin-top:10px" onclick="switchPage(\'home\')"><i class="fas fa-home"></i> হোমে ফিরুন</button></div>';
+  switchPage('complete');
+  showConfetti();
+  updateStreak();
+}
+function showConfetti(){
+  var colors = ['#58cc02', '#1cb0f6', '#ffc800', '#ff4b4b', '#ce82ff', '#89e219'];
+  for(var i = 0; i < 60; i++){
+    (function(idx){
+      setTimeout(function(){
+        var c = document.createElement('div');
+        c.className = 'confetti';
+        c.style.left = (Math.random() * 100) + 'vw';
+        c.style.background = colors[Math.floor(Math.random() * colors.length)];
+        document.body.appendChild(c);
+        var dur = 2000 + Math.random() * 2000;
+        var drift = (Math.random() - 0.5) * 400;
+        c.animate([
+          { transform: 'translate(0,0) rotate(0deg)', opacity: 1 },
+          { transform: 'translate(' + drift + 'px,100vh) rotate(720deg)', opacity: 0 }
+        ], { duration: dur, easing: 'cubic-bezier(.4,.6,.6,1)' });
+        setTimeout(function(){ c.remove(); }, dur);
+      }, idx * 30);
+    })(i);
+  }
+}
+function playAudio(text, rate){
+  if(!('speechSynthesis' in window)){ showToast('এই ব্রাউজারে অডিও সাপোর্ট নেই', 'no'); return; }
+  window.speechSynthesis.cancel();
+  var u = new SpeechSynthesisUtterance(text);
+  u.lang = LANGUAGES[CURRENT.lang] ? LANGUAGES[CURRENT.lang].langCode : 'en-US';
+  u.rate = rate || 0.85;
+  window.speechSynthesis.speak(u);
+}
+
+/* ============================================================
+   পেজ সুইচ (চ্যাট ইনপুট ঠিকমতো দেখানোর জন্য)
+   ============================================================ */
+function switchPage(id, el){
+  document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+  var target = document.getElementById('page-' + id);
+  if(target) target.classList.add('active');
+  document.querySelectorAll('.bnav-item').forEach(function(b){ b.classList.remove('active'); });
+  if(el) el.classList.add('active');
+  else {
+    var found = document.querySelector('.bnav-item[data-page="' + id + '"]');
+    if(found) found.classList.add('active');
+  }
+  window.scrollTo({top: 0, behavior: 'smooth'});
+  
+  // চ্যাট ইনপুট বার দেখান/লুকান
+  var chatWrap = document.getElementById('chatInputWrap');
+  var mainEl = document.getElementById('mainContent');
+  if(chatWrap){
+    if(id === 'ai'){
+      chatWrap.classList.add('active');
+      if(mainEl) mainEl.classList.add('chat-open');
+    } else {
+      chatWrap.classList.remove('active');
+      if(mainEl) mainEl.classList.remove('chat-open');
+    }
+  }
+  
+  if(id === 'home') renderHome();
+  if(id === 'learn') renderLearnPath();
+  if(id === 'ai') initChat();
+  if(id === 'leaderboard') renderLeaderboard();
+  if(id === 'profile') renderProfile();
+}
+
+/* ============================================================
+   Leaderboard
+   ============================================================ */
+function renderLeaderboard(){
+  var el = document.getElementById('leaderboardList');
+  if(!el) return;
+  var bots = [
+    { name: 'রহিম', xp: 2450, avatar: '👨' },
+    { name: 'করিম', xp: 2180, avatar: '👦' },
+    { name: 'সালমা', xp: 1980, avatar: '👩' },
+    { name: 'জাহিদ', xp: 1750, avatar: '🧑' },
+    { name: 'নাবিলা', xp: 1520, avatar: '👧' },
+    { name: 'ফারহান', xp: 1280, avatar: '👨‍🦰' },
+    { name: 'আয়েশা', xp: 1050, avatar: '👩‍🦱' },
+    { name: 'তানভীর', xp: 820, avatar: '🧔' },
+    { name: 'সাবরিনা', xp: 650, avatar: '👩‍🦰' },
+    { name: 'আপনি', xp: USER.xp || 0, avatar: '😎', me: true }
+  ];
+  bots.sort(function(a, b){ return b.xp - a.xp; });
+  var html = '';
+  bots.forEach(function(b, i){
+    var rankCls = i === 0 ? 'gold' : (i === 1 ? 'silver' : (i === 2 ? 'bronze' : ''));
+    var medal = i === 0 ? '🥇' : (i === 1 ? '🥈' : (i === 2 ? '🥉' : (i + 1)));
+    html += '<div class="lb-row' + (b.me ? ' me' : '') + '"><div class="lb-rank ' + rankCls + '">' + medal + '</div><div class="lb-avatar">' + b.avatar + '</div><div class="lb-name">' + escapeHtml(b.name) + '<small>' + (b.me ? 'আপনি' : 'প্রতিযোগী') + '</small></div><div class="lb-xp">⚡ ' + b.xp + '</div></div>';
+  });
+  el.innerHTML = html;
+}
+
+function renderProfile(){
+  var el = document.getElementById('profileContent');
+  if(!el) return;
+  var activeLang = LANGUAGES[USER.activeLang] || LANGUAGES.english;
+  var pct = getLangProgressPct(USER.activeLang);
+  el.innerHTML = '<div class="profile-head"><div class="profile-avatar">😎</div><div class="profile-info"><h2>শিক্ষার্থী</h2><p>সদস্য হয়েছেন ' + new Date(USER.createdAt).toLocaleDateString('bn-BD') + '</p></div></div><div class="profile-grid"><div class="profile-stat"><span class="ico">⚡</span><div class="val">' + (USER.xp || 0) + '</div><div class="lbl">মোট XP</div></div><div class="profile-stat"><span class="ico">🔥</span><div class="val">' + (USER.streak || 0) + '</div><div class="lbl">স্ট্রিক</div></div><div class="profile-stat"><span class="ico">❤️</span><div class="val">' + USER.hearts + '</div><div class="lbl">হৃদয়</div></div><div class="profile-stat"><span class="ico">💎</span><div class="val">' + (USER.gems || 0) + '</div><div class="lbl">রত্ন</div></div></div><div class="sec-title">📚 সক্রিয় ভাষা</div><div style="background:var(--surface);border:2px solid var(--border);border-radius:14px;padding:18px;margin-bottom:16px"><div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><span style="font-size:36px">' + activeLang.flag + '</span><div><div style="font-family:var(--font-en);font-size:16px;font-weight:800">' + activeLang.name + '</div><div style="font-size:12px;color:var(--text-muted)">' + activeLang.nameBn + ' • ' + pct + '% সম্পূর্ণ</div></div></div><div class="lang-prog"><div class="lang-prog-fill" style="width:' + pct + '%"></div></div></div><div class="sec-title">⚙️ সেটিংস</div><button class="btn-primary btn-block" style="background:var(--danger);box-shadow:0 5px 0 #b91c1c;margin-bottom:10px" onclick="confirmReset()"><i class="fas fa-rotate-left"></i> সব ডেটা রিসেট করুন</button>';
+}
+
+var MODAL_CB = null;
+function openModal(title, msg, cb){
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalMsg').textContent = msg;
+  MODAL_CB = cb;
+  document.getElementById('modalOverlay').classList.add('open');
+}
+function closeModal(){
+  document.getElementById('modalOverlay').classList.remove('open');
+  MODAL_CB = null;
+}
+document.getElementById('modalConfirm').addEventListener('click', function(){ if(MODAL_CB) MODAL_CB(); closeModal(); });
+function confirmQuit(){ openModal('লেসন থেকে বের হবেন?', 'আপনার অগ্রগতি হারিয়ে যাবে!', function(){ switchPage('learn'); }); }
+function confirmReset(){
+  openModal('সব ডেটা মুছবেন?', 'আপনার XP, স্ট্রিক, ও লেসন প্রোগ্রেস সব মুছে যাবে।', function(){
+    localStorage.removeItem(USER_KEY);
+    USER = loadUser();
+    saveUser();
+    updateTopStats();
+    switchPage('home');
+    showToast('সব ডেটা রিসেট হয়েছে', 'ok');
+  });
+}
+
+var TOAST_TIMER = null;
+function showToast(msg, type){
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.remove('ok', 'no');
+  if(type) t.classList.add(type);
+  t.classList.add('show');
+  clearTimeout(TOAST_TIMER);
+  TOAST_TIMER = setTimeout(function(){ t.classList.remove('show'); }, 2500);
+}
+
+function toggleTheme(){
+  var cur = document.documentElement.getAttribute('data-theme');
+  var next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('lingo_theme', next);
+  updateThemeIcon();
+}
+function updateThemeIcon(){
+  var t = document.documentElement.getAttribute('data-theme');
+  var btn = document.getElementById('themeIcon');
+  if(btn) btn.className = t === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+}
+
+/* ============================================================
+   AI চ্যাট (Cloudflare Worker) — Airlearn-এর মতো
+   ============================================================ */
+var CHAT_HISTORY = [];
+var IS_THINKING = false;
+var AI_TALKING = false;
+
+function initChat(){
+  var wrap = document.getElementById('chatWrap');
+  if(!wrap) return;
+  if(wrap.dataset.init) return;
+  wrap.dataset.init = '1';
+  addChatBubble('ai', 'আসসালামু আলাইকুম! 👋<br>আমি <b>লিঙ্গো বন্ধু</b> — আপনার AI শিক্ষক।<br><br>🎤 মাইকে চেপে বাংলায় বলুন, আমি শুনব ও উত্তর দেব।<br><br><b>যেমন:</b><br>• ইংরেজিতে দাম জিজ্ঞেস কিভাবে করব?<br>• মালয় ভাষায় ধন্যবাদ কি?', false);
+}
+
+function addChatBubble(who, html, withSpeakBtn){
+  var wrap = document.getElementById('chatWrap');
+  if(!wrap) return;
+  var div = document.createElement('div');
+  div.className = 'chat-bubble ' + who;
+  if(who === 'ai' && withSpeakBtn) div.classList.add('has-audio');
+  div.innerHTML = html;
+  if(who === 'ai' && withSpeakBtn){
+    var btn = document.createElement('button');
+    btn.className = 'speak-btn';
+    btn.innerHTML = '<i class="fas fa-volume-up"></i>';
+    btn.onclick = function(){ speakAI(div.innerText); };
+    div.appendChild(btn);
+  }
+  wrap.appendChild(div);
+  setTimeout(function(){ window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'}); }, 50);
+  return div;
+}
+
+function quickAsk(q){
+  var inp = document.getElementById('chatInput');
+  if(inp){ inp.value = q; sendChat(); }
+}
+
+function sendChat(){
+  if(IS_THINKING) return;
+  var inp = document.getElementById('chatInput');
+  if(!inp) return;
+  var text = inp.value.trim();
+  if(!text) return;
+  addChatBubble('me', escapeHtml(text), false);
+  inp.value = '';
+  inp.style.height = 'auto';
+  var typingBubble = addChatBubble('ai', '<span></span><span></span><span></span>', false);
+  typingBubble.classList.add('typing');
+  IS_THINKING = true;
+  var sendBtn = document.getElementById('chatSend');
+  if(sendBtn) sendBtn.disabled = true;
+  CHAT_HISTORY.push({ role: 'user', content: text });
+  if(CHAT_HISTORY.length > 10) CHAT_HISTORY = CHAT_HISTORY.slice(-10);
+  
+  callWorker(CHAT_HISTORY).then(function(reply){
+    if(typingBubble) typingBubble.remove();
+    addChatBubble('ai', formatAIResponse(reply), true);
+    CHAT_HISTORY.push({ role: 'assistant', content: reply });
+    // AI-এর উত্তর ভয়েসে পড়ুন
+    if(reply && reply.length < 500){
+      speakAI(reply);
+    }
+  }).catch(function(err){
+    if(typingBubble) typingBubble.remove();
+    console.error(err);
+    addChatBubble('ai', '❌ <b>AI সংযোগ ব্যর্থ</b><br><br>কারণ: ' + escapeHtml(err.message) + '<br><br>ইন্টারনেট ও Worker URL চেক করুন।', false);
+  }).then(function(){
+    IS_THINKING = false;
+    if(sendBtn) sendBtn.disabled = false;
+  });
+}
+
+function callWorker(messages){
+  var sysPrompt = 'You are "লিঙ্গো বন্ধু" (Lingo Friend) — an AI language teacher for Bangladeshi learners. Always respond in Bengali (বাংলা) but include the target-language words with pronunciation in Bengali. Keep responses short, clear, friendly, and helpful. When teaching a phrase, format like: বিদেশি ভাষা (বাংলা উচ্চারণ) — বাংলা অর্থ. Use emojis sparingly. If user asks about English, Arabic, Malay, Japanese, Korean, Spanish — help them. If asked something unrelated, briefly answer in Bengali then offer language help.';
+  var apiMessages = [{ role: 'system', content: sysPrompt }].concat(messages);
+  return fetch(WORKER_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ messages: apiMessages })
+  }).then(function(res){
+    if(!res.ok){
+      return res.text().then(function(txt){ throw new Error('HTTP ' + res.status + ': ' + (txt.substring(0, 200) || 'Unknown')); });
+    }
+    return res.json();
+  }).then(function(data){
+    if(data && data.choices && data.choices[0] && data.choices[0].message){
+      return data.choices[0].message.content;
+    }
+    if(data && data.error){ throw new Error(data.error.message || 'AI এরর'); }
+    throw new Error('উত্তর পাওয়া যায়নি');
+  });
+}
+
+function formatAIResponse(text){
+  if(!text) return '';
+  var html = escapeHtml(text);
+  html = html.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+  html = html.replace(/\*(.+?)\*/g, '<i>$1</i>');
+  html = html.replace(/`(.+?)`/g, '<code style="background:rgba(255,255,255,.1);padding:2px 6px;border-radius:4px;font-size:12px">$1</code>');
+  html = html.replace(/\n/g, '<br>');
+  return html;
+}
+
+/* AI-এর কথা বলা (পশু কথা বলবে) */
+function speakAI(text){
+  if(!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  // Markdown সরান
+  var clean = text.replace(/[*_`#]/g, '').replace(/\([^)]*\)/g, '').substring(0, 500);
+  var u = new SpeechSynthesisUtterance(clean);
+  u.lang = 'bn-BD';
+  u.rate = 0.9;
+  u.pitch = 1.15;
+  // পশুর কণ্ঠস্বর — বাংলা ভয়েস
+  var voices = window.speechSynthesis.getVoices();
+  for(var i = 0; i < voices.length; i++){
+    if(voices[i].lang && voices[i].lang.indexOf('bn') === 0){
+      u.voice = voices[i];
+      break;
+    }
+  }
+  // পশুর মতো অ্যানিমেশন — লোগো নাচবে
+  var avatar = document.getElementById('aiAvatar');
+  if(avatar) avatar.classList.add('talking');
+  AI_TALKING = true;
+  u.onend = function(){
+    if(avatar) avatar.classList.remove('talking');
+    AI_TALKING = false;
+  };
+  window.speechSynthesis.speak(u);
+}
+
+/* ============================================================
+   ভয়েস ইনপুট — মাইক দিয়ে প্রশ্ন করা
+   ============================================================ */
+var CHAT_RECOGNITION = null;
+var CHAT_LISTENING = false;
+
+function toggleVoiceChat(){
+  if(CHAT_LISTENING){ stopVoiceChat(); return; }
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SR){ showToast('এই ব্রাউজারে ভয়েস সাপোর্ট নেই', 'no'); return; }
+  
+  CHAT_LISTENING = true;
+  var btn = document.getElementById('chatVoice');
+  if(btn) btn.classList.add('listening');
+  var statusEl = document.getElementById('aiStatus');
+  if(statusEl) statusEl.textContent = '🎤 শুনছি... বাংলায় বলুন';
+  
+  CHAT_RECOGNITION = new SR();
+  CHAT_RECOGNITION.lang = 'bn-BD';
+  CHAT_RECOGNITION.continuous = false;
+  CHAT_RECOGNITION.interimResults = true;
+  
+  CHAT_RECOGNITION.onresult = function(ev){
+    var txt = '';
+    for(var i = ev.resultIndex; i < ev.results.length; i++){
+      txt += ev.results[i][0].transcript;
+    }
+    var inp = document.getElementById('chatInput');
+    if(inp) inp.value = txt;
+    
+    if(ev.results[0].isFinal){
+      setTimeout(function(){
+        stopVoiceChat();
+        if(txt.trim()) sendChat();
+      }, 300);
+    }
+  };
+  
+  CHAT_RECOGNITION.onerror = function(e){
+    stopVoiceChat();
+    if(e.error === 'not-allowed') showToast('মাইক্রোফোন permission দিন', 'no');
+    else if(e.error !== 'aborted') showToast('শোনা যায়নি, আবার চেষ্টা করুন', 'no');
+  };
+  
+  CHAT_RECOGNITION.onend = function(){ stopVoiceChat(); };
+  
+  try{
+    CHAT_RECOGNITION.start();
+    showToast('🎤 শুনছি... বাংলায় বলুন', 'ok');
+  }catch(e){
+    stopVoiceChat();
+  }
+}
+function stopVoiceChat(){
+  CHAT_LISTENING = false;
+  var btn = document.getElementById('chatVoice');
+  if(btn) btn.classList.remove('listening');
+  var statusEl = document.getElementById('aiStatus');
+  if(statusEl) statusEl.textContent = 'আপনার AI শিক্ষক — যেকোনো ভাষার প্রশ্ন করুন';
+  try{ if(CHAT_RECOGNITION) CHAT_RECOGNITION.stop(); }catch(e){}
+}
+
+/* ============================================================
+   Helpers
+   ============================================================ */
+function escapeHtml(s){
+  if(s == null) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+function escapeAttr(s){
+  if(s == null) return '';
+  return String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;');
+}
+
+/* ============================================================
+   ইনিশিয়ালাইজ
+   ============================================================ */
+(function(){
+  // Splash লোগো — "Lingo" letter-by-letter
+  var logoEl = document.getElementById('splashLogo');
+  if(logoEl){
+    'Lingo'.split('').forEach(function(ch, i){
+      var span = document.createElement('span');
+      span.textContent = ch;
+      span.style.animationDelay = (i * 0.12) + 's';
+      logoEl.appendChild(span);
+    });
+  }
+  
+  var saved = localStorage.getItem('lingo_theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+  updateThemeIcon();
+  updateTopStats();
+  renderHome();
+  
+  // পশুর কণ্ঠ লোড
+  if('speechSynthesis' in window){
+    window.speechSynthesis.getVoices();
+  }
+  
+  // Splash সরান
+  setTimeout(function(){
+    var w = document.getElementById('splash');
+    if(w) w.classList.add('hide');
+    setTimeout(function(){ if(w) w.remove(); }, 800);
+  }, 2400);
+})();
+</script>
+</body>
+</html>
