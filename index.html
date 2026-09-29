@@ -1,0 +1,1931 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#58cc02">
+<title>рж▓рж┐ржЩрзНржЧрзЛ тАФ ржнрж╛рж╖рж╛ рж╢рзЗржЦрж╛рж░ ржЖржиржирзНржж</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --brand:#58cc02;--brand-dark:#46a302;--brand-light:#89e219;
+  --accent:#1cb0f6;--accent-dark:#1899d6;
+  --warning:#ffc800;--danger:#ff4b4b;--purple:#ce82ff;
+  --bg:#131f24;--bg-alt:#0f181c;--surface:#1f2c34;--surface-hover:#2a3841;
+  --text:#ffffff;--text-secondary:#afbbbf;--text-muted:#6f7c82;
+  --border:#37464f;--border-light:#2b3a42;
+  --shadow-brand:0 6px 0 var(--brand-dark);
+  --shadow-accent:0 6px 0 var(--accent-dark);
+  --shadow-danger:0 6px 0 #b91c1c;
+  --font-bn:'Hind Siliguri',system-ui,sans-serif;
+  --font-en:'Plus Jakarta Sans',system-ui,sans-serif;
+}
+[data-theme="light"]{
+  --bg:#ffffff;--bg-alt:#f7f7f7;--surface:#f7f7f7;--surface-hover:#efefef;
+  --text:#3c3c3c;--text-secondary:#777777;--text-muted:#afafaf;
+  --border:#e5e5e5;--border-light:#f0f0f0;
+}
+html,body{height:100%}
+body{
+  font-family:var(--font-bn);background:var(--bg);color:var(--text);
+  line-height:1.5;overflow-x:hidden;transition:background .3s,color .3s;
+  -webkit-font-smoothing:antialiased;
+}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:10px}
+
+/* =============== TOP BAR =============== */
+.topbar{
+  position:sticky;top:0;z-index:100;
+  background:var(--bg);border-bottom:2px solid var(--border-light);
+  padding:10px 16px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;
+}
+.topbar-left{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+.topbar-right{display:flex;align-items:center;gap:10px}
+.topbar-title{font-family:var(--font-en);font-size:20px;font-weight:800;color:var(--brand)}
+.topbar-title small{font-family:var(--font-bn);font-size:11px;color:var(--text-muted);font-weight:500;display:block;letter-spacing:.5px}
+.icon-btn{
+  width:36px;height:36px;border-radius:10px;
+  background:transparent;border:2px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text-secondary);font-size:15px;transition:all .2s;
+}
+.icon-btn:hover{border-color:var(--brand);color:var(--brand)}
+
+/* =============== STAT PILLS =============== */
+.stat-pill{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:5px 12px;border-radius:9999px;
+  font-family:var(--font-en);font-weight:800;font-size:13px;
+  background:var(--surface);
+}
+.stat-pill .ico{font-size:14px}
+.stat-pill.xp{color:var(--warning)}
+.stat-pill.streak{color:var(--danger)}
+.stat-pill.gem{color:var(--accent)}
+
+/* =============== BOTTOM NAV =============== */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:100;
+  background:var(--bg);border-top:2px solid var(--border-light);
+  padding:8px 0 max(8px, env(safe-area-inset-bottom));
+  display:flex;justify-content:space-around;
+}
+.bnav-item{
+  flex:1;padding:6px 4px;background:none;border:none;
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  font-family:var(--font-bn);font-size:10px;font-weight:700;
+  color:var(--text-muted);transition:all .2s;
+}
+.bnav-item i{font-size:20px}
+.bnav-item.active{color:var(--brand)}
+.bnav-item:hover{color:var(--brand-light)}
+
+/* =============== MAIN =============== */
+main{padding:16px 16px 90px;max-width:640px;margin:0 auto}
+
+.page{display:none;animation:fadeUp .3s ease}
+.page.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* =============== HOME =============== */
+.hello-banner{
+  background:linear-gradient(135deg,var(--brand),var(--brand-dark));
+  border-radius:16px;padding:20px;margin-bottom:20px;
+  position:relative;overflow:hidden;
+  box-shadow:0 4px 0 rgba(0,0,0,.15);
+}
+.hello-banner::before{
+  content:'ЁЯОЙ';position:absolute;font-size:80px;right:-10px;top:-10px;opacity:.15;
+}
+.hello-title{font-size:22px;font-weight:800;color:#fff;margin-bottom:4px}
+.hello-sub{font-size:13px;color:rgba(255,255,255,.9)}
+
+.sec-title{
+  font-family:var(--font-en);font-size:16px;font-weight:800;
+  color:var(--text);margin:20px 4px 12px;
+  display:flex;align-items:center;gap:8px;
+}
+.sec-title small{font-family:var(--font-bn);font-size:11px;color:var(--text-muted);font-weight:600}
+
+/* =============== LANGUAGE CARDS =============== */
+.lang-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:520px){.lang-grid{grid-template-columns:repeat(3,1fr)}}
+.lang-card{
+  background:var(--surface);border:2px solid var(--border);
+  border-radius:16px;padding:18px 12px;text-align:center;
+  transition:all .2s;position:relative;overflow:hidden;
+}
+.lang-card:hover{border-color:var(--brand);transform:translateY(-3px);box-shadow:0 6px 0 var(--border)}
+.lang-card.active{border-color:var(--brand);box-shadow:0 6px 0 var(--brand-dark)}
+.lang-flag{font-size:44px;display:block;margin-bottom:8px}
+.lang-name{font-family:var(--font-en);font-size:14px;font-weight:800;color:var(--text);margin-bottom:2px}
+.lang-name-bn{font-size:12px;color:var(--text-muted);font-weight:600;margin-bottom:10px}
+.lang-prog{height:6px;background:var(--border);border-radius:6px;overflow:hidden;margin-top:8px}
+.lang-prog-fill{height:100%;background:var(--brand);border-radius:6px;transition:width .4s}
+.lang-prog-txt{font-size:10px;color:var(--text-muted);font-weight:700;margin-top:4px;font-family:var(--font-en)}
+
+/* =============== LESSON PATH =============== */
+.path-header{
+  background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+  border-radius:16px;padding:20px;margin-bottom:20px;
+  color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.15);
+}
+.path-header h2{font-size:20px;font-weight:800;margin-bottom:4px;display:flex;align-items:center;gap:10px}
+.path-header p{font-size:13px;opacity:.9}
+.path-back{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 14px;border-radius:9999px;background:rgba(255,255,255,.2);
+  color:#fff;font-size:12px;font-weight:700;margin-bottom:12px;
+}
+
+.module-group{margin-bottom:24px}
+.module-title{
+  font-family:var(--font-en);font-size:14px;font-weight:800;
+  color:var(--text-secondary);text-transform:uppercase;letter-spacing:1px;
+  margin-bottom:14px;padding-left:4px;
+}
+.lesson-path{display:flex;flex-direction:column;gap:14px;align-items:center}
+.lesson-node{
+  position:relative;
+  width:70px;height:70px;border-radius:50%;
+  background:var(--surface);border:3px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;transition:all .2s;
+  box-shadow:0 5px 0 var(--border);
+}
+.lesson-node:hover{transform:translateY(-2px);box-shadow:0 7px 0 var(--border)}
+.lesson-node.unlocked{background:var(--brand);border-color:var(--brand-dark);box-shadow:0 5px 0 var(--brand-dark);cursor:pointer}
+.lesson-node.unlocked:hover{box-shadow:0 7px 0 var(--brand-dark)}
+.lesson-node.completed{background:var(--warning);border-color:#cc9e00;box-shadow:0 5px 0 #cc9e00}
+.lesson-node.completed::after{
+  content:'тЬУ';position:absolute;top:-4px;right:-4px;
+  width:22px;height:22px;border-radius:50%;background:var(--brand);
+  border:2px solid var(--bg);color:#fff;font-size:12px;font-weight:900;
+  display:flex;align-items:center;justify-content:center;
+}
+.lesson-node.locked{opacity:.5;cursor:not-allowed}
+.lesson-label{
+  position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);
+  font-size:10px;font-weight:700;color:var(--text-muted);white-space:nowrap;
+}
+
+/* =============== LESSON SCREEN =============== */
+.lesson-topbar{
+  display:flex;align-items:center;gap:12px;margin-bottom:20px;
+}
+.lesson-close{
+  width:36px;height:36px;border-radius:50%;background:var(--surface);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text-muted);font-size:16px;font-weight:800;
+}
+.lesson-close:hover{background:var(--danger);color:#fff}
+.lesson-progress-track{
+  flex:1;height:12px;background:var(--surface);border-radius:9999px;overflow:hidden;
+}
+.lesson-progress-fill{
+  height:100%;background:linear-gradient(90deg,var(--brand),var(--brand-light));
+  border-radius:9999px;transition:width .4s;
+}
+.lesson-hearts{
+  display:flex;align-items:center;gap:5px;
+  font-family:var(--font-en);font-weight:800;font-size:14px;color:var(--danger);
+}
+
+.lesson-q{font-size:22px;font-weight:800;line-height:1.4;margin-bottom:20px;color:var(--text)}
+.lesson-q .bn{font-size:15px;color:var(--text-muted);font-weight:500;display:block;margin-top:6px}
+
+.audio-card{
+  background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+  border-radius:16px;padding:20px;margin-bottom:20px;
+  text-align:center;color:#fff;
+  box-shadow:0 4px 0 rgba(0,0,0,.15);
+}
+.audio-big-btn{
+  width:80px;height:80px;border-radius:50%;
+  background:rgba(255,255,255,.25);border:3px solid rgba(255,255,255,.5);
+  display:flex;align-items:center;justify-content:center;
+  font-size:32px;color:#fff;margin:0 auto 12px;
+  transition:all .2s;
+}
+.audio-big-btn:hover{transform:scale(1.1);background:rgba(255,255,255,.35)}
+.audio-big-btn:active{transform:scale(.95)}
+.audio-word{font-family:var(--font-en);font-size:28px;font-weight:800;margin-bottom:4px}
+.audio-pron{font-size:13px;opacity:.9;margin-bottom:16px}
+.audio-btn-row{display:flex;gap:8px;justify-content:center}
+.audio-btn{
+  padding:8px 16px;border-radius:9999px;
+  background:rgba(255,255,255,.2);color:#fff;
+  font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:6px;
+}
+.audio-btn:hover{background:rgba(255,255,255,.3)}
+
+/* =============== OPTION CARDS =============== */
+.options{display:flex;flex-direction:column;gap:10px}
+.opt-card{
+  padding:16px;border-radius:14px;
+  background:var(--bg-alt);border:2px solid var(--border);
+  color:var(--text);text-align:left;font-size:15px;font-weight:600;
+  transition:all .15s;box-shadow:0 4px 0 var(--border);
+  display:flex;align-items:center;gap:10px;
+}
+.opt-card:hover{border-color:var(--brand);box-shadow:0 4px 0 var(--brand-dark)}
+.opt-card:active{transform:translateY(2px);box-shadow:0 2px 0 var(--border)}
+.opt-card.selected{border-color:var(--accent);background:rgba(28,176,246,.1);box-shadow:0 4px 0 var(--accent-dark)}
+.opt-card.correct{background:rgba(88,204,2,.15);border-color:var(--brand);box-shadow:0 4px 0 var(--brand-dark);color:var(--brand-light)}
+.opt-card.wrong{background:rgba(255,75,75,.15);border-color:var(--danger);box-shadow:0 4px 0 #b91c1c;color:#ff8b8b}
+.opt-flag{font-size:26px}
+
+/* =============== MATCHING GAME =============== */
+.match-wrap{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.match-col{display:flex;flex-direction:column;gap:10px}
+.match-item{
+  padding:14px;border-radius:12px;
+  background:var(--bg-alt);border:2px solid var(--border);
+  font-size:14px;font-weight:600;text-align:center;
+  transition:all .15s;box-shadow:0 4px 0 var(--border);
+}
+.match-item.selected{border-color:var(--accent);background:rgba(28,176,246,.15)}
+.match-item.correct{background:rgba(88,204,2,.2);border-color:var(--brand)}
+.match-item.wrong{background:rgba(255,75,75,.2);border-color:var(--danger)}
+.match-item.done{opacity:.4;pointer-events:none}
+
+/* =============== WRITE INPUT =============== */
+.write-wrap{margin-top:10px}
+.write-input{
+  width:100%;padding:16px;border-radius:14px;
+  background:var(--bg-alt);border:2px solid var(--border);
+  color:var(--text);font-size:16px;font-family:var(--font-bn);
+  outline:none;transition:border-color .2s;
+}
+.write-input:focus{border-color:var(--brand)}
+
+/* =============== SPEAK (VOICE) SCREEN =============== */
+.speak-wrap{
+  text-align:center;padding:20px 0;
+}
+.speak-target{
+  font-family:var(--font-en);font-size:32px;font-weight:800;
+  color:var(--accent);margin-bottom:8px;
+}
+.speak-hint{font-size:13px;color:var(--text-muted);margin-bottom:20px}
+.mic-btn{
+  width:110px;height:110px;border-radius:50%;
+  background:linear-gradient(135deg,var(--danger),#b91c1c);
+  color:#fff;font-size:40px;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto;box-shadow:0 6px 0 #7f1d1d;
+  transition:all .2s;
+}
+.mic-btn:hover{transform:scale(1.05)}
+.mic-btn:active{transform:translateY(3px);box-shadow:0 3px 0 #7f1d1d}
+.mic-btn.listening{
+  background:linear-gradient(135deg,#f43f5e,#dc2626);
+  animation:pulse .8s ease infinite;
+}
+@keyframes pulse{0%,100%{box-shadow:0 6px 0 #7f1d1d,0 0 0 0 rgba(244,63,94,.6)}50%{box-shadow:0 6px 0 #7f1d1d,0 0 0 25px rgba(244,63,94,0)}}
+.transcript{
+  margin-top:20px;padding:14px;border-radius:12px;
+  background:var(--bg-alt);border:2px dashed var(--border);
+  font-size:15px;min-height:50px;color:var(--text-secondary);
+}
+.transcript.ok{border-color:var(--brand);background:rgba(88,204,2,.1);color:var(--brand-light)}
+.transcript.no{border-color:var(--danger);background:rgba(255,75,75,.1);color:#ff8b8b}
+
+/* =============== FEEDBACK BAR =============== */
+.feedback-bar{
+  position:fixed;bottom:0;left:0;right:0;z-index:200;
+  padding:16px;padding-bottom:max(16px, env(safe-area-inset-bottom));
+  transform:translateY(200%);transition:transform .35s cubic-bezier(.5,1.5,.7,1);
+}
+.feedback-bar.show{transform:translateY(0)}
+.feedback-inner{
+  max-width:640px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:14px 18px;border-radius:14px;
+}
+.feedback-bar.ok .feedback-inner{background:rgba(88,204,2,.15);border:2px solid var(--brand)}
+.feedback-bar.no .feedback-inner{background:rgba(255,75,75,.15);border:2px solid var(--danger)}
+.fb-info{display:flex;align-items:center;gap:12px;flex:1;min-width:0}
+.fb-icon{
+  width:38px;height:38px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;flex-shrink:0;
+}
+.feedback-bar.ok .fb-icon{background:var(--brand);color:#fff}
+.feedback-bar.no .fb-icon{background:var(--danger);color:#fff}
+.fb-title{font-size:15px;font-weight:800;margin-bottom:2px}
+.feedback-bar.ok .fb-title{color:var(--brand-light)}
+.feedback-bar.no .fb-title{color:#ff8b8b}
+.fb-msg{font-size:12px;color:var(--text-secondary);line-height:1.4}
+.fb-continue{
+  padding:14px 24px;border-radius:12px;
+  font-family:var(--font-en);font-weight:800;font-size:15px;
+  color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.2);
+  transition:all .15s;flex-shrink:0;
+}
+.feedback-bar.ok .fb-continue{background:var(--brand);box-shadow:0 4px 0 var(--brand-dark)}
+.feedback-bar.no .fb-continue{background:var(--danger);box-shadow:0 4px 0 #b91c1c}
+.fb-continue:hover{transform:translateY(-2px)}
+.fb-continue:active{transform:translateY(2px);box-shadow:0 2px 0 rgba(0,0,0,.2)}
+
+/* =============== LESSON COMPLETE =============== */
+.complete-screen{text-align:center;padding:40px 20px}
+.complete-badge{
+  width:140px;height:140px;border-radius:50%;
+  background:linear-gradient(135deg,var(--warning),#f59e0b);
+  display:flex;align-items:center;justify-content:center;
+  font-size:64px;margin:0 auto 24px;
+  box-shadow:0 8px 0 #cc9e00;
+  animation:popIn .5s cubic-bezier(.5,1.5,.7,1);
+}
+@keyframes popIn{0%{transform:scale(0);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+.complete-title{font-size:28px;font-weight:800;color:var(--warning);margin-bottom:8px;font-family:var(--font-en)}
+.complete-sub{font-size:15px;color:var(--text-secondary);margin-bottom:30px}
+.complete-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:30px;
+}
+.complete-stat{
+  padding:16px 8px;border-radius:14px;
+  background:var(--surface);border:2px solid var(--border);
+  text-align:center;
+}
+.complete-stat .ico{font-size:24px;margin-bottom:6px;display:block}
+.complete-stat .val{font-family:var(--font-en);font-weight:800;font-size:20px;color:var(--text)}
+.complete-stat .lbl{font-size:10px;color:var(--text-muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+
+/* =============== LEADERBOARD =============== */
+.lb-row{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 16px;border-radius:14px;
+  background:var(--surface);border:2px solid var(--border);
+  margin-bottom:10px;
+}
+.lb-row.me{border-color:var(--brand);background:rgba(88,204,2,.08)}
+.lb-rank{
+  width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-en);font-weight:800;font-size:13px;
+  background:var(--bg-alt);border:2px solid var(--border);
+}
+.lb-rank.gold{background:linear-gradient(135deg,#fbbf24,#f59e0b);border-color:#cc9e00;color:#fff}
+.lb-rank.silver{background:linear-gradient(135deg,#cbd5e1,#94a3b8);border-color:#64748b;color:#fff}
+.lb-rank.bronze{background:linear-gradient(135deg,#d97706,#b45309);border-color:#78350f;color:#fff}
+.lb-avatar{
+  width:40px;height:40px;border-radius:50%;
+  background:linear-gradient(135deg,var(--purple),#a855f7);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;flex-shrink:0;
+}
+.lb-name{flex:1;font-size:14px;font-weight:700}
+.lb-name small{display:block;font-size:11px;color:var(--text-muted);font-weight:500}
+.lb-xp{font-family:var(--font-en);font-weight:800;font-size:14px;color:var(--warning)}
+
+/* =============== PROFILE =============== */
+.profile-head{
+  display:flex;align-items:center;gap:16px;
+  padding:20px;border-radius:16px;background:var(--surface);
+  border:2px solid var(--border);margin-bottom:20px;
+}
+.profile-avatar{
+  width:80px;height:80px;border-radius:50%;
+  background:linear-gradient(135deg,var(--brand),var(--brand-dark));
+  display:flex;align-items:center;justify-content:center;
+  font-size:38px;flex-shrink:0;box-shadow:0 4px 0 var(--brand-dark);
+}
+.profile-info h2{font-size:20px;font-weight:800;margin-bottom:4px}
+.profile-info p{font-size:12px;color:var(--text-muted)}
+.profile-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px}
+.profile-stat{
+  padding:18px;border-radius:14px;background:var(--surface);
+  border:2px solid var(--border);text-align:center;
+}
+.profile-stat .ico{font-size:26px;margin-bottom:6px;display:block}
+.profile-stat .val{font-family:var(--font-en);font-weight:800;font-size:22px;color:var(--text)}
+.profile-stat .lbl{font-size:11px;color:var(--text-muted);font-weight:700;margin-top:2px}
+
+/* =============== BUTTONS =============== */
+.btn-primary{
+  padding:14px 24px;border-radius:12px;
+  background:var(--brand);color:#fff;
+  font-family:var(--font-en);font-weight:800;font-size:15px;
+  box-shadow:0 5px 0 var(--brand-dark);
+  transition:all .15s;display:inline-flex;align-items:center;gap:8px;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 7px 0 var(--brand-dark)}
+.btn-primary:active{transform:translateY(3px);box-shadow:0 2px 0 var(--brand-dark)}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:0 5px 0 var(--brand-dark)}
+.btn-block{display:flex;width:100%;justify-content:center}
+
+/* =============== MODAL =============== */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.8);
+  backdrop-filter:blur(6px);z-index:500;
+  display:none;align-items:center;justify-content:center;padding:20px;
+}
+.modal-overlay.open{display:flex}
+.modal-box{
+  background:var(--surface);border:2px solid var(--border);
+  border-radius:20px;padding:24px;max-width:400px;width:100%;
+  animation:popIn .3s ease;
+}
+.modal-box h3{font-family:var(--font-en);font-size:20px;font-weight:800;margin-bottom:10px}
+.modal-box p{font-size:14px;color:var(--text-secondary);margin-bottom:20px;line-height:1.6}
+.modal-actions{display:flex;gap:10px}
+.modal-btn{
+  flex:1;padding:14px;border-radius:12px;
+  font-family:var(--font-en);font-weight:800;font-size:14px;
+  transition:all .15s;
+}
+.modal-btn.cancel{background:var(--bg-alt);color:var(--text);border:2px solid var(--border)}
+.modal-btn.danger{background:var(--danger);color:#fff;box-shadow:0 4px 0 #b91c1c}
+
+/* =============== TOAST =============== */
+.toast{
+  position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-100px);
+  background:var(--surface);border:2px solid var(--border);
+  padding:12px 20px;border-radius:12px;
+  font-size:14px;font-weight:700;
+  z-index:1000;transition:transform .3s;
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
+  max-width:90vw;text-align:center;
+}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast.ok{border-color:var(--brand);color:var(--brand-light)}
+.toast.no{border-color:var(--danger);color:#ff8b8b}
+
+/* =============== XP POPUP =============== */
+.xp-pop{
+  position:fixed;pointer-events:none;z-index:900;
+  font-family:var(--font-en);font-weight:800;font-size:20px;color:var(--warning);
+  animation:xpUp 1s ease-out forwards;
+}
+@keyframes xpUp{
+  0%{opacity:0;transform:translateY(0) scale(.5)}
+  20%{opacity:1;transform:translateY(-10px) scale(1.2)}
+  100%{opacity:0;transform:translateY(-80px) scale(1)}
+}
+
+/* =============== CONFETTI =============== */
+.confetti{
+  position:fixed;top:-20px;width:12px;height:12px;
+  z-index:999;pointer-events:none;border-radius:2px;
+}
+
+/* =============== SPINNER =============== */
+.spinner{
+  width:40px;height:40px;border:4px solid var(--border);
+  border-top-color:var(--brand);border-radius:50%;
+  margin:0 auto;animation:spin .8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* =============== WELCOME =============== */
+#welcome{
+  position:fixed;inset:0;z-index:9999;
+  background:linear-gradient(135deg,#131f24,#0f181c);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:opacity .6s;
+}
+#welcome.hide{opacity:0;pointer-events:none}
+.w-logo{
+  font-size:100px;margin-bottom:20px;
+  animation:popIn .6s ease;
+}
+.w-title{
+  font-family:var(--font-en);font-size:42px;font-weight:800;
+  color:var(--brand);margin-bottom:8px;letter-spacing:-1px;
+}
+.w-sub{font-size:15px;color:var(--text-muted);margin-bottom:40px}
+.w-spinner{
+  width:60px;height:60px;border:5px solid var(--border);
+  border-top-color:var(--brand);border-radius:50%;
+  animation:spin .9s linear infinite;
+}
+.w-loading{
+  margin-top:24px;font-size:13px;color:var(--text-muted);
+  font-weight:600;letter-spacing:1px;
+}
+</style>
+</head>
+<body>
+
+<!-- ============ WELCOME SPLASH ============ -->
+<div id="welcome">
+  <div class="w-logo">ЁЯжЙ</div>
+  <div class="w-title">рж▓рж┐ржЩрзНржЧрзЛ</div>
+  <div class="w-sub">ржнрж╛рж╖рж╛ рж╢рзЗржЦрж╛рж░ ржЖржиржирзНржж</div>
+  <div class="w-spinner"></div>
+  <div class="w-loading">ржкрзНрж░рж╕рзНрждрзБржд рж╣ржЪрзНржЫрзЗ...</div>
+</div>
+
+<!-- ============ TOP BAR ============ -->
+<header class="topbar">
+  <div class="topbar-left">
+    <div class="topbar-title">рж▓рж┐ржЩрзНржЧрзЛ<small id="topbarSub">ржнрж╛рж╖рж╛ рж╢рзЗржЦрж╛рж░ ржЖржиржирзНржж</small></div>
+  </div>
+  <div class="topbar-right">
+    <span class="stat-pill xp"><span class="ico">тЪб</span><span id="xpTop">0</span></span>
+    <span class="stat-pill streak"><span class="ico">ЁЯФе</span><span id="streakTop">0</span></span>
+    <button class="icon-btn" onclick="toggleTheme()" title="ржерж┐ржо"><i class="fas fa-sun" id="themeIcon"></i></button>
+  </div>
+</header>
+
+<main>
+  <!-- ============ HOME ============ -->
+  <div class="page active" id="page-home">
+    <div class="hello-banner">
+      <div class="hello-title" id="greetTitle">рж╕рзНржмрж╛ржЧрждржо! ЁЯСЛ</div>
+      <div class="hello-sub" id="greetSub">ржЖржЬ ржХрзЛржи ржнрж╛рж╖рж╛ рж╢рж┐ржЦржмрзЗржи?</div>
+    </div>
+    <div class="sec-title">ЁЯМН ржнрж╛рж╖рж╛ ржирж┐рж░рзНржмрж╛ржЪржи ржХрж░рзБржи <small id="langCount"></small></div>
+    <div class="lang-grid" id="langGrid"></div>
+  </div>
+
+  <!-- ============ LEARN PATH ============ -->
+  <div class="page" id="page-learn">
+    <div id="learnContent"></div>
+  </div>
+
+  <!-- ============ LESSON SCREEN ============ -->
+  <div class="page" id="page-lesson">
+    <div id="lessonContent"></div>
+  </div>
+
+  <!-- ============ COMPLETE ============ -->
+  <div class="page" id="page-complete">
+    <div id="completeContent"></div>
+  </div>
+
+  <!-- ============ LEADERBOARD ============ -->
+  <div class="page" id="page-leaderboard">
+    <div class="sec-title">ЁЯПЖ рж╕рж╛ржкрзНрждрж╛рж╣рж┐ржХ рж▓рж┐ржЧ <small>ржЯржк рззрзж</small></div>
+    <div id="leaderboardList"></div>
+  </div>
+
+  <!-- ============ PROFILE ============ -->
+  <div class="page" id="page-profile">
+    <div id="profileContent"></div>
+  </div>
+</main>
+
+<!-- ============ BOTTOM NAV ============ -->
+<nav class="bottom-nav">
+  <button class="bnav-item active" data-page="home" onclick="switchPage('home',this)"><i class="fas fa-home"></i><span>рж╣рзЛржо</span></button>
+  <button class="bnav-item" data-page="learn" onclick="switchPage('learn',this)"><i class="fas fa-graduation-cap"></i><span>рж╢рж┐ржЦрзБржи</span></button>
+  <button class="bnav-item" data-page="leaderboard" onclick="switchPage('leaderboard',this)"><i class="fas fa-trophy"></i><span>рж▓рж┐ржЧ</span></button>
+  <button class="bnav-item" data-page="profile" onclick="switchPage('profile',this)"><i class="fas fa-user"></i><span>ржкрзНрж░рзЛржлрж╛ржЗрж▓</span></button>
+</nav>
+
+<!-- ============ FEEDBACK BAR ============ -->
+<div class="feedback-bar" id="feedbackBar">
+  <div class="feedback-inner">
+    <div class="fb-info">
+      <div class="fb-icon" id="fbIcon">тЬУ</div>
+      <div>
+        <div class="fb-title" id="fbTitle">ржжрзБрж░рзНржжрж╛ржирзНржд!</div>
+        <div class="fb-msg" id="fbMsg">рж╕ржарж┐ржХ ржЙрждрзНрждрж░</div>
+      </div>
+    </div>
+    <button class="fb-continue" id="fbContinue" onclick="nextQuestion()">ржЪрж╛рж▓рж┐ржпрж╝рзЗ ржпрж╛ржи</button>
+  </div>
+</div>
+
+<!-- ============ MODAL ============ -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <h3 id="modalTitle">рж╢рж┐рж░рзЛржирж╛ржо</h3>
+    <p id="modalMsg">ржмрж╛рж░рзНрждрж╛</p>
+    <div class="modal-actions">
+      <button class="modal-btn cancel" onclick="closeModal()">ржмрж╛рждрж┐рж▓</button>
+      <button class="modal-btn danger" id="modalConfirm">рж╣рзНржпрж╛ржБ</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ TOAST ============ -->
+<div class="toast" id="toast"></div>
+
+<script>
+'use strict';
+
+/* ============================================================
+   рж▓рж┐ржЩрзНржЧрзЛ тАФ ржнрж╛рж╖рж╛ ржбрзЗржЯрж╛
+   ============================================================ */
+var LANGUAGES = {
+  english: {
+    name: 'English', nameBn: 'ржЗржВрж░рзЗржЬрж┐', flag: 'ЁЯЗмЁЯЗз',
+    flagEmoji: 'ЁЯЗмЁЯЗз', langCode: 'en-US',
+    intro: 'ржмрж┐рж╢рзНржмрзЗрж░ рж╕ржмржЪрзЗржпрж╝рзЗ ржЬржиржкрзНрж░рж┐ржпрж╝ ржнрж╛рж╖рж╛ред ржмрж┐ржжрзЗрж╢рзЗ ржХрж╛ржЬ, ржкржбрж╝рж╛рж╢рзЛржирж╛, ржнрзНрж░ржоржгрзЗ рж╕ржмрж╛рж░ рж╕рж╛ржерзЗ ржпрзЛржЧрж╛ржпрзЛржЧрзЗрж░ ржЬржирзНржп ржЕржкрж░рж┐рж╣рж╛рж░рзНржпред',
+    color: '#1cb0f6',
+    modules: [
+      {
+        title: 'Beginner',
+        titleBn: 'рж╢рзБрж░рзБрж░ рж╕рзНрждрж░',
+        lessons: [
+          {
+            title: 'рж╢рзБржнрзЗржЪрзНржЫрж╛',
+            icon: 'ЁЯСЛ',
+            questions: [
+              { type: 'listen', word: 'Hello', pron: 'рж╣рзНржпрж╛рж▓рзЛ', meaning: 'рж╣рзНржпрж╛рж▓рзЛ / ржЖрж╕рж╕рж╛рж▓рж╛ржорзБ ржЖрж▓рж╛ржЗржХрзБржо', audioText: 'Hello' },
+              { type: 'choice', q: '"Hello" ржПрж░ ржмрж╛ржВрж▓рж╛ ржЕрж░рзНрже ржХрзА?', options: ['рж╣рзНржпрж╛рж▓рзЛ', 'ржмрж┐ржжрж╛ржпрж╝', 'ржзржирзНржпржмрж╛ржж', 'ржжрзБржГржЦрж┐ржд'], correct: 0 },
+              { type: 'match', pairs: [['Hello', 'рж╣рзНржпрж╛рж▓рзЛ'], ['Goodbye', 'ржмрж┐ржжрж╛ржпрж╝'], ['Thanks', 'ржзржирзНржпржмрж╛ржж']] },
+              { type: 'write', q: '"ржзржирзНржпржмрж╛ржж" ржХрзЗ ржЗржВрж░рзЗржЬрж┐рждрзЗ ржХрзА ржмрж▓рзЗ?', answer: 'thanks', alt: ['thank you', 'Thanks', 'Thank you'] },
+              { type: 'speak', target: 'Hello', hint: 'Hello ржмрж▓рзБржи' }
+            ]
+          },
+          {
+            title: 'ржирж┐ржЬрзЗрж░ ржкрж░рж┐ржЪржпрж╝',
+            icon: 'ЁЯЩЛ',
+            questions: [
+              { type: 'listen', word: 'My name is', pron: 'ржорж╛ржЗ ржирзЗржо ржЗржЬ', meaning: 'ржЖржорж╛рж░ ржирж╛ржо', audioText: 'My name is' },
+              { type: 'choice', q: '"My name is Karim" ржорж╛ржирзЗ ржХрзА?', options: ['ржЖржорж╛рж░ ржирж╛ржо ржХрж░рж┐ржо', 'ржЖржорж┐ ржХрж░рж┐ржо', 'рждрзЛржорж╛рж░ ржирж╛ржо ржХрж░рж┐ржо', 'рждрж╛рж░ ржирж╛ржо ржХрж░рж┐ржо'], correct: 0 },
+              { type: 'match', pairs: [['I', 'ржЖржорж┐'], ['You', 'рждрзБржорж┐'], ['We', 'ржЖржорж░рж╛']] },
+              { type: 'write', q: '"ржЖржорж┐" ржХрзЗ ржЗржВрж░рзЗржЬрж┐рждрзЗ ржХрзА ржмрж▓рзЗ?', answer: 'i', alt: ['I', 'me'] },
+              { type: 'speak', target: 'My name is Karim', hint: 'ржирж┐ржЬрзЗрж░ ржкрж░рж┐ржЪржпрж╝ ржжрж┐ржи' }
+            ]
+          },
+          {
+            title: 'рж╕ржВржЦрзНржпрж╛',
+            icon: 'ЁЯФв',
+            questions: [
+              { type: 'listen', word: 'One', pron: 'ржУржпрж╝рж╛ржи', meaning: 'ржПржХ', audioText: 'One' },
+              { type: 'choice', q: '"Three" рж╕ржВржЦрзНржпрж╛ржЯрж┐ ржХржд?', options: ['рзз', 'рзи', 'рзй', 'рзк'], correct: 2 },
+              { type: 'match', pairs: [['One', 'ржПржХ'], ['Two', 'ржжрзБржЗ'], ['Five', 'ржкрж╛ржБржЪ']] },
+              { type: 'write', q: '"ржжрж╢" ржХрзЗ ржЗржВрж░рзЗржЬрж┐рждрзЗ ржХрзА ржмрж▓рзЗ?', answer: 'ten', alt: ['Ten'] },
+              { type: 'speak', target: 'One two three', hint: 'ржПржХ ржжрзБржЗ рждрж┐ржи ржмрж▓рзБржи' }
+            ]
+          },
+          {
+            title: 'ржЦрж╛ржмрж╛рж░',
+            icon: 'ЁЯНО',
+            questions: [
+              { type: 'listen', word: 'Water', pron: 'ржУржпрж╝рж╛ржЯрж╛рж░', meaning: 'ржкрж╛ржирж┐', audioText: 'Water' },
+              { type: 'choice', q: '"Food" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['ржкрж╛ржирж┐', 'ржЦрж╛ржмрж╛рж░', 'ржмрж╛рждрж╛рж╕', 'ржЖржЧрзБржи'], correct: 1 },
+              { type: 'match', pairs: [['Rice', 'ржнрж╛ржд'], ['Chicken', 'ржорзБрж░ржЧрж┐'], ['Fish', 'ржорж╛ржЫ']] },
+              { type: 'write', q: '"ржкрж╛ржирж┐" ржХрзЗ ржЗржВрж░рзЗржЬрж┐рждрзЗ ржХрзА ржмрж▓рзЗ?', answer: 'water', alt: ['Water'] },
+              { type: 'speak', target: 'I want water', hint: 'ржЖржорж┐ ржкрж╛ржирж┐ ржЪрж╛ржЗ' }
+            ]
+          },
+          {
+            title: 'рж░ржВ',
+            icon: 'ЁЯОи',
+            questions: [
+              { type: 'listen', word: 'Red', pron: 'рж░рзЗржб', meaning: 'рж▓рж╛рж▓', audioText: 'Red' },
+              { type: 'choice', q: '"Blue" ржХрзЛржи рж░ржЩ?', options: ['рж▓рж╛рж▓', 'ржирзАрж▓', 'рж╕ржмрзБржЬ', 'рж╣рж▓рзБржж'], correct: 1 },
+              { type: 'match', pairs: [['Red', 'рж▓рж╛рж▓'], ['Green', 'рж╕ржмрзБржЬ'], ['Black', 'ржХрж╛рж▓рзЛ']] },
+              { type: 'write', q: '"рж╣рж▓рзБржж" ржХрзЗ ржЗржВрж░рзЗржЬрж┐рждрзЗ ржХрзА ржмрж▓рзЗ?', answer: 'yellow', alt: ['Yellow'] },
+              { type: 'speak', target: 'Red and blue', hint: 'рж▓рж╛рж▓ ржПржмржВ ржирзАрж▓' }
+            ]
+          }
+        ]
+      },
+      {
+        title: 'Intermediate',
+        titleBn: 'ржоржзрзНржпржо рж╕рзНрждрж░',
+        lessons: [
+          {
+            title: 'ржжрж┐ржХржирж┐рж░рзНржжрзЗрж╢ржирж╛',
+            icon: 'ЁЯзн',
+            questions: [
+              { type: 'listen', word: 'Where is', pron: 'рж╣рзЛржпрж╝рзНржпрж╛рж░ ржЗржЬ', meaning: 'ржХрзЛржерж╛ржпрж╝', audioText: 'Where is' },
+              { type: 'choice', q: '"Left" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['ржбрж╛ржи', 'ржмрж╛ржо', 'рж╕рзЛржЬрж╛', 'ржЙржкрж░рзЗ'], correct: 1 },
+              { type: 'match', pairs: [['Left', 'ржмрж╛ржо'], ['Right', 'ржбрж╛ржи'], ['Straight', 'рж╕рзЛржЬрж╛']] },
+              { type: 'write', q: '"ржХрзЛржерж╛ржпрж╝" ржХрзЗ ржЗржВрж░рзЗржЬрж┐рждрзЗ ржХрзА ржмрж▓рзЗ?', answer: 'where', alt: ['Where'] },
+              { type: 'speak', target: 'Where is the station', hint: 'рж╕рзНржЯрзЗрж╢ржи ржХрзЛржерж╛ржпрж╝?' }
+            ]
+          },
+          {
+            title: 'ржХрзЗржирж╛ржХрж╛ржЯрж╛',
+            icon: 'ЁЯЫТ',
+            questions: [
+              { type: 'listen', word: 'How much', pron: 'рж╣рж╛ржЙ ржорж╛ржЪ', meaning: 'ржХржд ржжрж╛ржо', audioText: 'How much' },
+              { type: 'choice', q: '"How much is this?" ржорж╛ржирзЗ ржХрзА?', options: ['ржПржЯрж╛ ржХржд ржжрж╛ржо?', 'ржПржЯрж╛ ржХрзА?', 'ржПржЯрж╛ ржХрзЛржерж╛ржпрж╝?', 'ржПржЯрж╛ ржХрзАржнрж╛ржмрзЗ?'], correct: 0 },
+              { type: 'match', pairs: [['Cheap', 'рж╕рж╕рзНрждрж╛'], ['Expensive', 'ржжрж╛ржорж┐'], ['Money', 'ржЯрж╛ржХрж╛']] },
+              { type: 'write', q: '"ржЯрж╛ржХрж╛" ржХрзЗ ржЗржВрж░рзЗржЬрж┐рждрзЗ ржХрзА ржмрж▓рзЗ?', answer: 'money', alt: ['Money'] },
+              { type: 'speak', target: 'How much is this', hint: 'ржПржЯрж╛ ржХржд ржжрж╛ржо?' }
+            ]
+          },
+          {
+            title: 'рж╕ржоржпрж╝',
+            icon: 'ЁЯХР',
+            questions: [
+              { type: 'listen', word: 'What time', pron: 'рж╣рзЛржпрж╝рж╛ржЯ ржЯрж╛ржЗржо', meaning: 'ржХржд рж╕ржоржпрж╝', audioText: 'What time' },
+              { type: 'choice', q: '"Today" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['ржЖржЬ', 'ржХрж╛рж▓', 'ржЧрждржХрж╛рж▓', 'ржкрж░рж╢рзБ'], correct: 0 },
+              { type: 'match', pairs: [['Today', 'ржЖржЬ'], ['Tomorrow', 'ржЖржЧрж╛ржорзАржХрж╛рж▓'], ['Yesterday', 'ржЧрждржХрж╛рж▓']] },
+              { type: 'write', q: '"рж╕ржоржпрж╝" ржХрзЗ ржЗржВрж░рзЗржЬрж┐рждрзЗ ржХрзА ржмрж▓рзЗ?', answer: 'time', alt: ['Time'] },
+              { type: 'speak', target: 'What time is it', hint: 'ржХржд рж╕ржоржпрж╝ рж╣ржпрж╝рзЗржЫрзЗ?' }
+            ]
+          },
+          {
+            title: 'ржЬрж░рзБрж░рж┐',
+            icon: 'ЁЯЪи',
+            questions: [
+              { type: 'listen', word: 'Help', pron: 'рж╣рзЗрж▓рзНржк', meaning: 'рж╕рж╛рж╣рж╛ржпрзНржп', audioText: 'Help' },
+              { type: 'choice', q: '"I need help" ржорж╛ржирзЗ ржХрзА?', options: ['ржЖржорж╛рж░ рж╕рж╛рж╣рж╛ржпрзНржп ржжрж░ржХрж╛рж░', 'ржЖржорж┐ ржнрж╛рж▓рзЛ ржЖржЫрж┐', 'ржЖржорж┐ ржпрж╛ржЪрзНржЫрж┐', 'ржЖржорж┐ ржЦрж╛ржмрзЛ'], correct: 0 },
+              { type: 'match', pairs: [['Help', 'рж╕рж╛рж╣рж╛ржпрзНржп'], ['Police', 'ржкрзБрж▓рж┐рж╢'], ['Hospital', 'рж╣рж╛рж╕ржкрж╛рждрж╛рж▓']] },
+              { type: 'write', q: '"ржкрзБрж▓рж┐рж╢" ржХрзЗ ржЗржВрж░рзЗржЬрж┐рждрзЗ ржХрзА ржмрж▓рзЗ?', answer: 'police', alt: ['Police'] },
+              { type: 'speak', target: 'I need help', hint: 'ржЖржорж╛рж░ рж╕рж╛рж╣рж╛ржпрзНржп ржжрж░ржХрж╛рж░' }
+            ]
+          },
+          {
+            title: 'ржнрзНрж░ржоржг',
+            icon: 'тЬИя╕П',
+            questions: [
+              { type: 'listen', word: 'Airport', pron: 'ржПржпрж╝рж╛рж░ржкрзЛрж░рзНржЯ', meaning: 'ржмрж┐ржорж╛ржиржмржирзНржжрж░', audioText: 'Airport' },
+              { type: 'choice', q: '"Ticket" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['ржЯрж┐ржХрж┐ржЯ', 'ржмрзНржпрж╛ржЧ', 'ржЧрж╛ржбрж╝рж┐', 'ржмрж┐ржорж╛ржи'], correct: 0 },
+              { type: 'match', pairs: [['Airport', 'ржмрж┐ржорж╛ржиржмржирзНржжрж░'], ['Ticket', 'ржЯрж┐ржХрж┐ржЯ'], ['Bag', 'ржмрзНржпрж╛ржЧ']] },
+              { type: 'write', q: '"ржмрж┐ржорж╛ржиржмржирзНржжрж░" ржХрзЗ ржЗржВрж░рзЗржЬрж┐рждрзЗ ржХрзА ржмрж▓рзЗ?', answer: 'airport', alt: ['Airport'] },
+              { type: 'speak', target: 'Where is the airport', hint: 'ржмрж┐ржорж╛ржиржмржирзНржжрж░ ржХрзЛржерж╛ржпрж╝?' }
+            ]
+          }
+        ]
+      },
+      {
+        title: 'Advanced',
+        titleBn: 'ржЙржЪрзНржЪ рж╕рзНрждрж░',
+        lessons: [
+          {
+            title: 'ржХрж╛ржЬрзЗрж░ рж╕рж╛ржХрзНрж╖рж╛рзОржХрж╛рж░',
+            icon: 'ЁЯТ╝',
+            questions: [
+              { type: 'listen', word: 'Experience', pron: 'ржПржХрзНрж╕ржкрзЗрж░рж┐ржпрж╝рзЗржирзНрж╕', meaning: 'ржЕржнрж┐ржЬрзНржЮрждрж╛', audioText: 'Experience' },
+              { type: 'choice', q: '"Tell me about yourself" ржорж╛ржирзЗ ржХрзА?', options: ['ржирж┐ржЬрзЗрж░ рж╕ржорзНржкрж░рзНржХрзЗ ржмрж▓рзБржи', 'ржЖржкржирж┐ ржХрзЗ?', 'ржЖржкржирж╛рж░ ржирж╛ржо ржХрзА?', 'ржХрзЛржерж╛ ржерзЗржХрзЗ ржПрж╕рзЗржЫрзЗржи?'], correct: 0 },
+              { type: 'match', pairs: [['Experience', 'ржЕржнрж┐ржЬрзНржЮрждрж╛'], ['Skill', 'ржжржХрзНрж╖рждрж╛'], ['Salary', 'ржмрзЗрждржи']] },
+              { type: 'write', q: '"ржЕржнрж┐ржЬрзНржЮрждрж╛" ржХрзЗ ржЗржВрж░рзЗржЬрж┐рждрзЗ ржХрзА ржмрж▓рзЗ?', answer: 'experience', alt: ['Experience'] },
+              { type: 'speak', target: 'I have five years experience', hint: 'ржЖржорж╛рж░ ржкрж╛ржБржЪ ржмржЫрж░рзЗрж░ ржЕржнрж┐ржЬрзНржЮрждрж╛ ржЖржЫрзЗ' }
+            ]
+          },
+          {
+            title: 'ржмрзНржпржмрж╕рж╛',
+            icon: 'ЁЯТ╝',
+            questions: [
+              { type: 'listen', word: 'Business', pron: 'ржмрж┐ржЬржирзЗрж╕', meaning: 'ржмрзНржпржмрж╕рж╛', audioText: 'Business' },
+              { type: 'choice', q: '"Customer" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['ржХрзНрж░рзЗрждрж╛', 'ржмрж┐ржХрзНрж░рзЗрждрж╛', 'ржорж╛рж▓рж┐ржХ', 'ржХрж░рзНржоржЪрж╛рж░рзА'], correct: 0 },
+              { type: 'match', pairs: [['Customer', 'ржХрзНрж░рзЗрждрж╛'], ['Price', 'ржжрж╛ржо'], ['Discount', 'ржЫрж╛ржбрж╝']] },
+              { type: 'write', q: '"ржмрж┐ржХрзНрж░рж┐" ржХрзЗ ржЗржВрж░рзЗржЬрж┐рждрзЗ ржХрзА ржмрж▓рзЗ?', answer: 'sell', alt: ['Sell'] },
+              { type: 'speak', target: 'I want to buy this', hint: 'ржЖржорж┐ ржПржЯрж╛ ржХрж┐ржирждрзЗ ржЪрж╛ржЗ' }
+            ]
+          },
+          {
+            title: 'ржЖржмрзЗржЧ',
+            icon: 'ЁЯШК',
+            questions: [
+              { type: 'listen', word: 'Happy', pron: 'рж╣рзНржпрж╛ржкрж┐', meaning: 'ржЦрзБрж╢рж┐', audioText: 'Happy' },
+              { type: 'choice', q: '"I am sad" ржорж╛ржирзЗ ржХрзА?', options: ['ржЖржорж┐ ржжрзБржГржЦрж┐ржд', 'ржЖржорж┐ ржЦрзБрж╢рж┐', 'ржЖржорж┐ рж░рж╛ржЧрж╛ржирзНржмрж┐ржд', 'ржЖржорж┐ ржнрж╛рж▓рзЛ'], correct: 0 },
+              { type: 'match', pairs: [['Happy', 'ржЦрзБрж╢рж┐'], ['Sad', 'ржжрзБржГржЦрж┐ржд'], ['Angry', 'рж░рж╛ржЧрж╛ржирзНржмрж┐ржд']] },
+              { type: 'write', q: '"ржнрж╛рж▓рзЛржмрж╛рж╕рж╛" ржХрзЗ ржЗржВрж░рзЗржЬрж┐рждрзЗ ржХрзА ржмрж▓рзЗ?', answer: 'love', alt: ['Love'] },
+              { type: 'speak', target: 'I am very happy', hint: 'ржЖржорж┐ ржЦрзБржм ржЦрзБрж╢рж┐' }
+            ]
+          },
+          {
+            title: 'ржЯрзЗржХржирзЛрж▓ржЬрж┐',
+            icon: 'ЁЯТ╗',
+            questions: [
+              { type: 'listen', word: 'Computer', pron: 'ржХржорзНржкрж┐ржЙржЯрж╛рж░', meaning: 'ржХржорзНржкрж┐ржЙржЯрж╛рж░', audioText: 'Computer' },
+              { type: 'choice', q: '"Internet" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['ржЗржирзНржЯрж╛рж░ржирзЗржЯ', 'ржЯрзЗрж▓рж┐ржнрж┐рж╢ржи', 'рж░рзЗржбрж┐ржУ', 'ржлрзЛржи'], correct: 0 },
+              { type: 'match', pairs: [['Computer', 'ржХржорзНржкрж┐ржЙржЯрж╛рж░'], ['Phone', 'ржлрзЛржи'], ['Email', 'ржЗржорзЗржЗрж▓']] },
+              { type: 'write', q: '"ржорзЛржмрж╛ржЗрж▓" ржХрзЗ ржЗржВрж░рзЗржЬрж┐рждрзЗ ржХрзА ржмрж▓рзЗ?', answer: 'mobile', alt: ['Mobile', 'phone'] },
+              { type: 'speak', target: 'I use computer', hint: 'ржЖржорж┐ ржХржорзНржкрж┐ржЙржЯрж╛рж░ ржмрзНржпржмрж╣рж╛рж░ ржХрж░рж┐' }
+            ]
+          },
+          {
+            title: 'рж╕рзНржмрж╛рж╕рзНржерзНржп',
+            icon: 'ЁЯПе',
+            questions: [
+              { type: 'listen', word: 'Doctor', pron: 'ржбржХрзНржЯрж░', meaning: 'ржбрж╛ржХрзНрждрж╛рж░', audioText: 'Doctor' },
+              { type: 'choice', q: '"Medicine" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['ржФрж╖ржз', 'ржЦрж╛ржмрж╛рж░', 'ржкрж╛ржирж┐', 'ржЯрж╛ржХрж╛'], correct: 0 },
+              { type: 'match', pairs: [['Doctor', 'ржбрж╛ржХрзНрждрж╛рж░'], ['Medicine', 'ржФрж╖ржз'], ['Hospital', 'рж╣рж╛рж╕ржкрж╛рждрж╛рж▓']] },
+              { type: 'write', q: '"ржЕрж╕рзБрж╕рзНрже" ржХрзЗ ржЗржВрж░рзЗржЬрж┐рждрзЗ ржХрзА ржмрж▓рзЗ?', answer: 'sick', alt: ['Sick', 'ill'] },
+              { type: 'speak', target: 'I am not feeling well', hint: 'ржЖржорж╛рж░ ржнрж╛рж▓рзЛ рж▓рж╛ржЧржЫрзЗ ржирж╛' }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  
+  malay: {
+    name: 'Bahasa Melayu', nameBn: 'ржорж╛рж▓ржпрж╝', flag: 'ЁЯЗ▓ЁЯЗ╛',
+    flagEmoji: 'ЁЯЗ▓ЁЯЗ╛', langCode: 'ms-MY',
+    intro: 'ржорж╛рж▓ржпрж╝рзЗрж╢рж┐ржпрж╝рж╛ржпрж╝ ржХрж╛ржЬ ржХрж░рждрзЗ ржпрж╛ржУржпрж╝рж╛ ржмрж╛ржВрж▓рж╛ржжрзЗрж╢рзАржжрзЗрж░ ржЬржирзНржп ржЕржкрж░рж┐рж╣рж╛рж░рзНржп ржнрж╛рж╖рж╛ред ржкрзНрж░рждрж┐ржжрж┐ржирзЗрж░ ржХрж╛ржЬ, ржХрзЗржирж╛ржХрж╛ржЯрж╛ ржУ ржпрзЛржЧрж╛ржпрзЛржЧрзЗ рж╕ржмржЪрзЗржпрж╝рзЗ ржжрж░ржХрж╛рж░рж┐ред',
+    color: '#fbbf24',
+    modules: [
+      {
+        title: 'Beginner', titleBn: 'рж╢рзБрж░рзБрж░ рж╕рзНрждрж░',
+        lessons: [
+          { title: 'рж╢рзБржнрзЗржЪрзНржЫрж╛', icon: 'ЁЯСЛ', questions: [
+            { type: 'listen', word: 'Selamat datang', pron: 'рж╕рзЗрж▓рж╛ржорж╛ржд ржжрж╛рждрж╛ржВ', meaning: 'рж╕рзНржмрж╛ржЧрждржо', audioText: 'Selamat datang' },
+            { type: 'choice', q: '"Apa khabar" ржорж╛ржирзЗ ржХрзА?', options: ['ржХрзЗржоржи ржЖржЫрзЗржи?', 'ржХрзЛржерж╛ржпрж╝ ржпрж╛ржЪрзНржЫрзЗржи?', 'ржХржд ржЯрж╛ржХрж╛?', 'ржХрзА ржХрж░ржЫрзЗржи?'], correct: 0 },
+            { type: 'match', pairs: [['Terima kasih', 'ржзржирзНржпржмрж╛ржж'], ['Selamat tinggal', 'ржмрж┐ржжрж╛ржпрж╝'], ['Maaf', 'ржорж╛ржл']] },
+            { type: 'write', q: '"ржзржирзНржпржмрж╛ржж" ржХрзЗ ржорж╛рж▓ржпрж╝рзЗ ржХрзА ржмрж▓рзЗ?', answer: 'terima kasih', alt: ['Terima kasih'] },
+            { type: 'speak', target: 'Apa khabar', hint: 'ржХрзЗржоржи ржЖржЫрзЗржи?' }
+          ]},
+          { title: 'рж╕ржВржЦрзНржпрж╛', icon: 'ЁЯФв', questions: [
+            { type: 'listen', word: 'Satu', pron: 'рж╕рж╛рждрзБ', meaning: 'ржПржХ', audioText: 'Satu' },
+            { type: 'choice', q: '"Lima" рж╕ржВржЦрзНржпрж╛ржЯрж┐ ржХржд?', options: ['рзз', 'рзй', 'рзл', 'рзн'], correct: 2 },
+            { type: 'match', pairs: [['Satu', 'ржПржХ'], ['Dua', 'ржжрзБржЗ'], ['Tiga', 'рждрж┐ржи']] },
+            { type: 'write', q: '"ржжрж╢" ржХрзЗ ржорж╛рж▓ржпрж╝рзЗ ржХрзА ржмрж▓рзЗ?', answer: 'sepuluh', alt: ['Sepuluh'] },
+            { type: 'speak', target: 'Satu dua tiga', hint: 'ржПржХ ржжрзБржЗ рждрж┐ржи' }
+          ]},
+          { title: 'ржЦрж╛ржмрж╛рж░', icon: 'ЁЯНЪ', questions: [
+            { type: 'listen', word: 'Nasi', pron: 'ржирж╛рж╕рж┐', meaning: 'ржнрж╛ржд', audioText: 'Nasi' },
+            { type: 'choice', q: '"Air" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['ржмрж╛рждрж╛рж╕', 'ржкрж╛ржирж┐', 'ржЖржЧрзБржи', 'ржорж╛ржЯрж┐'], correct: 1 },
+            { type: 'match', pairs: [['Ayam', 'ржорзБрж░ржЧрж┐'], ['Ikan', 'ржорж╛ржЫ'], ['Sayur', 'рж╕ржмржЬрж┐']] },
+            { type: 'write', q: '"ржнрж╛ржд" ржХрзЗ ржорж╛рж▓ржпрж╝рзЗ ржХрзА ржмрж▓рзЗ?', answer: 'nasi', alt: ['Nasi'] },
+            { type: 'speak', target: 'Saya mahu nasi', hint: 'ржЖржорж┐ ржнрж╛ржд ржЪрж╛ржЗ' }
+          ]},
+          { title: 'ржХрзЗржирж╛ржХрж╛ржЯрж╛', icon: 'ЁЯЫТ', questions: [
+            { type: 'listen', word: 'Berapa harga', pron: 'ржмрзЗрж░рж╛ржкрж╛ рж╣рж╛рж░ржЧрж╛', meaning: 'ржХржд ржжрж╛ржо', audioText: 'Berapa harga' },
+            { type: 'choice', q: '"Mahal" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['рж╕рж╕рзНрждрж╛', 'ржжрж╛ржорж┐', 'ржнрж╛рж▓рзЛ', 'ржЦрж╛рж░рж╛ржк'], correct: 1 },
+            { type: 'match', pairs: [['Murah', 'рж╕рж╕рзНрждрж╛'], ['Mahal', 'ржжрж╛ржорж┐'], ['Duit', 'ржЯрж╛ржХрж╛']] },
+            { type: 'write', q: '"ржЯрж╛ржХрж╛" ржХрзЗ ржорж╛рж▓ржпрж╝рзЗ ржХрзА ржмрж▓рзЗ?', answer: 'duit', alt: ['Duit', 'wang'] },
+            { type: 'speak', target: 'Berapa harga ini', hint: 'ржПржЯрж╛рж░ ржжрж╛ржо ржХржд?' }
+          ]},
+          { title: 'ржжрж┐ржХржирж┐рж░рзНржжрзЗрж╢ржирж╛', icon: 'ЁЯзн', questions: [
+            { type: 'listen', word: 'Di mana', pron: 'ржжрж┐ ржорж╛ржирж╛', meaning: 'ржХрзЛржерж╛ржпрж╝', audioText: 'Di mana' },
+            { type: 'choice', q: '"Kiri" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['ржбрж╛ржи', 'ржмрж╛ржо', 'рж╕рзЛржЬрж╛', 'ржкрзЗржЫржирзЗ'], correct: 1 },
+            { type: 'match', pairs: [['Kiri', 'ржмрж╛ржо'], ['Kanan', 'ржбрж╛ржи'], ['Terus', 'рж╕рзЛржЬрж╛']] },
+            { type: 'write', q: '"ржбрж╛ржи" ржХрзЗ ржорж╛рж▓ржпрж╝рзЗ ржХрзА ржмрж▓рзЗ?', answer: 'kanan', alt: ['Kanan'] },
+            { type: 'speak', target: 'Di mana hospital', hint: 'рж╣рж╛рж╕ржкрж╛рждрж╛рж▓ ржХрзЛржерж╛ржпрж╝?' }
+          ]}
+        ]
+      },
+      {
+        title: 'Intermediate', titleBn: 'ржоржзрзНржпржо рж╕рзНрждрж░',
+        lessons: [
+          { title: 'ржХрж╛ржЬрзЗрж░ ржЬрж╛ржпрж╝ржЧрж╛', icon: 'ЁЯТ╝', questions: [
+            { type: 'listen', word: 'Kerja', pron: 'ржХрзЗрж░ржЬрж╛', meaning: 'ржХрж╛ржЬ', audioText: 'Kerja' },
+            { type: 'choice', q: '"Bos" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['ржмрж╕', 'ржХрж░рзНржоржЪрж╛рж░рзА', 'ржЧрзНрж░рж╛рж╣ржХ', 'ржмржирзНржзрзБ'], correct: 0 },
+            { type: 'match', pairs: [['Kerja', 'ржХрж╛ржЬ'], ['Gaji', 'ржмрзЗрждржи'], ['Cuti', 'ржЫрзБржЯрж┐']] },
+            { type: 'write', q: '"ржЕржлрж┐рж╕" ржХрзЗ ржорж╛рж▓ржпрж╝рзЗ ржХрзА ржмрж▓рзЗ?', answer: 'pejabat', alt: ['Pejabat'] },
+            { type: 'speak', target: 'Saya kerja di sini', hint: 'ржЖржорж┐ ржПржЦрж╛ржирзЗ ржХрж╛ржЬ ржХрж░рж┐' }
+          ]},
+          { title: 'ржЬрж░рзБрж░рж┐', icon: 'ЁЯЪи', questions: [
+            { type: 'listen', word: 'Tolong', pron: 'рждрзЛрж▓рзЛржВ', meaning: 'рж╕рж╛рж╣рж╛ржпрзНржп', audioText: 'Tolong' },
+            { type: 'choice', q: '"Polis" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['рж╕рзИржирж┐ржХ', 'ржкрзБрж▓рж┐рж╢', 'ржбрж╛ржХрзНрждрж╛рж░', 'рж╢рж┐ржХрзНрж╖ржХ'], correct: 1 },
+            { type: 'match', pairs: [['Tolong', 'рж╕рж╛рж╣рж╛ржпрзНржп'], ['Polis', 'ржкрзБрж▓рж┐рж╢'], ['Hospital', 'рж╣рж╛рж╕ржкрж╛рждрж╛рж▓']] },
+            { type: 'write', q: '"рж╕рж╛рж╣рж╛ржпрзНржп" ржХрзЗ ржорж╛рж▓ржпрж╝рзЗ ржХрзА ржмрж▓рзЗ?', answer: 'tolong', alt: ['Tolong'] },
+            { type: 'speak', target: 'Tolong saya', hint: 'ржЖржорж╛ржХрзЗ рж╕рж╛рж╣рж╛ржпрзНржп ржХрж░рзБржи' }
+          ]},
+          { title: 'ржпрж╛рждрж╛ржпрж╝рж╛ржд', icon: 'ЁЯЪХ', questions: [
+            { type: 'listen', word: 'Teksi', pron: 'рждрзЗржХрж╕рж┐', meaning: 'ржЯрзНржпрж╛ржХрзНрж╕рж┐', audioText: 'Teksi' },
+            { type: 'choice', q: '"Bas" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['ржЧрж╛ржбрж╝рж┐', 'ржмрж╛рж╕', 'ржЯрзНрж░рзЗржи', 'ржмрж┐ржорж╛ржи'], correct: 1 },
+            { type: 'match', pairs: [['Bas', 'ржмрж╛рж╕'], ['Keretapi', 'ржЯрзНрж░рзЗржи'], ['Kapal terbang', 'ржмрж┐ржорж╛ржи']] },
+            { type: 'write', q: '"ржЯрзНржпрж╛ржХрзНрж╕рж┐" ржХрзЗ ржорж╛рж▓ржпрж╝рзЗ ржХрзА ржмрж▓рзЗ?', answer: 'teksi', alt: ['Teksi'] },
+            { type: 'speak', target: 'Berhenti di sini', hint: 'ржПржЦрж╛ржирзЗ ржерж╛ржорзБржи' }
+          ]},
+          { title: 'ржкрж░рж┐ржмрж╛рж░', icon: 'ЁЯСитАНЁЯСйтАНЁЯСз', questions: [
+            { type: 'listen', word: 'Keluarga', pron: 'ржХрзЗрж▓рзБржпрж╝рж╛рж░рзНржЧрж╛', meaning: 'ржкрж░рж┐ржмрж╛рж░', audioText: 'Keluarga' },
+            { type: 'choice', q: '"Ibu" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['ржмрж╛ржмрж╛', 'ржорж╛', 'ржнрж╛ржЗ', 'ржмрзЛржи'], correct: 1 },
+            { type: 'match', pairs: [['Ayah', 'ржмрж╛ржмрж╛'], ['Ibu', 'ржорж╛'], ['Anak', 'рж╕ржирзНрждрж╛ржи']] },
+            { type: 'write', q: '"ржмрж╛ржмрж╛" ржХрзЗ ржорж╛рж▓ржпрж╝рзЗ ржХрзА ржмрж▓рзЗ?', answer: 'ayah', alt: ['Ayah', 'bapa'] },
+            { type: 'speak', target: 'Ini keluarga saya', hint: 'ржПржЯрж╛ ржЖржорж╛рж░ ржкрж░рж┐ржмрж╛рж░' }
+          ]},
+          { title: 'рж╕ржоржпрж╝', icon: 'ЁЯХР', questions: [
+            { type: 'listen', word: 'Sekarang', pron: 'рж╕рзЗржХрж╛рж░рж╛ржВ', meaning: 'ржПржЦржи', audioText: 'Sekarang' },
+            { type: 'choice', q: '"Esok" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['ржЖржЬ', 'ржХрж╛рж▓', 'ржЧрждржХрж╛рж▓', 'ржкрж░рж╢рзБ'], correct: 1 },
+            { type: 'match', pairs: [['Hari ini', 'ржЖржЬ'], ['Esok', 'ржХрж╛рж▓'], ['Semalam', 'ржЧрждржХрж╛рж▓']] },
+            { type: 'write', q: '"ржПржЦржи" ржХрзЗ ржорж╛рж▓ржпрж╝рзЗ ржХрзА ржмрж▓рзЗ?', answer: 'sekarang', alt: ['Sekarang'] },
+            { type: 'speak', target: 'Pukul berapa sekarang', hint: 'ржПржЦржи ржХржд рж╕ржоржпрж╝?' }
+          ]}
+        ]
+      },
+      {
+        title: 'Advanced', titleBn: 'ржЙржЪрзНржЪ рж╕рзНрждрж░',
+        lessons: [
+          { title: 'ржмрзНржпржмрж╕рж╛', icon: 'ЁЯТ╝', questions: [
+            { type: 'listen', word: 'Perniagaan', pron: 'ржкрзЗрж░ржирж┐ржпрж╝рж╛ржЧрж╛ржи', meaning: 'ржмрзНржпржмрж╕рж╛', audioText: 'Perniagaan' },
+            { type: 'choice', q: '"Pelanggan" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['ржХрж░рзНржоржЪрж╛рж░рзА', 'ржЧрзНрж░рж╛рж╣ржХ', 'ржорж╛рж▓рж┐ржХ', 'ржмржирзНржзрзБ'], correct: 1 },
+            { type: 'match', pairs: [['Pelanggan', 'ржЧрзНрж░рж╛рж╣ржХ'], ['Harga', 'ржжрж╛ржо'], ['Diskaun', 'ржЫрж╛ржбрж╝']] },
+            { type: 'write', q: '"ржмрж┐ржХрзНрж░рж┐" ржХрзЗ ржорж╛рж▓ржпрж╝рзЗ ржХрзА ржмрж▓рзЗ?', answer: 'jual', alt: ['Jual'] },
+            { type: 'speak', target: 'Saya mahu beli ini', hint: 'ржЖржорж┐ ржПржЯрж╛ ржХрж┐ржирждрзЗ ржЪрж╛ржЗ' }
+          ]},
+          { title: 'ржЖржЗржи', icon: 'тЪЦя╕П', questions: [
+            { type: 'listen', word: 'Undang-undang', pron: 'ржЙржирзНржжрж╛ржВ-ржЙржирзНржжрж╛ржВ', meaning: 'ржЖржЗржи', audioText: 'Undang-undang' },
+            { type: 'choice', q: '"Hak" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['ржЕржзрж┐ржХрж╛рж░', 'ржжрж╛ржпрж╝рж┐рждрзНржм', 'ржЯрж╛ржХрж╛', 'ржХрж╛ржЬ'], correct: 0 },
+            { type: 'match', pairs: [['Hak', 'ржЕржзрж┐ржХрж╛рж░'], ['Undang-undang', 'ржЖржЗржи'], ['Kontrak', 'ржЪрзБржХрзНрждрж┐']] },
+            { type: 'write', q: '"ржЪрзБржХрзНрждрж┐" ржХрзЗ ржорж╛рж▓ржпрж╝рзЗ ржХрзА ржмрж▓рзЗ?', answer: 'kontrak', alt: ['Kontrak'] },
+            { type: 'speak', target: 'Saya ada kontrak', hint: 'ржЖржорж╛рж░ ржЪрзБржХрзНрждрж┐ ржЖржЫрзЗ' }
+          ]},
+          { title: 'ржЖржмрзЗржЧ', icon: 'ЁЯШК', questions: [
+            { type: 'listen', word: 'Gembira', pron: 'ржЧрзЗржоржмрж┐рж░рж╛', meaning: 'ржЦрзБрж╢рж┐', audioText: 'Gembira' },
+            { type: 'choice', q: '"Sedih" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['ржЦрзБрж╢рж┐', 'ржжрзБржГржЦрж┐ржд', 'рж░рж╛ржЧрж╛ржирзНржмрж┐ржд', 'ржнржпрж╝'], correct: 1 },
+            { type: 'match', pairs: [['Gembira', 'ржЦрзБрж╢рж┐'], ['Sedih', 'ржжрзБржГржЦрж┐ржд'], ['Marah', 'рж░рж╛ржЧрж╛ржирзНржмрж┐ржд']] },
+            { type: 'write', q: '"ржнрж╛рж▓рзЛржмрж╛рж╕рж╛" ржХрзЗ ржорж╛рж▓ржпрж╝рзЗ ржХрзА ржмрж▓рзЗ?', answer: 'cinta', alt: ['Cinta'] },
+            { type: 'speak', target: 'Saya sangat gembira', hint: 'ржЖржорж┐ ржЦрзБржм ржЦрзБрж╢рж┐' }
+          ]},
+          { title: 'ржЯрзЗржХржирзЛрж▓ржЬрж┐', icon: 'ЁЯТ╗', questions: [
+            { type: 'listen', word: 'Komputer', pron: 'ржХржорзНржкрж┐ржЙрждрж╛рж░', meaning: 'ржХржорзНржкрж┐ржЙржЯрж╛рж░', audioText: 'Komputer' },
+            { type: 'choice', q: '"Internet" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['ржЗржирзНржЯрж╛рж░ржирзЗржЯ', 'ржЯрзЗрж▓рж┐ржнрж┐рж╢ржи', 'рж░рзЗржбрж┐ржУ', 'ржлрзЛржи'], correct: 0 },
+            { type: 'match', pairs: [['Komputer', 'ржХржорзНржкрж┐ржЙржЯрж╛рж░'], ['Telefon', 'ржлрзЛржи'], ['Emel', 'ржЗржорзЗржЗрж▓']] },
+            { type: 'write', q: '"ржорзЛржмрж╛ржЗрж▓" ржХрзЗ ржорж╛рж▓ржпрж╝рзЗ ржХрзА ржмрж▓рзЗ?', answer: 'telefon bimbit', alt: ['Telefon bimbit', 'handphone'] },
+            { type: 'speak', target: 'Saya guna komputer', hint: 'ржЖржорж┐ ржХржорзНржкрж┐ржЙржЯрж╛рж░ ржмрзНржпржмрж╣рж╛рж░ ржХрж░рж┐' }
+          ]},
+          { title: 'рж╕рзНржмрж╛рж╕рзНржерзНржп', icon: 'ЁЯПе', questions: [
+            { type: 'listen', word: 'Doktor', pron: 'ржжрзЛржХрждрзЛрж░', meaning: 'ржбрж╛ржХрзНрждрж╛рж░', audioText: 'Doktor' },
+            { type: 'choice', q: '"Ubat" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['ржФрж╖ржз', 'ржЦрж╛ржмрж╛рж░', 'ржкрж╛ржирж┐', 'ржЯрж╛ржХрж╛'], correct: 0 },
+            { type: 'match', pairs: [['Doktor', 'ржбрж╛ржХрзНрждрж╛рж░'], ['Ubat', 'ржФрж╖ржз'], ['Hospital', 'рж╣рж╛рж╕ржкрж╛рждрж╛рж▓']] },
+            { type: 'write', q: '"ржЕрж╕рзБрж╕рзНрже" ржХрзЗ ржорж╛рж▓ржпрж╝рзЗ ржХрзА ржмрж▓рзЗ?', answer: 'sakit', alt: ['Sakit'] },
+            { type: 'speak', target: 'Saya sakit', hint: 'ржЖржорж┐ ржЕрж╕рзБрж╕рзНрже' }
+          ]}
+        ]
+      }
+    ]
+  },
+  
+  arabic: {
+    name: 'Arabic', nameBn: 'ржЖрж░ржмрж┐', flag: 'ЁЯЗ╕ЁЯЗж',
+    flagEmoji: 'ЁЯЗ╕ЁЯЗж', langCode: 'ar-SA',
+    intro: 'рж╕рзМржжрж┐, UAE, ржХрж╛рждрж╛рж░, ржХрзБржпрж╝рзЗржд, ржУржорж╛ржи тАФ ржоржзрзНржпржкрзНрж░рж╛ржЪрзНржпрзЗрж░ рж╕ржм ржжрзЗрж╢рзЗ ржХрж╛ржЬ ржХрж░рж╛рж░ ржЬржирзНржп ржЕржкрж░рж┐рж╣рж╛рж░рзНржпред',
+    color: '#10b981',
+    modules: [
+      { title: 'Beginner', titleBn: 'рж╢рзБрж░рзБрж░ рж╕рзНрждрж░', lessons: [
+        { title: 'рж╢рзБржнрзЗржЪрзНржЫрж╛', icon: 'ЁЯСЛ', questions: [
+          { type: 'listen', word: '╪з┘Д╪│┘Д╪з┘Е ╪╣┘Д┘К┘Г┘Е', pron: 'ржЖрж╕рж╕рж╛рж▓рж╛ржорзБ ржЖрж▓рж╛ржЗржХрзБржо', meaning: 'ржЖржкржирж╛рж░ ржЙржкрж░ рж╢рж╛ржирзНрждрж┐ ржмрж░рзНрж╖рж┐ржд рж╣рзЛржХ', audioText: '╪з┘Д╪│┘Д╪з┘Е ╪╣┘Д┘К┘Г┘Е' },
+          { type: 'choice', q: '"╪┤┘Г╪▒╪з┘Л" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['ржзржирзНржпржмрж╛ржж', 'рж╕рзНржмрж╛ржЧрждржо', 'ржмрж┐ржжрж╛ржпрж╝', 'ржжрзБржГржЦрж┐ржд'], correct: 0 },
+          { type: 'match', pairs: [['┘Е╪▒╪н╪и╪з', 'рж╕рзНржмрж╛ржЧрждржо'], ['╪┤┘Г╪▒╪з┘Л', 'ржзржирзНржпржмрж╛ржж'], ['┘Е╪╣ ╪з┘Д╪│┘Д╪з┘Е╪й', 'ржмрж┐ржжрж╛ржпрж╝']] },
+          { type: 'write', q: '"ржзржирзНржпржмрж╛ржж" ржЖрж░ржмрж┐рждрзЗ ржХрзА?', answer: '╪┤┘Г╪▒╪з', alt: ['╪┤┘Г╪▒╪з┘Л', '╪┤┘Г╪▒╪з'] },
+          { type: 'speak', target: '╪з┘Д╪│┘Д╪з┘Е ╪╣┘Д┘К┘Г┘Е', hint: 'ржЖрж╕рж╕рж╛рж▓рж╛ржорзБ ржЖрж▓рж╛ржЗржХрзБржо ржмрж▓рзБржи' }
+        ]},
+        { title: 'рж╕ржВржЦрзНржпрж╛', icon: 'ЁЯФв', questions: [
+          { type: 'listen', word: '┘И╪з╪н╪п', pron: 'ржУржпрж╝рж╛рж╣рж┐ржж', meaning: 'ржПржХ', audioText: '┘И╪з╪н╪п' },
+          { type: 'choice', q: '"╪л┘Д╪з╪л╪й" рж╕ржВржЦрзНржпрж╛ржЯрж┐ ржХржд?', options: ['рзз', 'рзй', 'рзл', 'рзн'], correct: 1 },
+          { type: 'match', pairs: [['┘И╪з╪н╪п', 'ржПржХ'], ['╪з╪л┘Ж╪з┘Ж', 'ржжрзБржЗ'], ['╪л┘Д╪з╪л╪й', 'рждрж┐ржи']] },
+          { type: 'write', q: '"ржжрж╢" ржЖрж░ржмрж┐рждрзЗ ржХрзА?', answer: '╪╣╪┤╪▒╪й', alt: ['╪╣╪┤╪▒┘З'] },
+          { type: 'speak', target: '┘И╪з╪н╪п ╪з╪л┘Ж╪з┘Ж ╪л┘Д╪з╪л╪й', hint: 'ржПржХ ржжрзБржЗ рждрж┐ржи' }
+        ]},
+        { title: 'ржЦрж╛ржмрж╛рж░', icon: 'ЁЯНЪ', questions: [
+          { type: 'listen', word: '┘Е╪з╪б', pron: 'ржорж╛', meaning: 'ржкрж╛ржирж┐', audioText: '┘Е╪з╪б' },
+          { type: 'choice', q: '"╪г╪▒╪▓" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['ржнрж╛ржд', 'ржкрж╛ржирж┐', 'рж░рзБржЯрж┐', 'ржорж╛ржЫ'], correct: 0 },
+          { type: 'match', pairs: [['┘Е╪з╪б', 'ржкрж╛ржирж┐'], ['╪г╪▒╪▓', 'ржнрж╛ржд'], ['╪о╪и╪▓', 'рж░рзБржЯрж┐']] },
+          { type: 'write', q: '"ржнрж╛ржд" ржЖрж░ржмрж┐рждрзЗ ржХрзА?', answer: '╪г╪▒╪▓', alt: ['╪з╪▒╪▓'] },
+          { type: 'speak', target: '╪г╪▒┘К╪п ┘Е╪з╪б', hint: 'ржЖржорж┐ ржкрж╛ржирж┐ ржЪрж╛ржЗ' }
+        ]},
+        { title: 'ржХрзЗржирж╛ржХрж╛ржЯрж╛', icon: 'ЁЯЫТ', questions: [
+          { type: 'listen', word: '┘Г┘Е ╪з┘Д╪│╪╣╪▒', pron: 'ржХрж╛ржо ржЖрж╕-рж╕рж┐ржЗрж░', meaning: 'ржХржд ржжрж╛ржо', audioText: '┘Г┘Е ╪з┘Д╪│╪╣╪▒' },
+          { type: 'choice', q: '"╪║╪з┘Д┘К" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['рж╕рж╕рзНрждрж╛', 'ржжрж╛ржорж┐', 'ржнрж╛рж▓рзЛ', 'ржЦрж╛рж░рж╛ржк'], correct: 1 },
+          { type: 'match', pairs: [['╪▒╪о┘К╪╡', 'рж╕рж╕рзНрждрж╛'], ['╪║╪з┘Д┘К', 'ржжрж╛ржорж┐'], ['┘Е╪з┘Д', 'ржЯрж╛ржХрж╛']] },
+          { type: 'write', q: '"ржЯрж╛ржХрж╛" ржЖрж░ржмрж┐рждрзЗ ржХрзА?', answer: '┘Е╪з┘Д', alt: ['┘Б┘Д┘И╪│'] },
+          { type: 'speak', target: '┘Г┘Е ╪з┘Д╪│╪╣╪▒', hint: 'ржХржд ржжрж╛ржо?' }
+        ]},
+        { title: 'ржжрж┐ржХ', icon: 'ЁЯзн', questions: [
+          { type: 'listen', word: '╪г┘К┘Ж', pron: 'ржЖржЗржи', meaning: 'ржХрзЛржерж╛ржпрж╝', audioText: '╪г┘К┘Ж' },
+          { type: 'choice', q: '"┘К┘Е┘К┘Ж" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['ржбрж╛ржи', 'ржмрж╛ржо', 'рж╕рзЛржЬрж╛', 'ржкрзЗржЫржирзЗ'], correct: 0 },
+          { type: 'match', pairs: [['┘К┘Е┘К┘Ж', 'ржбрж╛ржи'], ['┘К╪│╪з╪▒', 'ржмрж╛ржо'], ['┘Е╪│╪к┘В┘К┘Е', 'рж╕рзЛржЬрж╛']] },
+          { type: 'write', q: '"ржбрж╛ржи" ржЖрж░ржмрж┐рждрзЗ ржХрзА?', answer: '┘К┘Е┘К┘Ж', alt: ['┘К┘Е┘К┘Ж'] },
+          { type: 'speak', target: '╪г┘К┘Ж ╪з┘Д┘Е╪│╪к╪┤┘Б┘Й', hint: 'рж╣рж╛рж╕ржкрж╛рждрж╛рж▓ ржХрзЛржерж╛ржпрж╝?' }
+        ]}
+      ]}
+    ]
+  },
+  
+  japanese: {
+    name: 'Japanese', nameBn: 'ржЬрж╛ржкрж╛ржирж┐', flag: 'ЁЯЗпЁЯЗ╡',
+    flagEmoji: 'ЁЯЗпЁЯЗ╡', langCode: 'ja-JP',
+    intro: 'ржЬрж╛ржкрж╛ржирзЗ ржкржбрж╝рж╛рж╢рзЛржирж╛, ржХрж╛ржЬ ржмрж╛ ржнрзНрж░ржоржгрзЗрж░ ржЬржирзНржпред ржЬрж╛ржкрж╛ржирж┐ рж╕ржВрж╕рзНржХрзГрждрж┐ ржУ ржнрж╛рж╖рж╛ рж╢рзЗржЦрж╛рж░ ржЖржиржирзНржж ржЖрж▓рж╛ржжрж╛ред',
+    color: '#ef4444',
+    modules: [
+      { title: 'Beginner', titleBn: 'рж╢рзБрж░рзБрж░ рж╕рзНрждрж░', lessons: [
+        { title: 'рж╢рзБржнрзЗржЪрзНржЫрж╛', icon: 'ЁЯСЛ', questions: [
+          { type: 'listen', word: 'уБУуВУуБлуБбуБп', pron: 'ржХрзЛржиржирж┐ржЪрж┐ржУржпрж╝рж╛', meaning: 'рж╣рзНржпрж╛рж▓рзЛ / рж╢рзБржн ржжрж┐ржи', audioText: 'уБУуВУуБлуБбуБп' },
+          { type: 'choice', q: '"уБВуВКуБМуБиуБЖ" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['ржзржирзНржпржмрж╛ржж', 'рж╕рзНржмрж╛ржЧрждржо', 'ржмрж┐ржжрж╛ржпрж╝', 'ржжрзБржГржЦрж┐ржд'], correct: 0 },
+          { type: 'match', pairs: [['уБУуВУуБлуБбуБп', 'рж╣рзНржпрж╛рж▓рзЛ'], ['уБВуВКуБМуБиуБЖ', 'ржзржирзНржпржмрж╛ржж'], ['уБХуВИуБЖуБкуВЙ', 'ржмрж┐ржжрж╛ржпрж╝']] },
+          { type: 'write', q: '"ржзржирзНржпржмрж╛ржж" ржЬрж╛ржкрж╛ржирж┐рждрзЗ ржХрзА?', answer: 'уБВуВКуБМуБиуБЖ', alt: ['уБВуВКуБМуБиуБЖуБФуБЦуБДуБ╛уБЩ'] },
+          { type: 'speak', target: 'уБУуВУуБлуБбуБп', hint: 'рж╣рзНржпрж╛рж▓рзЛ ржмрж▓рзБржи' }
+        ]},
+        { title: 'рж╕ржВржЦрзНржпрж╛', icon: 'ЁЯФв', questions: [
+          { type: 'listen', word: 'уБДуБб', pron: 'ржЗржЪрж┐', meaning: 'ржПржХ', audioText: 'уБДуБб' },
+          { type: 'choice', q: '"уБХуВУ" рж╕ржВржЦрзНржпрж╛ржЯрж┐ ржХржд?', options: ['рзз', 'рзи', 'рзй', 'рзк'], correct: 2 },
+          { type: 'match', pairs: [['уБДуБб', 'ржПржХ'], ['уБл', 'ржжрзБржЗ'], ['уБХуВУ', 'рждрж┐ржи']] },
+          { type: 'write', q: '"ржжрж╢" ржЬрж╛ржкрж╛ржирж┐рждрзЗ ржХрзА?', answer: 'уБШуВЕуБЖ', alt: ['уБШуВЕуБЖ', 'juu'] },
+          { type: 'speak', target: 'уБДуБб уБл уБХуВУ', hint: 'ржПржХ ржжрзБржЗ рждрж┐ржи' }
+        ]},
+        { title: 'ржЦрж╛ржмрж╛рж░', icon: 'ЁЯНЬ', questions: [
+          { type: 'listen', word: 'уБ┐уБЪ', pron: 'ржорж┐ржЬрзБ', meaning: 'ржкрж╛ржирж┐', audioText: 'уБ┐уБЪ' },
+          { type: 'choice', q: '"уБФуБпуВУ" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['ржнрж╛ржд', 'ржкрж╛ржирж┐', 'рж░рзБржЯрж┐', 'ржорж╛ржЫ'], correct: 0 },
+          { type: 'match', pairs: [['уБ┐уБЪ', 'ржкрж╛ржирж┐'], ['уБФуБпуВУ', 'ржнрж╛ржд'], ['уБХуБЛуБк', 'ржорж╛ржЫ']] },
+          { type: 'write', q: '"ржнрж╛ржд" ржЬрж╛ржкрж╛ржирж┐рждрзЗ ржХрзА?', answer: 'уБФуБпуВУ', alt: ['уБФуБпуВУ', 'gohan'] },
+          { type: 'speak', target: 'уБ┐уБЪ уБПуБауБХуБД', hint: 'ржкрж╛ржирж┐ ржжрж┐ржи' }
+        ]},
+        { title: 'рж╕ржВржЦрзНржпрж╛ рзи', icon: 'ЁЯФв', questions: [
+          { type: 'listen', word: 'уВИуВУ', pron: 'ржЗржпрж╝рзЛржи', meaning: 'ржЪрж╛рж░', audioText: 'уВИуВУ' },
+          { type: 'choice', q: '"уБФ" рж╕ржВржЦрзНржпрж╛ржЯрж┐ ржХржд?', options: ['рзй', 'рзк', 'рзл', 'рзм'], correct: 2 },
+          { type: 'match', pairs: [['уВИуВУ', 'ржЪрж╛рж░'], ['уБФ', 'ржкрж╛ржБржЪ'], ['уВНуБП', 'ржЫржпрж╝']] },
+          { type: 'write', q: '"рж╕рж╛ржд" ржЬрж╛ржкрж╛ржирж┐рждрзЗ ржХрзА?', answer: 'уБкуБк', alt: ['уБЧуБб'] },
+          { type: 'speak', target: 'уВИуВУ уБФ уВНуБП', hint: 'ржЪрж╛рж░ ржкрж╛ржБржЪ ржЫржпрж╝' }
+        ]},
+        { title: 'ржзржирзНржпржмрж╛ржж', icon: 'ЁЯЩП', questions: [
+          { type: 'listen', word: 'уБЩуБ┐уБ╛уБЫуВУ', pron: 'рж╕рзБржорж┐ржорж╛рж╕рзЗржи', meaning: 'ржорж╛ржл ржХрж░ржмрзЗржи', audioText: 'уБЩуБ┐уБ╛уБЫуВУ' },
+          { type: 'choice', q: '"уБФуВБуВУуБкуБХуБД" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['ржжрзБржГржЦрж┐ржд', 'ржзржирзНржпржмрж╛ржж', 'рж╕рзНржмрж╛ржЧрждржо', 'рж╣рзНржпрж╛рж▓рзЛ'], correct: 0 },
+          { type: 'match', pairs: [['уБЩуБ┐уБ╛уБЫуВУ', 'ржорж╛ржл ржХрж░ржмрзЗржи'], ['уБФуВБуВУуБкуБХуБД', 'ржжрзБржГржЦрж┐ржд'], ['уБйуБЖуВВ', 'ржзржирзНржпржмрж╛ржж']] },
+          { type: 'write', q: '"ржжрзБржГржЦрж┐ржд" ржЬрж╛ржкрж╛ржирж┐рждрзЗ ржХрзА?', answer: 'уБФуВБуВУуБкуБХуБД', alt: ['уБЩуБ┐уБ╛уБЫуВУ'] },
+          { type: 'speak', target: 'уБВуВКуБМуБиуБЖуБФуБЦуБДуБ╛уБЩ', hint: 'ржЕржирзЗржХ ржзржирзНржпржмрж╛ржж' }
+        ]}
+      ]}
+    ]
+  },
+  
+  korean: {
+    name: 'Korean', nameBn: 'ржХрзЛрж░рж┐ржпрж╝рж╛ржи', flag: 'ЁЯЗ░ЁЯЗ╖',
+    flagEmoji: 'ЁЯЗ░ЁЯЗ╖', langCode: 'ko-KR',
+    intro: 'ржХрзЛрж░рж┐ржпрж╝рж╛ржпрж╝ EPS рж╕рж┐рж╕рзНржЯрзЗржорзЗ ржХрж╛ржЬ ржХрж░рждрзЗ ржпрж╛ржУржпрж╝рж╛ ржмрж╛ржВрж▓рж╛ржжрзЗрж╢рзАржжрзЗрж░ ржЬржирзНржп ржЕржкрж░рж┐рж╣рж╛рж░рзНржпред',
+    color: '#8b5cf6',
+    modules: [
+      { title: 'Beginner', titleBn: 'рж╢рзБрж░рзБрж░ рж╕рзНрждрж░', lessons: [
+        { title: 'рж╢рзБржнрзЗржЪрзНржЫрж╛', icon: 'ЁЯСЛ', questions: [
+          { type: 'listen', word: 'ьХИыЕХэХШьД╕ьЪФ', pron: 'ржЖржиржЗржпрж╝рзЛржВрж╣рж╛рж╕рзЗржпрж╝рзЛ', meaning: 'рж╣рзНржпрж╛рж▓рзЛ', audioText: 'ьХИыЕХэХШьД╕ьЪФ' },
+          { type: 'choice', q: '"ъ░РьВмэХйыЛИыЛд" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['ржзржирзНржпржмрж╛ржж', 'рж╕рзНржмрж╛ржЧрждржо', 'ржмрж┐ржжрж╛ржпрж╝', 'ржжрзБржГржЦрж┐ржд'], correct: 0 },
+          { type: 'match', pairs: [['ьХИыЕХэХШьД╕ьЪФ', 'рж╣рзНржпрж╛рж▓рзЛ'], ['ъ░РьВмэХйыЛИыЛд', 'ржзржирзНржпржмрж╛ржж'], ['ьХИыЕХэЮИ ъ░АьД╕ьЪФ', 'ржмрж┐ржжрж╛ржпрж╝']] },
+          { type: 'write', q: '"ржзржирзНржпржмрж╛ржж" ржХрзЛрж░рж┐ржпрж╝рж╛ржи ржнрж╛рж╖рж╛ржпрж╝ ржХрзА?', answer: 'ъ░РьВмэХйыЛИыЛд', alt: ['ъ│аызИьЫМьЪФ', 'ъ░РьВм'] },
+          { type: 'speak', target: 'ьХИыЕХэХШьД╕ьЪФ', hint: 'рж╣рзНржпрж╛рж▓рзЛ ржмрж▓рзБржи' }
+        ]},
+        { title: 'рж╕ржВржЦрзНржпрж╛', icon: 'ЁЯФв', questions: [
+          { type: 'listen', word: 'ьЭ╝', pron: 'ржЗрж▓', meaning: 'ржПржХ', audioText: 'ьЭ╝' },
+          { type: 'choice', q: '"ьВ╝" рж╕ржВржЦрзНржпрж╛ржЯрж┐ ржХржд?', options: ['рзз', 'рзи', 'рзй', 'рзк'], correct: 2 },
+          { type: 'match', pairs: [['ьЭ╝', 'ржПржХ'], ['ьЭ┤', 'ржжрзБржЗ'], ['ьВ╝', 'рждрж┐ржи']] },
+          { type: 'write', q: '"ржжрж╢" ржХрзЛрж░рж┐ржпрж╝рж╛ржи ржнрж╛рж╖рж╛ржпрж╝ ржХрзА?', answer: 'ьЛн', alt: ['ьЧ┤'] },
+          { type: 'speak', target: 'ьЭ╝ ьЭ┤ ьВ╝', hint: 'ржПржХ ржжрзБржЗ рждрж┐ржи' }
+        ]},
+        { title: 'ржЦрж╛ржмрж╛рж░', icon: 'ЁЯНЪ', questions: [
+          { type: 'listen', word: 'ым╝', pron: 'ржорзБрж▓', meaning: 'ржкрж╛ржирж┐', audioText: 'ым╝' },
+          { type: 'choice', q: '"ы░е" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['ржнрж╛ржд', 'ржкрж╛ржирж┐', 'рж░рзБржЯрж┐', 'ржорж╛ржЫ'], correct: 0 },
+          { type: 'match', pairs: [['ым╝', 'ржкрж╛ржирж┐'], ['ы░е', 'ржнрж╛ржд'], ['ъ│аъ╕░', 'ржорж╛ржВрж╕']] },
+          { type: 'write', q: '"ржнрж╛ржд" ржХрзЛрж░рж┐ржпрж╝рж╛ржи ржнрж╛рж╖рж╛ржпрж╝ ржХрзА?', answer: 'ы░е', alt: ['ы░е'] },
+          { type: 'speak', target: 'ым╝ ьг╝ьД╕ьЪФ', hint: 'ржкрж╛ржирж┐ ржжрж┐ржи' }
+        ]},
+        { title: 'ржХрж╛ржЬ', icon: 'ЁЯТ╝', questions: [
+          { type: 'listen', word: 'ьЭ╝', pron: 'ржЗрж▓', meaning: 'ржХрж╛ржЬ', audioText: 'ьЭ╝' },
+          { type: 'choice', q: '"эЪМьВм" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['ржЕржлрж┐рж╕', 'ржмрж╛ржбрж╝рж┐', 'ржжрзЛржХрж╛ржи', 'рж╣рж╛рж╕ржкрж╛рждрж╛рж▓'], correct: 0 },
+          { type: 'match', pairs: [['ьЭ╝', 'ржХрж╛ржЬ'], ['эЪМьВм', 'ржЕржлрж┐рж╕'], ['ыПИ', 'ржЯрж╛ржХрж╛']] },
+          { type: 'write', q: '"ржЯрж╛ржХрж╛" ржХрзЛрж░рж┐ржпрж╝рж╛ржи ржнрж╛рж╖рж╛ржпрж╝ ржХрзА?', answer: 'ыПИ', alt: ['ыПИ'] },
+          { type: 'speak', target: 'ьЭ╝ эХШъ│а ьЛ╢ьЦ┤ьЪФ', hint: 'ржЖржорж┐ ржХрж╛ржЬ ржХрж░рждрзЗ ржЪрж╛ржЗ' }
+        ]},
+        { title: 'ржжрж┐ржХ', icon: 'ЁЯзн', questions: [
+          { type: 'listen', word: 'ьЦ┤ыФФ', pron: 'ржУржжрж┐', meaning: 'ржХрзЛржерж╛ржпрж╝', audioText: 'ьЦ┤ыФФ' },
+          { type: 'choice', q: '"ьШдые╕ьк╜" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['ржбрж╛ржи', 'ржмрж╛ржо', 'рж╕рзЛржЬрж╛', 'ржкрзЗржЫржирзЗ'], correct: 0 },
+          { type: 'match', pairs: [['ьШдые╕ьк╜', 'ржбрж╛ржи'], ['ьЩ╝ьк╜', 'ржмрж╛ржо'], ['ьзБьзД', 'рж╕рзЛржЬрж╛']] },
+          { type: 'write', q: '"ржбрж╛ржи" ржХрзЛрж░рж┐ржпрж╝рж╛ржи ржнрж╛рж╖рж╛ржпрж╝ ржХрзА?', answer: 'ьШдые╕ьк╜', alt: ['ьШдые╕ьк╜'] },
+          { type: 'speak', target: 'ьЦ┤ыФФ ьЮИьЦ┤ьЪФ', hint: 'ржХрзЛржерж╛ржпрж╝ ржЖржЫрзЗ?' }
+        ]}
+      ]}
+    ]
+  },
+  
+  spanish: {
+    name: 'Spanish', nameBn: 'рж╕рзНржкрзНржпрж╛ржирж┐рж╢', flag: 'ЁЯЗкЁЯЗ╕',
+    flagEmoji: 'ЁЯЗкЁЯЗ╕', langCode: 'es-ES',
+    intro: 'ржмрж┐рж╢рзНржмрзЗрж░ ржжрзНржмрж┐рждрзАржпрж╝ ржмрзГрж╣рждрзНрждржо ржорж╛рждрзГржнрж╛рж╖рж╛ред ржЗржЙрж░рзЛржк, ржЖржорзЗрж░рж┐ржХрж╛ ржУ ржЖржлрзНрж░рж┐ржХрж╛рж░ рзирзж+ ржжрзЗрж╢рзЗ ржмрж▓рж╛ рж╣ржпрж╝ред',
+    color: '#f59e0b',
+    modules: [
+      { title: 'Beginner', titleBn: 'рж╢рзБрж░рзБрж░ рж╕рзНрждрж░', lessons: [
+        { title: 'рж╢рзБржнрзЗржЪрзНржЫрж╛', icon: 'ЁЯСЛ', questions: [
+          { type: 'listen', word: 'Hola', pron: 'ржУрж▓рж╛', meaning: 'рж╣рзНржпрж╛рж▓рзЛ', audioText: 'Hola' },
+          { type: 'choice', q: '"Gracias" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['ржзржирзНржпржмрж╛ржж', 'рж╕рзНржмрж╛ржЧрждржо', 'ржмрж┐ржжрж╛ржпрж╝', 'ржжрзБржГржЦрж┐ржд'], correct: 0 },
+          { type: 'match', pairs: [['Hola', 'рж╣рзНржпрж╛рж▓рзЛ'], ['Gracias', 'ржзржирзНржпржмрж╛ржж'], ['Adi├│s', 'ржмрж┐ржжрж╛ржпрж╝']] },
+          { type: 'write', q: '"ржзржирзНржпржмрж╛ржж" рж╕рзНржкрзНржпрж╛ржирж┐рж╢рзЗ ржХрзА?', answer: 'gracias', alt: ['Gracias'] },
+          { type: 'speak', target: 'Hola', hint: 'рж╣рзНржпрж╛рж▓рзЛ ржмрж▓рзБржи' }
+        ]},
+        { title: 'рж╕ржВржЦрзНржпрж╛', icon: 'ЁЯФв', questions: [
+          { type: 'listen', word: 'Uno', pron: 'ржЙржирзЛ', meaning: 'ржПржХ', audioText: 'Uno' },
+          { type: 'choice', q: '"Tres" рж╕ржВржЦрзНржпрж╛ржЯрж┐ ржХржд?', options: ['рзз', 'рзи', 'рзй', 'рзк'], correct: 2 },
+          { type: 'match', pairs: [['Uno', 'ржПржХ'], ['Dos', 'ржжрзБржЗ'], ['Tres', 'рждрж┐ржи']] },
+          { type: 'write', q: '"ржжрж╢" рж╕рзНржкрзНржпрж╛ржирж┐рж╢рзЗ ржХрзА?', answer: 'diez', alt: ['Diez'] },
+          { type: 'speak', target: 'Uno dos tres', hint: 'ржПржХ ржжрзБржЗ рждрж┐ржи' }
+        ]},
+        { title: 'ржЦрж╛ржмрж╛рж░', icon: 'ЁЯНО', questions: [
+          { type: 'listen', word: 'Agua', pron: 'ржЖржЧрзБржпрж╝рж╛', meaning: 'ржкрж╛ржирж┐', audioText: 'Agua' },
+          { type: 'choice', q: '"Arroz" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['ржнрж╛ржд', 'ржкрж╛ржирж┐', 'рж░рзБржЯрж┐', 'ржорж╛ржЫ'], correct: 0 },
+          { type: 'match', pairs: [['Agua', 'ржкрж╛ржирж┐'], ['Arroz', 'ржнрж╛ржд'], ['Pan', 'рж░рзБржЯрж┐']] },
+          { type: 'write', q: '"ржнрж╛ржд" рж╕рзНржкрзНржпрж╛ржирж┐рж╢рзЗ ржХрзА?', answer: 'arroz', alt: ['Arroz'] },
+          { type: 'speak', target: 'Quiero agua', hint: 'ржЖржорж┐ ржкрж╛ржирж┐ ржЪрж╛ржЗ' }
+        ]},
+        { title: 'рж░ржВ', icon: 'ЁЯОи', questions: [
+          { type: 'listen', word: 'Rojo', pron: 'рж░рзЛрж╣рзЛ', meaning: 'рж▓рж╛рж▓', audioText: 'Rojo' },
+          { type: 'choice', q: '"Azul" ржХрзЛржи рж░ржЩ?', options: ['рж▓рж╛рж▓', 'ржирзАрж▓', 'рж╕ржмрзБржЬ', 'рж╣рж▓рзБржж'], correct: 1 },
+          { type: 'match', pairs: [['Rojo', 'рж▓рж╛рж▓'], ['Verde', 'рж╕ржмрзБржЬ'], ['Negro', 'ржХрж╛рж▓рзЛ']] },
+          { type: 'write', q: '"рж╣рж▓рзБржж" рж╕рзНржкрзНржпрж╛ржирж┐рж╢рзЗ ржХрзА?', answer: 'amarillo', alt: ['Amarillo'] },
+          { type: 'speak', target: 'Rojo y azul', hint: 'рж▓рж╛рж▓ ржПржмржВ ржирзАрж▓' }
+        ]},
+        { title: 'ржжрж┐ржХ', icon: 'ЁЯзн', questions: [
+          { type: 'listen', word: 'D├│nde', pron: 'ржжрзЛржирзНржжрзЗ', meaning: 'ржХрзЛржерж╛ржпрж╝', audioText: 'D├│nde' },
+          { type: 'choice', q: '"Derecha" ржПрж░ ржмрж╛ржВрж▓рж╛ ржХрзА?', options: ['ржбрж╛ржи', 'ржмрж╛ржо', 'рж╕рзЛржЬрж╛', 'ржкрзЗржЫржирзЗ'], correct: 0 },
+          { type: 'match', pairs: [['Derecha', 'ржбрж╛ржи'], ['Izquierda', 'ржмрж╛ржо'], ['Recto', 'рж╕рзЛржЬрж╛']] },
+          { type: 'write', q: '"ржбрж╛ржи" рж╕рзНржкрзНржпрж╛ржирж┐рж╢рзЗ ржХрзА?', answer: 'derecha', alt: ['Derecha'] },
+          { type: 'speak', target: 'D├│nde est├б el hospital', hint: 'рж╣рж╛рж╕ржкрж╛рждрж╛рж▓ ржХрзЛржерж╛ржпрж╝?' }
+        ]}
+      ]}
+    ]
+  }
+};
+
+/* ============================================================
+   ржЗржЙржЬрж╛рж░ ржбрзЗржЯрж╛ (localStorage)
+   ============================================================ */
+var USER_KEY = 'lingo_user_v1';
+
+function loadUser(){
+  try{
+    var d = JSON.parse(localStorage.getItem(USER_KEY));
+    if(d && typeof d === 'object') return d;
+  }catch(e){}
+  return {
+    xp: 0,
+    streak: 0,
+    lastActive: null,
+    hearts: 5,
+    gems: 20,
+    activeLang: 'english',
+    progress: {}, // {lang: {moduleIdx: {lessonIdx: true}}}
+    history: [], // {date, xp}
+    createdAt: Date.now()
+  };
+}
+function saveUser(){
+  try{ localStorage.setItem(USER_KEY, JSON.stringify(USER)); }catch(e){}
+}
+
+var USER = loadUser();
+
+/* ============================================================
+   рж╕рзНржЯрзНрж░рж┐ржХ ржЖржкржбрзЗржЯ
+   ============================================================ */
+function updateStreak(){
+  var today = new Date().toDateString();
+  if(USER.lastActive === today) return;
+  var yesterday = new Date(Date.now() - 86400000).toDateString();
+  if(USER.lastActive === yesterday){
+    USER.streak = (USER.streak || 0) + 1;
+  } else if(USER.lastActive){
+    USER.streak = 1;
+  } else {
+    USER.streak = 1;
+  }
+  USER.lastActive = today;
+  saveUser();
+}
+
+/* ============================================================
+   ржкрзНрж░рзЛржЧрзНрж░рзЗрж╕ ржЪрзЗржХ
+   ============================================================ */
+function getProgress(langKey){
+  if(!USER.progress[langKey]) USER.progress[langKey] = {};
+  return USER.progress[langKey];
+}
+function isLessonCompleted(langKey, mIdx, lIdx){
+  var p = getProgress(langKey);
+  return !!(p[mIdx] && p[mIdx][lIdx]);
+}
+function markLessonCompleted(langKey, mIdx, lIdx){
+  var p = getProgress(langKey);
+  if(!p[mIdx]) p[mIdx] = {};
+  p[mIdx][lIdx] = true;
+  saveUser();
+}
+function isLessonUnlocked(langKey, mIdx, lIdx){
+  // ржкрзНрж░ржержо рж▓рзЗрж╕ржи рж╕ржмрж╕ржоржпрж╝ ржЦрзЛрж▓рж╛
+  if(mIdx === 0 && lIdx === 0) return true;
+  // ржЖржЧрзЗрж░ рж▓рзЗрж╕ржи рж╢рзЗрж╖ рж╣рж▓рзЗ ржПржЗ рж▓рзЗрж╕ржи ржЦрзЛрж▓рж╛
+  var lang = LANGUAGES[langKey];
+  if(!lang) return false;
+  if(lIdx > 0) return isLessonCompleted(langKey, mIdx, lIdx - 1);
+  // ржирждрзБржи ржоржбрж┐ржЙрж▓рзЗрж░ ржкрзНрж░ржержо рж▓рзЗрж╕ржи тАФ ржЖржЧрзЗрж░ ржоржбрж┐ржЙрж▓рзЗрж░ рж╢рзЗрж╖ рж▓рзЗрж╕ржи рж╢рзЗрж╖ рж╣рж▓рзЗ
+  var prevM = lang.modules[mIdx - 1];
+  if(!prevM) return false;
+  return isLessonCompleted(langKey, mIdx - 1, prevM.lessons.length - 1);
+}
+function getLangProgressPct(langKey){
+  var lang = LANGUAGES[langKey];
+  if(!lang) return 0;
+  var total = 0, done = 0;
+  lang.modules.forEach(function(m, mIdx){
+    m.lessons.forEach(function(l, lIdx){
+      total++;
+      if(isLessonCompleted(langKey, mIdx, lIdx)) done++;
+    });
+  });
+  return total ? Math.round(done / total * 100) : 0;
+}
+
+/* ============================================================
+   XP ржпрзЛржЧ
+   ============================================================ */
+function addXP(amount){
+  USER.xp = (USER.xp || 0) + amount;
+  var today = new Date().toDateString();
+  var found = false;
+  USER.history.forEach(function(h){ if(h.date === today){ h.xp += amount; found = true; } });
+  if(!found) USER.history.push({date: today, xp: amount});
+  if(USER.history.length > 30) USER.history = USER.history.slice(-30);
+  saveUser();
+  updateTopStats();
+  showXPPop(amount);
+}
+function updateTopStats(){
+  var xpEl = document.getElementById('xpTop');
+  var streakEl = document.getElementById('streakTop');
+  if(xpEl) xpEl.textContent = USER.xp || 0;
+  if(streakEl) streakEl.textContent = USER.streak || 0;
+}
+function showXPPop(amount){
+  var el = document.createElement('div');
+  el.className = 'xp-pop';
+  el.textContent = '+' + amount + ' XP';
+  el.style.left = (window.innerWidth / 2) + 'px';
+  el.style.top = '30%';
+  el.style.transform = 'translateX(-50%)';
+  document.body.appendChild(el);
+  setTimeout(function(){ el.remove(); }, 1200);
+}
+
+/* ============================================================
+   рж╣рзЛржо ржкрзЗржЬ рж░рзЗржирзНржбрж╛рж░
+   ============================================================ */
+function renderHome(){
+  var grid = document.getElementById('langGrid');
+  if(!grid) return;
+  var countEl = document.getElementById('langCount');
+  var keys = Object.keys(LANGUAGES);
+  if(countEl) countEl.textContent = keys.length + 'ржЯрж┐ ржнрж╛рж╖рж╛';
+  var html = '';
+  keys.forEach(function(key){
+    var lang = LANGUAGES[key];
+    var pct = getLangProgressPct(key);
+    html += '<button class="lang-card" onclick="openLanguage(\'' + key + '\')">' +
+      '<span class="lang-flag">' + lang.flag + '</span>' +
+      '<div class="lang-name">' + lang.name + '</div>' +
+      '<div class="lang-name-bn">' + lang.nameBn + '</div>' +
+      '<div class="lang-prog"><div class="lang-prog-fill" style="width:' + pct + '%"></div></div>' +
+      '<div class="lang-prog-txt">' + pct + '% рж╕ржорзНржкрзВрж░рзНржг</div>' +
+    '</button>';
+  });
+  grid.innerHTML = html;
+  
+  // ржЧрзНрж░рж┐ржЯрж┐ржВ
+  var h = new Date().getHours();
+  var greet = 'рж╢рзБржн рж╕ржХрж╛рж▓';
+  if(h >= 12 && h < 17) greet = 'рж╢рзБржн ржЕржкрж░рж╛рж╣рзНржи';
+  else if(h >= 17 && h < 20) greet = 'рж╢рзБржн рж╕ржирзНржзрзНржпрж╛';
+  else if(h >= 20 || h < 5) greet = 'рж╢рзБржн рж░рж╛рждрзНрж░рж┐';
+  var gt = document.getElementById('greetTitle');
+  if(gt) gt.textContent = greet + '! ЁЯСЛ';
+}
+
+/* ============================================================
+   ржнрж╛рж╖рж╛ ржкрзЗржЬ ржЦрзЛрж▓рж╛
+   ============================================================ */
+function openLanguage(key){
+  USER.activeLang = key;
+  saveUser();
+  switchPage('learn');
+}
+
+/* ============================================================
+   рж▓рзЗрж╕ржи ржкрж╛рже рж░рзЗржирзНржбрж╛рж░
+   ============================================================ */
+function renderLearnPath(){
+  var key = USER.activeLang || 'english';
+  var lang = LANGUAGES[key];
+  var container = document.getElementById('learnContent');
+  if(!container || !lang) return;
+  
+  var pct = getLangProgressPct(key);
+  var html = 
+    '<div class="path-header">' +
+      '<button class="path-back" onclick="switchPage(\'home\')"><i class="fas fa-arrow-left"></i> рж╕ржм ржнрж╛рж╖рж╛</button>' +
+      '<h2>' + lang.flag + ' ' + lang.nameBn + '</h2>' +
+      '<p>' + lang.name + ' тАв ' + pct + '% рж╕ржорзНржкрзВрж░рзНржг</p>' +
+    '</div>' +
+    '<div style="background:var(--surface);border:2px solid var(--border);border-radius:14px;padding:14px;margin-bottom:20px;font-size:13px;color:var(--text-secondary);line-height:1.6">' +
+      'ЁЯТб ' + lang.intro +
+    '</div>';
+  
+  lang.modules.forEach(function(mod, mIdx){
+    html += '<div class="module-group">' +
+      '<div class="module-title">' + mod.titleBn + ' тАФ ' + mod.title + '</div>' +
+      '<div class="lesson-path">';
+    mod.lessons.forEach(function(les, lIdx){
+      var completed = isLessonCompleted(key, mIdx, lIdx);
+      var unlocked = isLessonValid(key, mIdx, lIdx);
+      var cls = 'lesson-node';
+      if(completed) cls += ' completed';
+      else if(unlocked) cls += ' unlocked';
+      else cls += ' locked';
+      var icon = completed ? 'тнР' : (unlocked ? les.icon : 'ЁЯФТ');
+      var clickAttr = unlocked ? 'onclick="startLesson(\'' + key + '\',' + mIdx + ',' + lIdx + ')"' : '';
+      html += '<button class="' + cls + '" ' + clickAttr + '>' +
+        '<span>' + icon + '</span>' +
+        '<span class="lesson-label">' + les.title + '</span>' +
+      '</button>';
+    });
+    html += '</div></div>';
+  });
+  
+  container.innerHTML = html;
+}
+
+// isLessonUnlocked alias
+function isLessonValid(k,m,l){ return isLessonUnlocked(k,m,l); }
+
+/* ============================================================
+   рж▓рзЗрж╕ржи рж╢рзБрж░рзБ
+   ============================================================ */
+var CURRENT = {
+  lang: null,
+  moduleIdx: 0,
+  lessonIdx: 0,
+  questions: [],
+  currentQ: 0,
+  correctCount: 0,
+  wrongCount: 0,
+  xpEarned: 0
+};
+
+function startLesson(langKey, mIdx, lIdx){
+  var lang = LANGUAGES[langKey];
+  if(!lang) return;
+  var lesson = lang.modules[mIdx].lessons[lIdx];
+  CURRENT.lang = langKey;
+  CURRENT.moduleIdx = mIdx;
+  CURRENT.lessonIdx = lIdx;
+  CURRENT.questions = lesson.questions.slice();
+  CURRENT.currentQ = 0;
+  CURRENT.correctCount = 0;
+  CURRENT.wrongCount = 0;
+  CURRENT.xpEarned = 0;
+  updateStreak();
+  switchPage('lesson');
+  renderQuestion();
+}
+
+/* ============================================================
+   ржкрзНрж░рж╢рзНржи рж░рзЗржирзНржбрж╛рж░
+   ============================================================ */
+function renderQuestion(){
+  var q = CURRENT.questions[CURRENT.currentQ];
+  if(!q){ finishLesson(); return; }
+  var total = CURRENT.questions.length;
+  var idx = CURRENT.currentQ;
+  var pct = (idx / total) * 100;
+  
+  var container = document.getElementById('lessonContent');
+  if(!container) return;
+  
+  var topbar = 
+    '<div class="lesson-topbar">' +
+      '<button class="lesson-close" onclick="confirmQuit()">тЬХ</button>' +
+      '<div class="lesson-progress-track"><div class="lesson-progress-fill" style="width:' + pct + '%"></div></div>' +
+      '<div class="lesson-hearts">тЭдя╕П <span>' + USER.hearts + '</span></div>' +
+    '</div>';
+  
+  var body = '';
+  
+  if(q.type === 'listen'){
+    body = renderListenQ(q);
+  } else if(q.type === 'choice'){
+    body = renderChoiceQ(q);
+  } else if(q.type === 'match'){
+    body = renderMatchQ(q);
+  } else if(q.type === 'write'){
+    body = renderWriteQ(q);
+  } else if(q.type === 'speak'){
+    body = renderSpeakQ(q);
+  }
+  
+  container.innerHTML = topbar + body;
+  
+  // ржЕржбрж┐ржУ ржЕржЯрзЛ-ржкрзНрж▓рзЗ (listen type)
+  if(q.type === 'listen' || q.type === 'speak'){
+    setTimeout(function(){ playAudio(q.audioText || q.target || q.word); }, 400);
+  }
+}
+
+/* ============================================================
+   Listen ржЯрж╛ржЗржк
+   ============================================================ */
+function renderListenQ(q){
+  return '<div class="lesson-q">ЁЯФК рж╢рзБржирзБржи ржПржмржВ рж╕ржарж┐ржХ ржЙрждрзНрждрж░ ржмрзЗржЫрзЗ ржирж┐ржи</div>' +
+    '<div class="audio-card">' +
+      '<button class="audio-big-btn" onclick="playAudio(\'' + escapeAttr(q.audioText) + '\')"><i class="fas fa-volume-up"></i></button>' +
+      '<div class="audio-word">' + escapeHtml(q.word) + '</div>' +
+      '<div class="audio-pron">' + escapeHtml(q.pron || '') + '</div>' +
+      '<div class="audio-btn-row">' +
+        '<button class="audio-btn" onclick="playAudio(\'' + escapeAttr(q.audioText) + '\', 0.7)"><i class="fas fa-turtle"></i> ржзрзАрж░рзЗ</button>' +
+        '<button class="audio-btn" onclick="playAudio(\'' + escapeAttr(q.audioText) + '\', 1.1)"><i class="fas fa-bolt"></i> ржжрзНрж░рзБржд</button>' +
+      '</div>' +
+    '</div>' +
+    '<div class="options">' +
+      '<button class="opt-card" onclick="chooseListen(0)">' + escapeHtml(q.meaning) + '</button>' +
+      '<button class="opt-card" onclick="chooseListen(1)">ржЕржирзНржп ржХрж┐ржЫрзБ</button>' +
+      '<button class="opt-card" onclick="chooseListen(2)">ржЬрж╛ржирж┐ ржирж╛</button>' +
+    '</div>' +
+    '<p style="text-align:center;font-size:12px;color:var(--text-muted);margin-top:20px">ржЙржкрж░рзЗрж░ ЁЯФК ржЪрзЗржкрзЗ рж╢рзБржирзБржи, рждрж╛рж░ржкрж░ рж╕ржарж┐ржХржЯрж┐ ржмрзЗржЫрзЗ ржирж┐ржи</p>';
+}
+
+function chooseListen(idx){
+  // ржкрзНрж░ржержо ржЕржкрж╢ржиржЗ рж╕ржарж┐ржХ (ржХрж╛рж░ржг ржЖржорж░рж╛ рж╕ржарж┐ржХ ржЕрж░рзНрже ржжрзЗржЦрж┐ржпрж╝рзЗржЫрж┐)
+  if(idx === 0) correctAnswer('ржжрзБрж░рзНржжрж╛ржирзНржд! рж╕ржарж┐ржХ ржЙрждрзНрждрж░');
+  else wrongAnswer('рж╕ржарж┐ржХ ржЙрждрзНрждрж░: ' + escapeHtml(CURRENT.questions[CURRENT.currentQ].meaning));
+}
+
+/* ============================================================
+   Choice ржЯрж╛ржЗржк
+   ============================================================ */
+function renderChoiceQ(q){
+  var html = '<div class="lesson-q">' + escapeHtml(q.q) + '</div>' +
+    '<div class="options">';
+  q.options.forEach(function(o, i){
+    html += '<button class="opt-card" onclick="chooseOption(' + i + ')">' + escapeHtml(o) + '</button>';
+  });
+  html += '</div>';
+  return html;
+}
+
+var SELECTED_OPTION = null;
+function chooseOption(i){
+  SELECTED_OPTION = i;
+  var q = CURRENT.questions[CURRENT.currentQ];
+  var all = document.querySelectorAll('#lessonContent .opt-card');
+  all.forEach(function(el, idx){
+    el.classList.remove('selected');
+    if(idx === i) el.classList.add('selected');
+  });
+  // рж╕рж░рж╛рж╕рж░рж┐ ржЪрзЗржХ
+  if(i === q.correct){
+    setTimeout(function(){ correctAnswer('ржжрзБрж░рзНржжрж╛ржирзНржд! рж╕ржарж┐ржХ ржЙрждрзНрждрж░'); }, 200);
+  } else {
+    setTimeout(function(){ wrongAnswer('рж╕ржарж┐ржХ ржЙрждрзНрждрж░: ' + escapeHtml(q.options[q.correct])); }, 200);
+  }
+}
+
+/* ============================================================
+   Match ржЯрж╛ржЗржк
+   ============================================================ */
+function renderMatchQ(q){
+  var left = q.pairs.map(function(p){ return p[0]; });
+  var right = q.pairs.map(function(p){ return p[1]; });
+  // shuffle right
+  right = right.slice().sort(function(){ return Math.random() - 0.5; });
+  
+  var html = '<div class="lesson-q">ЁЯФЧ ржЬрзЛржбрж╝рж╛ ржорж┐рж▓рж╛ржи</div>' +
+    '<div class="match-wrap">' +
+      '<div class="match-col" id="matchLeft">';
+  left.forEach(function(t, i){
+    html += '<button class="match-item" data-side="left" data-idx="' + i + '" onclick="selectMatch(this)">' + escapeHtml(t) + '</button>';
+  });
+  html += '</div><div class="match-col" id="matchRight">';
+  right.forEach(function(t){
+    var origIdx = q.pairs.findIndex(function(p){ return p[1] === t; });
+    html += '<button class="match-item" data-side="right" data-idx="' + origIdx + '" onclick="selectMatch(this)">' + escapeHtml(t) + '</button>';
+  });
+  html += '</div></div>' +
+    '<p style="text-align:center;font-size:12px;color:var(--text-muted);margin-top:20px">ржмрж╛ржо ржжрж┐ржХрзЗрж░ рж╢ржмрзНржжрзЗрж░ рж╕рж╛ржерзЗ ржбрж╛ржи ржжрж┐ржХрзЗрж░ рж╕ржарж┐ржХ ржЕржирзБржмрж╛ржж ржорж┐рж▓рж╛ржи</p>';
+  
+  setTimeout(function(){ resetMatchState(q.pairs.length); }, 100);
+  return html;
+}
+
+var MATCH_STATE = { selectedLeft: null, matched: 0, total: 0 };
+function resetMatchState(total){
+  MATCH_STATE = { selectedLeft: null, matched: 0, total: total };
+}
+function selectMatch(el){
+  if(el.classList.contains('done')) return;
+  if(el.classList.contains('correct')) return;
+  var side = el.dataset.side;
+  if(side === 'left'){
+    // deselect previous left
+    document.querySelectorAll('#matchLeft .match-item').forEach(function(x){ x.classList.remove('selected'); });
+    el.classList.add('selected');
+    MATCH_STATE.selectedLeft = el;
+  } else {
+    // right clicked
+    if(!MATCH_STATE.selectedLeft) return;
+    var lIdx = parseInt(MATCH_STATE.selectedLeft.dataset.idx);
+    var rIdx = parseInt(el.dataset.idx);
+    if(lIdx === rIdx){
+      // correct
+      MATCH_STATE.selectedLeft.classList.remove('selected');
+      MATCH_STATE.selectedLeft.classList.add('correct', 'done');
+      el.classList.add('correct', 'done');
+      MATCH_STATE.selectedLeft = null;
+      MATCH_STATE.matched++;
+      if(MATCH_STATE.matched >= MATCH_STATE.total){
+        setTimeout(function(){ correctAnswer('рж╕ржм ржорж┐рж▓рж┐ржпрж╝рзЗ ржжрж┐рж▓рзЗржи!'); }, 300);
+      }
+    } else {
+      // wrong
+      el.classList.add('wrong');
+      MATCH_STATE.selectedLeft.classList.add('wrong');
+      var wrongEl = el;
+      var wrongSel = MATCH_STATE.selectedLeft;
+      setTimeout(function(){
+        wrongEl.classList.remove('wrong');
+        wrongSel.classList.remove('wrong', 'selected');
+      }, 600);
+      MATCH_STATE.selectedLeft = null;
+      // рж╣рзГржжржпрж╝ ржХржорж╛ржУ ржирж╛ ржПржЦрж╛ржирзЗ тАФ рж╢рзБржзрзБ ржнрзБрж▓ ржлрж┐ржбржмрзНржпрж╛ржХ
+    }
+  }
+}
+
+/* ============================================================
+   Write ржЯрж╛ржЗржк
+   ============================================================ */
+function renderWriteQ(q){
+  return '<div class="lesson-q">тЬНя╕П ' + escapeHtml(q.q) + '</div>' +
+    '<div class="write-wrap">' +
+      '<input type="text" class="write-input" id="writeInput" placeholder="ржПржЦрж╛ржирзЗ рж▓рж┐ржЦрзБржи..." autocomplete="off" onkeydown="if(event.key===\'Enter\')submitWrite()">' +
+      '<button class="btn-primary btn-block" style="margin-top:16px" onclick="submitWrite()"><i class="fas fa-check"></i> ржпрж╛ржЪрж╛ржЗ ржХрж░рзБржи</button>' +
+    '</div>';
+}
+function submitWrite(){
+  var q = CURRENT.questions[CURRENT.currentQ];
+  var val = (document.getElementById('writeInput').value || '').trim().toLowerCase();
+  if(!val){ showToast('ржХрж┐ржЫрзБ рж▓рж┐ржЦрзБржи', 'no'); return; }
+  var answers = [q.answer].concat(q.alt || []).map(function(x){ return String(x).toLowerCase(); });
+  if(answers.indexOf(val) !== -1) correctAnswer('рж╕ржарж┐ржХ!');
+  else wrongAnswer('рж╕ржарж┐ржХ ржЙрждрзНрждрж░: ' + q.answer);
+}
+
+/* ============================================================
+   Speak ржЯрж╛ржЗржк
+   ============================================================ */
+function renderSpeakQ(q){
+  return '<div class="lesson-q">ЁЯОд ржЙржЪрзНржЪрж╛рж░ржг ржХрж░рзБржи</div>' +
+    '<div class="speak-wrap">' +
+      '<div class="speak-target">' + escapeHtml(q.target) + '</div>' +
+      '<div class="speak-hint">' + escapeHtml(q.hint) + '</div>' +
+      '<button class="audio-btn" onclick="playAudio(\'' + escapeAttr(q.target) + '\')" style="margin-bottom:20px"><i class="fas fa-volume-up"></i> рж╢рзБржирзБржи</button>' +
+      '<button class="mic-btn" id="micBtn" onclick="startSpeak(\'' + escapeAttr(q.target) + '\')"><i class="fas fa-microphone"></i></button>' +
+      '<div class="transcript" id="transcript">ЁЯОд ржЪрзЗржкрзЗ ржмрж▓рзБржи...</div>' +
+      '<button class="btn-primary btn-block" style="margin-top:20px" onclick="skipSpeak()">ржПржбрж╝рж┐ржпрж╝рзЗ ржпрж╛ржи</button>' +
+    '</div>';
+}
+var RECOGNITION = null;
+function startSpeak(target){
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SR){ showToast('ржПржЗ ржмрзНрж░рж╛ржЙржЬрж╛рж░рзЗ ржнржпрж╝рзЗрж╕ рж╕рж╛ржкрзЛрж░рзНржЯ ржирзЗржЗ', 'no'); return; }
+  var micBtn = document.getElementById('micBtn');
+  var trans = document.getElementById('transcript');
+  micBtn.classList.add('listening');
+  trans.textContent = 'ЁЯОд рж╢рзБржиржЫрж┐...';
+  trans.className = 'transcript';
+  RECOGNITION = new SR();
+  RECOGNITION.lang = LANGUAGES[CURRENT.lang].langCode;
+  RECOGNITION.continuous = false;
+  RECOGNITION.interimResults = false;
+  RECOGNITION.onresult = function(ev){
+    var said = ev.results[0][0].transcript;
+    trans.textContent = 'ржЖржкржирж┐ ржмрж▓рзЗржЫрзЗржи: "' + said + '"';
+    var clean = said.toLowerCase().replace(/[.,!?ред]/g, '').trim();
+    var cleanTarget = target.toLowerCase().replace(/[.,!?ред]/g, '').trim();
+    if(clean === cleanTarget || clean.indexOf(cleanTarget) !== -1 || cleanTarget.indexOf(clean) !== -1){
+      trans.classList.add('ok');
+      setTimeout(function(){ correctAnswer('ржЪржорзОржХрж╛рж░ ржЙржЪрзНржЪрж╛рж░ржг!'); }, 500);
+    } else {
+      trans.classList.add('no');
+      setTimeout(function(){ wrongAnswer('ржЖржмрж╛рж░ ржЪрзЗрж╖рзНржЯрж╛ ржХрж░рзБржи тАФ "' + target + '"'); }, 500);
+    }
+    micBtn.classList.remove('listening');
+  };
+  RECOGNITION.onerror = function(e){
+    micBtn.classList.remove('listening');
+    trans.textContent = 'тЭМ рж╢рзЛржирж╛ ржпрж╛ржпрж╝ржирж┐, ржЖржмрж╛рж░ ржЪрзЗрж╖рзНржЯрж╛ ржХрж░рзБржи';
+    trans.classList.add('no');
+  };
+  RECOGNITION.onend = function(){
+    micBtn.classList.remove('listening');
+  };
+  try{ RECOGNITION.start(); }catch(e){ micBtn.classList.remove('listening'); }
+}
+function skipSpeak(){
+  correctAnswer('ржарж┐ржХ ржЖржЫрзЗ, ржкрж░рзЗрж░ ржзрж╛ржкрзЗ ржпрж╛ржЗ');
+}
+
+/* ============================================================
+   рж╕ржарж┐ржХ / ржнрзБрж▓ ржЙрждрзНрждрж░
+   ============================================================ */
+function correctAnswer(msg){
+  CURRENT.correctCount++;
+  addXP(10);
+  showFeedback(true, 'ЁЯОЙ ' + msg, 'ржжрзБрж░рзНржжрж╛ржирзНржд! +10 XP');
+}
+function wrongAnswer(msg){
+  CURRENT.wrongCount++;
+  USER.hearts = Math.max(0, USER.hearts - 1);
+  saveUser();
+  if(USER.hearts === 0){
+    showFeedback(false, 'тЭдя╕П рж╣рзГржжржпрж╝ рж╢рзЗрж╖!', msg);
+    return;
+  }
+  showFeedback(false, 'ржнрзБрж▓ ржЙрждрзНрждрж░', msg);
+}
+
+var FEEDBACK_NEXT_CALLBACK = null;
+function showFeedback(ok, title, msg){
+  var bar = document.getElementById('feedbackBar');
+  var icon = document.getElementById('fbIcon');
+  var ttl = document.getElementById('fbTitle');
+  var msgEl = document.getElementById('fbMsg');
+  var btn = document.getElementById('fbContinue');
+  bar.classList.remove('ok', 'no');
+  bar.classList.add(ok ? 'ok' : 'no');
+  icon.innerHTML = ok ? '<i class="fas fa-check"></i>' : '<i class="fas fa-times"></i>';
+  ttl.textContent = title;
+  msgEl.textContent = msg;
+  btn.textContent = ok ? 'ржЪрж╛рж▓рж┐ржпрж╝рзЗ ржпрж╛ржи' : 'ржмрзБржЭрзЗржЫрж┐';
+  btn.style.background = ok ? 'var(--brand)' : 'var(--danger)';
+  bar.classList.add('show');
+  FEEDBACK_NEXT_CALLBACK = function(){
+    bar.classList.remove('show');
+    setTimeout(function(){
+      if(ok) nextQuestion();
+      else {
+        // ржнрзБрж▓ рж╣рж▓рзЗ рж╣рзГржжржпрж╝ рж╢рзЗрж╖ ржирж╛ рж╣рж▓рзЗ ржЖржмрж╛рж░ ржЪрзЗрж╖рзНржЯрж╛
+        if(USER.hearts > 0) renderQuestion();
+        else finishLesson();
+      }
+    }, 200);
+  };
+}
+
+function nextQuestion(){
+  CURRENT.currentQ++;
+  if(CURRENT.currentQ >= CURRENT.questions.length) finishLesson();
+  else renderQuestion();
+}
+
+/* ============================================================
+   рж▓рзЗрж╕ржи рж╢рзЗрж╖
+   ============================================================ */
+function finishLesson(){
+  var total = CURRENT.questions.length;
+  var correct = CURRENT.correctCount;
+  var bonus = 20;
+  var totalXP = CURRENT.xpEarned + correct * 10 + bonus;
+  addXP(bonus);
+  markLessonCompleted(CURRENT.lang, CURRENT.moduleIdx, CURRENT.lessonIdx);
+  
+  var container = document.getElementById('completeContent');
+  if(!container) return;
+  
+  container.innerHTML = 
+    '<div class="complete-screen">' +
+      '<div class="complete-badge">ЁЯПЖ</div>' +
+      '<div class="complete-title">рж▓рзЗрж╕ржи рж╕ржорзНржкрзВрж░рзНржг!</div>' +
+      '<div class="complete-sub">ржЖржкржирж┐ ржжрзБрж░рзНржжрж╛ржирзНржд ржХрж░ржЫрзЗржи!</div>' +
+      '<div class="complete-stats">' +
+        '<div class="complete-stat"><span class="ico">тЪб</span><div class="val">+' + totalXP + '</div><div class="lbl">XP</div></div>' +
+        '<div class="complete-stat"><span class="ico">тЬЕ</span><div class="val">' + correct + '/' + total + '</div><div class="lbl">рж╕ржарж┐ржХ</div></div>' +
+        '<div class="complete-stat"><span class="ico">ЁЯФе</span><div class="val">' + USER.streak + '</div><div class="lbl">рж╕рзНржЯрзНрж░рж┐ржХ</div></div>' +
+      '</div>' +
+      '<button class="btn-primary btn-block" onclick="switchPage(\'learn\')"><i class="fas fa-arrow-right"></i> ржкрж░ржмрж░рзНрждрзА рж▓рзЗрж╕ржи</button>' +
+      '<button class="btn-primary btn-block" style="background:var(--accent);box-shadow:0 5px 0 var(--accent-dark);margin-top:10px" onclick="switchPage(\'home\')"><i class="fas fa-home"></i> рж╣рзЛржорзЗ ржлрж┐рж░рзБржи</button>' +
+    '</div>';
+  
+  switchPage('complete');
+  showConfetti();
+  updateStreak();
+}
+
+/* ============================================================
+   Confetti
+   ============================================================ */
+function showConfetti(){
+  var colors = ['#58cc02', '#1cb0f6', '#ffc800', '#ff4b4b', '#ce82ff', '#89e219'];
+  for(var i = 0; i < 60; i++){
+    (function(idx){
+      setTimeout(function(){
+        var c = document.createElement('div');
+        c.className = 'confetti';
+        c.style.left = (Math.random() * 100) + 'vw';
+        c.style.background = colors[Math.floor(Math.random() * colors.length)];
+        c.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
+        document.body.appendChild(c);
+        var dur = 2000 + Math.random() * 2000;
+        var drift = (Math.random() - 0.5) * 400;
+        c.animate([
+          { transform: 'translate(0,0) rotate(0deg)', opacity: 1 },
+          { transform: 'translate(' + drift + 'px,100vh) rotate(720deg)', opacity: 0 }
+        ], { duration: dur, easing: 'cubic-bezier(.4,.6,.6,1)' });
+        setTimeout(function(){ c.remove(); }, dur);
+      }, idx * 30);
+    })(i);
+  }
+}
+
+/* ============================================================
+   ржЕржбрж┐ржУ ржкрзНрж▓рзЗ
+   ============================================================ */
+function playAudio(text, rate){
+  if(!('speechSynthesis' in window)){
+    showToast('ржПржЗ ржмрзНрж░рж╛ржЙржЬрж╛рж░рзЗ ржЕржбрж┐ржУ рж╕рж╛ржкрзЛрж░рзНржЯ ржирзЗржЗ', 'no');
+    return;
+  }
+  window.speechSynthesis.cancel();
+  var u = new SpeechSynthesisUtterance(text);
+  u.lang = LANGUAGES[CURRENT.lang] ? LANGUAGES[CURRENT.lang].langCode : 'en-US';
+  u.rate = rate || 0.85;
+  window.speechSynthesis.speak(u);
+}
+
+/* ============================================================
+   ржкрзЗржЬ рж╕рзБржЗржЪ
+   ============================================================ */
+function switchPage(id, el){
+  document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+  var target = document.getElementById('page-' + id);
+  if(target) target.classList.add('active');
+  document.querySelectorAll('.bnav-item').forEach(function(b){ b.classList.remove('active'); });
+  if(el) el.classList.add('active');
+  else {
+    var found = document.querySelector('.bnav-item[data-page="' + id + '"]');
+    if(found) found.classList.add('active');
+  }
+  window.scrollTo({top: 0, behavior: 'smooth'});
+  
+  if(id === 'home') renderHome();
+  if(id === 'learn') renderLearnPath();
+  if(id === 'leaderboard') renderLeaderboard();
+  if(id === 'profile') renderProfile();
+}
+
+/* ============================================================
+   Leaderboard
+   ============================================================ */
+function renderLeaderboard(){
+  var el = document.getElementById('leaderboardList');
+  if(!el) return;
+  var bots = [
+    { name: 'рж░рж╣рж┐ржо', xp: 2450, avatar: 'ЁЯСи' },
+    { name: 'ржХрж░рж┐ржо', xp: 2180, avatar: 'ЁЯСж' },
+    { name: 'рж╕рж╛рж▓ржорж╛', xp: 1980, avatar: 'ЁЯСй' },
+    { name: 'ржЬрж╛рж╣рж┐ржж', xp: 1750, avatar: 'ЁЯзС' },
+    { name: 'ржирж╛ржмрж┐рж▓рж╛', xp: 1520, avatar: 'ЁЯСз' },
+    { name: 'ржлрж╛рж░рж╣рж╛ржи', xp: 1280, avatar: 'ЁЯСитАНЁЯж░' },
+    { name: 'ржЖржпрж╝рзЗрж╢рж╛', xp: 1050, avatar: 'ЁЯСйтАНЁЯж▒' },
+    { name: 'рждрж╛ржиржнрзАрж░', xp: 820, avatar: 'ЁЯзФ' },
+    { name: 'рж╕рж╛ржмrina', xp: 650, avatar: 'ЁЯСйтАНЁЯж░' },
+    { name: 'ржЖржкржирж┐', xp: USER.xp || 0, avatar: 'ЁЯШО', me: true }
+  ];
+  bots.sort(function(a, b){ return b.xp - a.xp; });
+  var html = '';
+  bots.forEach(function(b, i){
+    var rankCls = i === 0 ? 'gold' : (i === 1 ? 'silver' : (i === 2 ? 'bronze' : ''));
+    var medal = i === 0 ? 'ЁЯеЗ' : (i === 1 ? 'ЁЯеИ' : (i === 2 ? 'ЁЯеЙ' : (i + 1)));
+    html += '<div class="lb-row' + (b.me ? ' me' : '') + '">' +
+      '<div class="lb-rank ' + rankCls + '">' + medal + '</div>' +
+      '<div class="lb-avatar">' + b.avatar + '</div>' +
+      '<div class="lb-name">' + escapeHtml(b.name) + '<small>' + (b.me ? 'ржЖржкржирж┐' : 'ржкрзНрж░рждрж┐ржпрзЛржЧрзА') + '</small></div>' +
+      '<div class="lb-xp">тЪб ' + b.xp + '</div>' +
+    '</div>';
+  });
+  el.innerHTML = html;
+}
+
+/* ============================================================
+   Profile
+   ============================================================ */
+function renderProfile(){
+  var el = document.getElementById('profileContent');
+  if(!el) return;
+  var today = new Date().toDateString();
+  var todayXP = 0;
+  USER.history.forEach(function(h){ if(h.date === today) todayXP = h.xp; });
+  var activeLang = LANGUAGES[USER.activeLang] || LANGUAGES.english;
+  var pct = getLangProgressPct(USER.activeLang);
+  
+  el.innerHTML = 
+    '<div class="profile-head">' +
+      '<div class="profile-avatar">ЁЯШО</div>' +
+      '<div class="profile-info">' +
+        '<h2>рж╢рж┐ржХрзНрж╖рж╛рж░рзНржерзА</h2>' +
+        '<p>рж╕ржжрж╕рзНржп рж╣ржпрж╝рзЗржЫрзЗржи ' + new Date(USER.createdAt).toLocaleDateString('bn-BD') + '</p>' +
+      '</div>' +
+    '</div>' +
+    '<div class="profile-grid">' +
+      '<div class="profile-stat"><span class="ico">тЪб</span><div class="val">' + (USER.xp || 0) + '</div><div class="lbl">ржорзЛржЯ XP</div></div>' +
+      '<div class="profile-stat"><span class="ico">ЁЯФе</span><div class="val">' + (USER.streak || 0) + '</div><div class="lbl">рж╕рзНржЯрзНрж░рж┐ржХ</div></div>' +
+      '<div class="profile-stat"><span class="ico">тЭдя╕П</span><div class="val">' + USER.hearts + '</div><div class="lbl">рж╣рзГржжржпрж╝</div></div>' +
+      '<div class="profile-stat"><span class="ico">ЁЯТО</span><div class="val">' + (USER.gems || 0) + '</div><div class="lbl">рж░рждрзНржи</div></div>' +
+    '</div>' +
+    '<div class="sec-title">ЁЯУЪ рж╕ржХрзНрж░рж┐ржпрж╝ ржнрж╛рж╖рж╛</div>' +
+    '<div style="background:var(--surface);border:2px solid var(--border);border-radius:14px;padding:18px;margin-bottom:16px">' +
+      '<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">' +
+        '<span style="font-size:36px">' + activeLang.flag + '</span>' +
+        '<div><div style="font-family:var(--font-en);font-size:16px;font-weight:800">' + activeLang.name + '</div>' +
+        '<div style="font-size:12px;color:var(--text-muted)">' + activeLang.nameBn + ' тАв ' + pct + '% рж╕ржорзНржкрзВрж░рзНржг</div></div>' +
+      '</div>' +
+      '<div class="lang-prog"><div class="lang-prog-fill" style="width:' + pct + '%"></div></div>' +
+    '</div>' +
+    '<div class="sec-title">тЪЩя╕П рж╕рзЗржЯрж┐ржВрж╕</div>' +
+    '<button class="btn-primary btn-block" style="background:var(--danger);box-shadow:0 5px 0 #b91c1c;margin-bottom:10px" onclick="confirmReset()">' +
+      '<i class="fas fa-rotate-left"></i> рж╕ржм ржбрзЗржЯрж╛ рж░рж┐рж╕рзЗржЯ ржХрж░рзБржи' +
+    '</button>';
+}
+
+/* ============================================================
+   Modal
+   ============================================================ */
+var MODAL_CB = null;
+function openModal(title, msg, cb){
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalMsg').textContent = msg;
+  MODAL_CB = cb;
+  document.getElementById('modalOverlay').classList.add('open');
+}
+function closeModal(){
+  document.getElementById('modalOverlay').classList.remove('open');
+  MODAL_CB = null;
+}
+document.getElementById('modalConfirm').addEventListener('click', function(){
+  if(MODAL_CB) MODAL_CB();
+  closeModal();
+});
+function confirmQuit(){
+  openModal('рж▓рзЗрж╕ржи ржерзЗржХрзЗ ржмрзЗрж░ рж╣ржмрзЗржи?', 'ржЖржкржирж╛рж░ ржЕржЧрзНрж░ржЧрждрж┐ рж╣рж╛рж░рж┐ржпрж╝рзЗ ржпрж╛ржмрзЗ!', function(){
+    switchPage('learn');
+  });
+}
+function confirmReset(){
+  openModal('рж╕ржм ржбрзЗржЯрж╛ ржорзБржЫржмрзЗржи?', 'ржЖржкржирж╛рж░ XP, рж╕рзНржЯрзНрж░рж┐ржХ, ржУ рж▓рзЗрж╕ржи ржкрзНрж░рзЛржЧрзНрж░рзЗрж╕ рж╕ржм ржорзБржЫрзЗ ржпрж╛ржмрзЗред ржПржЯрж┐ ржлрж┐рж░рж┐ржпрж╝рзЗ ржЖржирж╛ ржпрж╛ржмрзЗ ржирж╛ред', function(){
+    localStorage.removeItem(USER_KEY);
+    USER = loadUser();
+    saveUser();
+    updateTopStats();
+    switchPage('home');
+    showToast('рж╕ржм ржбрзЗржЯрж╛ рж░рж┐рж╕рзЗржЯ рж╣ржпрж╝рзЗржЫрзЗ', 'ok');
+  });
+}
+
+/* ============================================================
+   Toast
+   ============================================================ */
+var TOAST_TIMER = null;
+function showToast(msg, type){
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.remove('ok', 'no');
+  if(type) t.classList.add(type);
+  t.classList.add('show');
+  clearTimeout(TOAST_TIMER);
+  TOAST_TIMER = setTimeout(function(){ t.classList.remove('show'); }, 2500);
+}
+
+/* ============================================================
+   ржерж┐ржо
+   ============================================================ */
+function toggleTheme(){
+  var cur = document.documentElement.getAttribute('data-theme');
+  var next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('lingo_theme', next);
+  updateThemeIcon();
+}
+function updateThemeIcon(){
+  var t = document.documentElement.getAttribute('data-theme');
+  var btn = document.getElementById('themeIcon');
+  if(btn) btn.className = t === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+}
+
+/* ============================================================
+   Helpers
+   ============================================================ */
+function escapeHtml(s){
+  if(s == null) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+function escapeAttr(s){
+  if(s == null) return '';
+  return String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;');
+}
+
+/* ============================================================
+   ржЗржирж┐рж╢рж┐ржпрж╝рж╛рж▓рж╛ржЗржЬ
+   ============================================================ */
+(function(){
+  var saved = localStorage.getItem('lingo_theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+  updateThemeIcon();
+  updateTopStats();
+  renderHome();
+  
+  // рж╕рзНржкрзНрж▓рзНржпрж╛рж╢ рж╕рзНржХрзНрж░рж┐ржи рзи рж╕рзЗржХрзЗржирзНржб ржкрж░рзЗ рж╕рж░рж╛ржи
+  setTimeout(function(){
+    var w = document.getElementById('welcome');
+    if(w) w.classList.add('hide');
+    setTimeout(function(){ if(w) w.remove(); }, 700);
+  }, 1800);
+})();
+</script>
+</body>
+</html>
